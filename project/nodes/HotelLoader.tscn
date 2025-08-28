@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://eutlnvg2s8kt"]
+
+[ext_resource type="Script" uid="uid://3ehxj4ngsiiw" path="res://scripts/HotelLoader.gd" id="1_6pq26"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_6pq26")

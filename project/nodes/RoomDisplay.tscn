@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b5qm1bkwnp1t6"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+scale = Vector2(16, 12)
+points = PackedVector2Array(-1, -1, -1, 1, 1, 1, 1, -1, -1, -1, -1, 1)
+width = 3.0

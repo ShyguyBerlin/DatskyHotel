@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://icdh0k6s0aup"]
+
+[ext_resource type="Script" uid="uid://dnvmalkupb7uo" path="res://nodes/ResidenceDisplay.gd" id="1_shcql"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_shcql")
+
+[node name="Line2D" type="Line2D" parent="."]
+scale = Vector2(16, 12)
+points = PackedVector2Array(-1, -1, -1, 1, 1, 1, 1, -1, -1, -1, -1, 1)
+width = 3.0
+default_color = Color(0.882353, 1, 0.839216, 1)
