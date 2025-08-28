@@ -1,0 +1,1 @@
+The RoomConnection serves as a good way to connect [[Room]]s with each other, as it provides an easy way to iterate through connected rooms without needing to assess factors like "is this room an [[Elevator]] or not".

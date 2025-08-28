@@ -1,0 +1,1 @@
+Home to a [[Habitant]]. Acts as a proxy to their requests.

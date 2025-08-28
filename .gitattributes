@@ -1,0 +1,2 @@
+# Force Markdown files in docs/ to use LF line endings
+notes/*.md text eol=lf
