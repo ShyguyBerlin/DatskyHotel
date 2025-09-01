@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dtuxbhn4fhqbl"]
+
+[node name="Room" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+scale = Vector2(16, 12)
+points = PackedVector2Array(-1, -1, -1, 1, 1, 1, 1, -1, -1, -1, -1, 1)
+width = 3.0
+default_color = Color(0.54902, 0.580392, 0.54902, 1)

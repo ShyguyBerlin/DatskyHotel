@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://icdh0k6s0aup"]
 
-[ext_resource type="Script" uid="uid://dnvmalkupb7uo" path="res://nodes/ResidenceDisplay.gd" id="1_shcql"]
+[ext_resource type="Script" uid="uid://dnvmalkupb7uo" path="res://nodes/roomtypes/Residence/ResidenceDisplay.gd" id="1_dwmlp"]
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_shcql")
+script = ExtResource("1_dwmlp")
 
 [node name="Line2D" type="Line2D" parent="."]
 scale = Vector2(16, 12)

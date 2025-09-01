@@ -11,28 +11,29 @@ func set_current_room(room : Room):
 	current_room=room
 
 func build_room_to_left():
-	if not current_room:
-		return
-	
-	var connected_rooms = current_room.get_rooms_in_direction(RoomConnection.display_direction.DISPLAY_LEFT)
-	if len(connected_rooms)>0:
-		return
-	
-	var new_room= Room.new()
-	current_room.connect_to_room(new_room,RoomConnection.display_direction.DISPLAY_LEFT)
-	built_stuff.emit()
+	return build_room_in_dir(RoomConnection.display_direction.DISPLAY_LEFT)
 
 func build_room_to_right():
+	return build_room_in_dir(RoomConnection.display_direction.DISPLAY_RIGHT)
+
+func build_room_to_up():
+	return build_room_in_dir(RoomConnection.display_direction.DISPLAY_UP)
+
+func build_room_to_down():
+	return build_room_in_dir(RoomConnection.display_direction.DISPLAY_DOWN)
+
+func build_room_in_dir(dir : RoomConnection.display_direction):
 	if not current_room:
 		return
 	
-	var connected_rooms = current_room.get_rooms_in_direction(RoomConnection.display_direction.DISPLAY_RIGHT)
+	var connected_rooms = current_room.get_rooms_in_direction(dir)
 	if len(connected_rooms)>0:
 		return
 	
 	var new_room= Room.new()
-	current_room.connect_to_room(new_room,RoomConnection.display_direction.DISPLAY_RIGHT)
+	current_room.connect_to_room(new_room,dir)
 	built_stuff.emit()
+	return new_room
 
 func make_room_to_residence():
 	if not current_room:

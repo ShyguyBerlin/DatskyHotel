@@ -33,7 +33,7 @@ func get_rooms_in_direction(direction : RoomConnection.display_direction) -> Arr
 
 # Shall return a node which displays the properties of this Resource
 func get_display_node():
-	var display_node = load("res://nodes/RoomDisplay.tscn").instantiate()
+	var display_node = load("res://nodes/roomtypes/Room/RoomDisplay.tscn").instantiate()
 	return display_node
 
 func get_size(direction : RoomConnection.display_direction) -> Vector2:

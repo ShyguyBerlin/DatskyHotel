@@ -26,3 +26,4 @@ Forced or Random under certain conditions:
 - Want to forget [[Habitant]] X
 ### Fulfillment of Requests
 A request will present the player with A "I want this" and B "are you willing to give it to me", this either presents the player with a dialog to represent A and either an implicit choice to fulfill B, or a question which will trigger a scene change or minigame when approved.
+A is generally represented by a [[RequestMainDialog]] and B is represented by a [[RequestFullfillmentAction]] or [[RequestFullfillmentListener]].

@@ -1,3 +1,6 @@
+# Obsidian client settings
+**/.obsidian/*
+
 # Godot 4+ specific ignores
 .godot/
 .nomedia
