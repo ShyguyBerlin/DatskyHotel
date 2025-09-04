@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://b5qm1bkwnp1t6"]
+[gd_scene load_steps=2 format=3 uid="uid://b5qm1bkwnp1t6"]
+
+[ext_resource type="Script" uid="uid://dtrmckc12puw7" path="res://scripts/dataclasses/roomtypes/RoomDisplay.gd" id="1_e66uc"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_e66uc")
 
 [node name="Line2D" type="Line2D" parent="."]
 scale = Vector2(16, 12)

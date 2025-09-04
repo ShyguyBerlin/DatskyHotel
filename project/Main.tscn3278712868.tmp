@@ -14,7 +14,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 
 [node name="HotelLoader" parent="." node_paths=PackedStringArray("hotel_display_node") instance=ExtResource("1_uu6xs")]
 hotel_display_node = NodePath("../Control/Hotel")
@@ -62,7 +61,6 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 
 [node name="Hotel" parent="Control" instance=ExtResource("2_r0du0")]
 

@@ -49,5 +49,8 @@ func make_room_to_residence():
 		i.connected_rooms[new_residence]=i.connected_rooms.get(current_room)
 		i.connected_rooms.erase(current_room)
 	
+	if current_room==HotelManager.hotel_instance.initial_room:
+		HotelManager.hotel_instance.initial_room=new_residence
+	current_room=new_residence
 	current_room_changed.emit(new_residence)
 	built_stuff.emit()

@@ -32,9 +32,17 @@ func get_rooms_in_direction(direction : RoomConnection.display_direction) -> Arr
 ###################################################
 
 # Shall return a node which displays the properties of this Resource
-func get_display_node():
-	var display_node = load("res://nodes/roomtypes/Room/RoomDisplay.tscn").instantiate()
+func get_display_node_base(path):
+	var display_node = load(path).instantiate()
+	if not display_node.has_method("set_dataclass_instance") or not display_node.has_method("get_dataclass_instance"):
+		printerr("Tried to load non-display_node class ",typeof(display_node)," at ",path)
+		print(display_node.name," ",display_node.get_script().get_script_method_list())
+		return null
+	display_node.set_dataclass_instance(self)
 	return display_node
+
+func get_display_node():
+	return get_display_node_base("res://nodes/roomtypes/Room/RoomDisplay.tscn")
 
 func get_size(direction : RoomConnection.display_direction) -> Vector2:
 	match(direction):
@@ -47,6 +55,12 @@ func get_size(direction : RoomConnection.display_direction) -> Vector2:
 		RoomConnection.display_direction.DISPLAY_DOWN:
 			return Vector2(0,60) # vertical display size
 	return Vector2(0,0)
+
+func get_total_size() -> Vector2:
+	return	abs(get_size(RoomConnection.display_direction.DISPLAY_RIGHT))+ \
+		abs(get_size(RoomConnection.display_direction.DISPLAY_DOWN))
+		#abs(get_size(RoomConnection.display_direction.DISPLAY_LEFT))+ \
+		#abs(get_size(RoomConnection.display_direction.DISPLAY_UP))+ \
 
 ###################################################
 #########   Display related functions end #########

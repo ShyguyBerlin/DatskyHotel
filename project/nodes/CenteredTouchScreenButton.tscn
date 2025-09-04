@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://k60e43mehr53"]
 
-[ext_resource type="Script" uid="uid://clnlc6r8amm2m" path="res://nodes/CenterTouchScreenButton.gd" id="1_u5xq3"]
+[ext_resource type="Script" uid="uid://clnlc6r8amm2m" path="res://scripts/CenteredTouchScreenButton.gd" id="1_ik5ec"]
 
 [node name="MoveLeft" type="Control"]
 layout_mode = 3
@@ -12,6 +12,6 @@ grow_vertical = 0
 
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0
-script = ExtResource("1_u5xq3")
+script = ExtResource("1_ik5ec")
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]

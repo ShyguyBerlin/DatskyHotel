@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://dtuxbhn4fhqbl"]
+[gd_scene load_steps=2 format=3 uid="uid://dtuxbhn4fhqbl"]
+
+[ext_resource type="Script" uid="uid://1w57nykrk5ti" path="res://scripts/dataclasses/roomtypes/ElevatorDisplay.gd" id="1_n0mtf"]
 
 [node name="Room" type="Node2D"]
+script = ExtResource("1_n0mtf")
 
 [node name="Line2D" type="Line2D" parent="."]
 scale = Vector2(16, 12)
