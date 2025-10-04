@@ -1,21 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://vbxq2syg5rg2"]
+[gd_scene load_steps=2 format=3 uid="uid://vbxq2syg5rg2"]
 
 [ext_resource type="Script" uid="uid://dkba5utgm4twv" path="res://scripts/HotelDisplay.gd" id="1_2gg85"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f5lqc"]
-size = Vector2(1, 1)
 
 [node name="Hotel" type="Node2D"]
 script = ExtResource("1_2gg85")
 
-[node name="RoomClickArea" type="Area2D" parent="."]
-
-[node name="HotelCoverageArea" type="CollisionShape2D" parent="RoomClickArea"]
-unique_name_in_owner = true
-shape = SubResource("RectangleShape2D_f5lqc")
-
 [node name="DisplayNodesFolder" type="Node2D" parent="."]
 unique_name_in_owner = true
-
-[connection signal="mouse_entered" from="RoomClickArea" to="." method="mouse_entered_coverage"]
-[connection signal="mouse_exited" from="RoomClickArea" to="." method="mouse_exited_coverage"]

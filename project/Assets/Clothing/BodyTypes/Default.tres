@@ -1,0 +1,137 @@
+[gd_resource type="Resource" script_class="Clothing" load_steps=36 format=3 uid="uid://cynqnvwoc4kcs"]
+
+[ext_resource type="Script" uid="uid://cojwsx7xatk52" path="res://scripts/dataclasses/clothing/ClothingPart.gd" id="1_8ic20"]
+[ext_resource type="Script" uid="uid://ha6btnofgk80" path="res://scripts/dataclasses/clothing/ClothingPartOverride.gd" id="2_q2g13"]
+[ext_resource type="Texture2D" uid="uid://cjfkwcn5f60gd" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/Head.PNG" id="3_8ic20"]
+[ext_resource type="Texture2D" uid="uid://cum36yc60e43w" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/Neck.PNG" id="4_q2g13"]
+[ext_resource type="Texture2D" uid="uid://bgg6a0sr3wkih" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/TorsoUp.PNG" id="5_072tn"]
+[ext_resource type="Texture2D" uid="uid://cjp5yusf2yug1" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/TorsoDown.PNG" id="6_3ao15"]
+[ext_resource type="Texture2D" uid="uid://cuagqu4ntykon" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/RightUpperArm.PNG" id="7_1kbav"]
+[ext_resource type="Texture2D" uid="uid://csc7icr238rhv" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/RightLowerArm.PNG" id="8_rsnvd"]
+[ext_resource type="Texture2D" uid="uid://ksiuybnpdvo2" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/RightHand.PNG" id="9_ds12t"]
+[ext_resource type="Texture2D" uid="uid://c686lko2g0eh4" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/LeftUpperArm.PNG" id="10_40r0k"]
+[ext_resource type="Texture2D" uid="uid://bippbo38s51vd" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/LeftLowerArm.PNG" id="11_l3bin"]
+[ext_resource type="Texture2D" uid="uid://dxukpwxeddeio" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/LeftHand.PNG" id="12_mct2i"]
+[ext_resource type="Texture2D" uid="uid://bbsgbm5uut065" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/RightUpperLeg.PNG" id="13_6cfk8"]
+[ext_resource type="Texture2D" uid="uid://y2dpgmdneqg3" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/RightLowerLeg.PNG" id="14_gf3v0"]
+[ext_resource type="Texture2D" uid="uid://bno7jpry6mv0o" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/RightFoot.PNG" id="15_nwa8j"]
+[ext_resource type="Texture2D" uid="uid://cp323r3kpqevv" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/LeftUpperLeg.PNG" id="16_prt6o"]
+[ext_resource type="Texture2D" uid="uid://dwoj2mssy7i6n" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/LeftLowerLeg.PNG" id="17_hkxif"]
+[ext_resource type="Texture2D" uid="uid://bmeuffvfp15oi" path="res://Assets/Images/PNG/Clothing/BodyTypes/Default/LeftFoot2.PNG" id="18_8ic20"]
+[ext_resource type="Script" uid="uid://csy0hs5tpip6u" path="res://scripts/dataclasses/clothing/Clothing.gd" id="19_cqdo5"]
+
+[sub_resource type="Resource" id="Resource_head"]
+script = ExtResource("1_8ic20")
+bodypart = 1
+texture = ExtResource("3_8ic20")
+offset = Vector2(-6, -141.495)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_neck"]
+script = ExtResource("1_8ic20")
+bodypart = 2
+texture = ExtResource("4_q2g13")
+offset = Vector2(-5, -6)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_upper_body"]
+script = ExtResource("1_8ic20")
+texture = ExtResource("5_072tn")
+offset = Vector2(3, -52)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_lower_body"]
+script = ExtResource("1_8ic20")
+bodypart = 4
+texture = ExtResource("6_3ao15")
+offset = Vector2(7, 11)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_arm_r"]
+script = ExtResource("1_8ic20")
+bodypart = 5
+texture = ExtResource("7_1kbav")
+offset = Vector2(-7, 41)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_forearm_r"]
+script = ExtResource("1_8ic20")
+bodypart = 6
+texture = ExtResource("8_rsnvd")
+offset = Vector2(4, 43)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_hand_r"]
+script = ExtResource("1_8ic20")
+bodypart = 7
+texture = ExtResource("9_ds12t")
+offset = Vector2(5, 8)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_arm_l"]
+script = ExtResource("1_8ic20")
+bodypart = 8
+texture = ExtResource("10_40r0k")
+offset = Vector2(-6, 35)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_forearm_l"]
+script = ExtResource("1_8ic20")
+bodypart = 9
+texture = ExtResource("11_l3bin")
+offset = Vector2(16, 39)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_hand_l"]
+script = ExtResource("1_8ic20")
+bodypart = 10
+texture = ExtResource("12_mct2i")
+offset = Vector2(3, 11)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_leg_r"]
+script = ExtResource("1_8ic20")
+bodypart = 11
+texture = ExtResource("13_6cfk8")
+offset = Vector2(8, 40)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_shin_r"]
+script = ExtResource("1_8ic20")
+bodypart = 12
+texture = ExtResource("14_gf3v0")
+offset = Vector2(-16, 51)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_foot_r"]
+script = ExtResource("1_8ic20")
+bodypart = 13
+texture = ExtResource("15_nwa8j")
+offset = Vector2(46.05, -6.232)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_leg_l"]
+script = ExtResource("1_8ic20")
+bodypart = 14
+texture = ExtResource("16_prt6o")
+offset = Vector2(1, 39)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_shin_l"]
+script = ExtResource("1_8ic20")
+bodypart = 16
+texture = ExtResource("17_hkxif")
+offset = Vector2(-19, 53)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_foot_l"]
+script = ExtResource("1_8ic20")
+bodypart = 17
+texture = ExtResource("18_8ic20")
+offset = Vector2(44.022, -10.736)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[resource]
+script = ExtResource("19_cqdo5")
+parts = Array[ExtResource("1_8ic20")]([SubResource("Resource_head"), SubResource("Resource_neck"), SubResource("Resource_upper_body"), SubResource("Resource_lower_body"), SubResource("Resource_arm_r"), SubResource("Resource_forearm_r"), SubResource("Resource_hand_r"), SubResource("Resource_arm_l"), SubResource("Resource_forearm_l"), SubResource("Resource_hand_l"), SubResource("Resource_leg_r"), SubResource("Resource_shin_r"), SubResource("Resource_foot_r"), SubResource("Resource_leg_l"), SubResource("Resource_shin_l"), SubResource("Resource_foot_l")])
+metadata/_custom_type_script = "uid://csy0hs5tpip6u"

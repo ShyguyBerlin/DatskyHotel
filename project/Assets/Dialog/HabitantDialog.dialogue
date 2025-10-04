@@ -1,0 +1,6 @@
+~ start
+{{habitant.name}}: [[Hi|Hello|Howdy]].
+% {{habitant.name}}: I am fine.
+% {{habitant.name}}: It is a beautiful day outside.
+% {{habitant.name}}: I miss my family.
+=> END

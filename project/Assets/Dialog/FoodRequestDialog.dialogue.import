@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://c4mi3dqi1bnva"
+path="res://.godot/imported/FoodRequestDialog.dialogue-df289db43be324df5c184b35916d33cd.tres"
+
+[deps]
+
+source_file="res://Assets/Dialog/FoodRequestDialog.dialogue"
+dest_files=["res://.godot/imported/FoodRequestDialog.dialogue-df289db43be324df5c184b35916d33cd.tres"]
+
+[params]
+
+defaults=true

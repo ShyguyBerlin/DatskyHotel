@@ -1,7 +1,20 @@
-[gd_scene format=3 uid="uid://c6aa0asulf87"]
+[gd_scene load_steps=2 format=3 uid="uid://c6aa0asulf87"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="Script" uid="uid://bapx2rtq8xlax" path="res://scripts/dataclasses/roomtypes/RoomConnectionDisplay.gd" id="1_wq1y2"]
 
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(-10, -5, 10, -5, 10, 5, -10, 5, -10, -5, 10, -5)
+[node name="ConnectionDisplay" type="Node2D"]
+script = ExtResource("1_wq1y2")
+
+[node name="HorizontalLine" type="Line2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+points = PackedVector2Array(-42, -5, 42, -5, 42, 5, -42, 5, -42, -5, 42, -5)
+default_color = Color(0.65834, 0.65834, 0.65834, 1)
+
+[node name="VerticalLine" type="Line2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+rotation = 1.5708
+scale = Vector2(0.6, 1.8)
+points = PackedVector2Array(-42, -5, 42, -5, 42, 5, -42, 5, -42, -5, 42, -5)
 default_color = Color(0.65834, 0.65834, 0.65834, 1)

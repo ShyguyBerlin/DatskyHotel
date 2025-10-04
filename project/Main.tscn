@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccp45kjeqnsyn"]
+[gd_scene load_steps=20 format=3 uid="uid://ccp45kjeqnsyn"]
 
 [ext_resource type="PackedScene" uid="uid://eutlnvg2s8kt" path="res://nodes/HotelLoader.tscn" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://vbxq2syg5rg2" path="res://nodes/HotelDisplay.tscn" id="2_r0du0"]
@@ -6,6 +6,65 @@
 [ext_resource type="Script" uid="uid://de4xbdajv2shh" path="res://HotelInputHandler.gd" id="4_3dxm6"]
 [ext_resource type="Texture2D" uid="uid://b4tr0alsee1u" path="res://icon.svg" id="4_fos0i"]
 [ext_resource type="Script" uid="uid://ei74hetppbva" path="res://scripts/Builder.gd" id="5_fos0i"]
+[ext_resource type="Script" uid="uid://hiwflyyi2wjt" path="res://scripts/ui/RoomButtonCreator.gd" id="6_trn2v"]
+[ext_resource type="Script" uid="uid://b74ejcotfcsul" path="res://scripts/ui/HotelButtonData.gd" id="7_03owx"]
+[ext_resource type="PackedScene" uid="uid://cn8tnkricq2cr" path="res://nodes/HabitantSelection.tscn" id="9_20pc6"]
+[ext_resource type="Script" uid="uid://bkheb4gi1iqo" path="res://scripts/dataclasses/roomtypes/Elevator.gd" id="9_wkp8b"]
+[ext_resource type="PackedScene" uid="uid://dy1coe5jwdf0y" path="res://nodes/CycleProgress.tscn" id="11_20pc6"]
+
+[sub_resource type="Resource" id="Resource_trn2v"]
+script = ExtResource("7_03owx")
+button_text = "Build Room Left
+"
+button_actions = Array[String](["build_room_left"])
+
+[sub_resource type="Resource" id="Resource_03owx"]
+script = ExtResource("7_03owx")
+button_text = "Build Room Right
+"
+button_actions = Array[String](["build_room_right"])
+
+[sub_resource type="Resource" id="Resource_20pc6"]
+script = ExtResource("7_03owx")
+button_text = "Build Floor Up
+"
+button_actions = Array[String](["build_room_up"])
+room_whitelist = [ExtResource("9_wkp8b")]
+
+[sub_resource type="Resource" id="Resource_5vvyt"]
+script = ExtResource("7_03owx")
+button_text = "Build Floor Down
+"
+button_actions = Array[String](["build_room_down"])
+room_whitelist = [ExtResource("9_wkp8b")]
+
+[sub_resource type="Resource" id="Resource_wkp8b"]
+script = ExtResource("7_03owx")
+button_text = "Expand to Residence
+"
+button_actions = Array[String](["build_residence"])
+room_whitelist = ["Room"]
+
+[sub_resource type="Resource" id="Resource_c6i3y"]
+script = ExtResource("7_03owx")
+button_text = "Expand to Elevator"
+button_actions = Array[String](["build_elevator"])
+room_whitelist = ["Room"]
+metadata/_custom_type_script = "uid://b74ejcotfcsul"
+
+[sub_resource type="Resource" id="Resource_c2ibq"]
+script = ExtResource("7_03owx")
+button_text = "Move Habitant here"
+button_actions = Array[String](["select_habitant_to_reside"])
+room_whitelist = ["Residence"]
+metadata/_custom_type_script = "uid://b74ejcotfcsul"
+
+[sub_resource type="Resource" id="Resource_j4qnp"]
+script = ExtResource("7_03owx")
+button_text = "Enter"
+button_actions = Array[String](["enter_residence"])
+room_whitelist = ["Residence"]
+metadata/_custom_type_script = "uid://b74ejcotfcsul"
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -15,9 +74,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-
-[node name="HotelLoader" parent="." node_paths=PackedStringArray("hotel_display_node") instance=ExtResource("1_uu6xs")]
-hotel_display_node = NodePath("../Control/Hotel")
 
 [node name="MoveLeft" parent="." instance=ExtResource("3_cm0pq")]
 layout_mode = 1
@@ -29,6 +85,7 @@ offset_right = -64.0
 offset_bottom = -64.0
 
 [node name="TouchScreenButton" parent="MoveLeft/Control" index="0"]
+position = Vector2(-345, -100)
 texture_normal = ExtResource("4_fos0i")
 action = "ui_left"
 visibility_mode = 1
@@ -45,12 +102,41 @@ offset_right = -64.0
 offset_bottom = -64.0
 
 [node name="TouchScreenButton" parent="MoveRight/Control" index="0"]
+position = Vector2(280, -31)
 texture_normal = ExtResource("4_fos0i")
 action = "ui_right"
 visibility_mode = 1
 
-[node name="HotelInputHandler" type="Node" parent="." node_paths=PackedStringArray("hotel_display_node")]
+[node name="HotelUtilButtons" type="HBoxContainer" parent="."]
+z_index = 1
+custom_minimum_size = Vector2(800, 140)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = 400.0
+offset_right = 400.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_trn2v")
+buttons = Array[ExtResource("7_03owx")]([SubResource("Resource_trn2v"), SubResource("Resource_03owx"), SubResource("Resource_20pc6"), SubResource("Resource_5vvyt"), SubResource("Resource_wkp8b"), SubResource("Resource_c6i3y"), SubResource("Resource_c2ibq"), SubResource("Resource_j4qnp")])
+
+[node name="HotelInputHandler" type="Node" parent="." node_paths=PackedStringArray("hotel_display_node", "builder_node", "habitant_selection")]
+unique_name_in_owner = true
 script = ExtResource("4_3dxm6")
+hotel_display_node = NodePath("../Control/Hotel")
+builder_node = NodePath("../Builder")
+habitant_selection = NodePath("../SelectHabitant")
+
+[node name="Builder" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_fos0i")
+
+[node name="HotelLoader" parent="." node_paths=PackedStringArray("hotel_display_node") instance=ExtResource("1_uu6xs")]
 hotel_display_node = NodePath("../Control/Hotel")
 
 [node name="Control" type="Control" parent="."]
@@ -65,93 +151,40 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="Hotel" parent="Control" instance=ExtResource("2_r0du0")]
+scale = Vector2(2, 2)
 
-[node name="Control2" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(800, 140)
+[node name="SelectHabitant" parent="." instance=ExtResource("9_20pc6")]
+unique_name_in_owner = true
+visible = false
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = 260.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 200.0
+offset_top = 80.0
+offset_right = -200.0
+offset_bottom = -80.0
 
-[node name="Button" type="Button" parent="Control2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Build Room Left
-"
-autowrap_mode = 1
-clip_text = true
+[node name="CycleProgress" parent="." instance=ExtResource("11_20pc6")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -173.0
+offset_top = -168.0
+offset_right = -45.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+fill_percentage = 0.105
 
-[node name="Button2" type="Button" parent="Control2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Build Room Right
-"
-autowrap_mode = 1
-clip_text = true
-
-[node name="Button3" type="Button" parent="Control2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Expand to Residence
-"
-autowrap_mode = 1
-clip_text = true
-
-[node name="Button4" type="Button" parent="Control2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Build Floor Up
-"
-autowrap_mode = 1
-clip_text = true
-
-[node name="Button5" type="Button" parent="Control2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Build Floor Down
-"
-autowrap_mode = 1
-clip_text = true
-
-[node name="Button6" type="Button" parent="Control2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Deselect room"
-autowrap_mode = 1
-clip_text = true
-
-[node name="Button7" type="Button" parent="Control2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Select Door"
-autowrap_mode = 1
-clip_text = true
-
-[node name="Builder" type="Node2D" parent="."]
-script = ExtResource("5_fos0i")
-
-[connection signal="current_room_changed" from="Control/Hotel" to="Builder" method="set_current_room"]
-[connection signal="pressed" from="Control2/Button" to="Builder" method="build_room_to_left"]
-[connection signal="pressed" from="Control2/Button2" to="Builder" method="build_room_to_right"]
-[connection signal="pressed" from="Control2/Button3" to="Builder" method="make_room_to_residence"]
-[connection signal="pressed" from="Control2/Button4" to="Builder" method="build_room_to_up"]
-[connection signal="pressed" from="Control2/Button5" to="Builder" method="build_room_to_down"]
-[connection signal="pressed" from="Control2/Button6" to="HotelInputHandler" method="unselect_room"]
-[connection signal="pressed" from="Control2/Button7" to="HotelInputHandler" method="select_initial_room"]
 [connection signal="built_stuff" from="Builder" to="Control/Hotel" method="draw_hotel"]
 [connection signal="current_room_changed" from="Builder" to="Control/Hotel" method="change_current_room"]
+[connection signal="current_room_changed" from="Control/Hotel" to="HotelUtilButtons" method="current_room_updated"]
+[connection signal="generated_new_spatial_room_finder" from="Control/Hotel" to="HotelInputHandler" method="set_spatial_room_finder"]
+[connection signal="selected_habitant" from="SelectHabitant" to="HotelInputHandler" method="select_habitant_to_reside_finish"]
 
 [editable path="MoveLeft"]
 [editable path="MoveRight"]

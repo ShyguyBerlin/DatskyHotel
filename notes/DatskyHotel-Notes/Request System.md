@@ -26,4 +26,18 @@ Forced or Random under certain conditions:
 - Want to forget [[Habitant]] X
 ### Fulfillment of Requests
 A request will present the player with A "I want this" and B "are you willing to give it to me", this either presents the player with a dialog to represent A and either an implicit choice to fulfill B, or a question which will trigger a scene change or minigame when approved.
-A is generally represented by a [[RequestMainDialog]] and B is represented by a [[RequestFullfillmentAction]] or [[RequestFullfillmentListener]].
+A is generally represented by a [[RequestDialog]] and B is represented by a [[RequestFullfillmentAction]] or [[RequestFullfillmentListener]].
+
+### Points of access
+
+As Request shall not be hardcoded as much as possible, the [[Habitant]] or [[Residence]] needs to have certain points of access, where Requests can subscribe to, to be able to insert their own behavior to replace the default behavior. This should also make modding easier.
+Points where requests need to insert their behavior are (but not limited to):
+- GetHabitantExpression
+- GetHabitantThoughtIcon
+
+And points where the signal approach feels even better:
+- RecievedGift
+- StartedDialog
+
+This opens the question about how a Request would be able to engage a dialog.
+Best would probably be to include a dialog-anchor node in the emitted signal and thus in the StartDialog function. This anchor could then be used to start a dialog file and should add some meta information about the habitant.

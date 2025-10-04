@@ -1,0 +1,8 @@
+~ start
+{{habitant.name}}: [[Hi|Hey you!]].
+% {{habitant.name}}: I am hungry
+% {{habitant.name}}: I am kinda hungry
+% {{habitant.name}}: I really want to eat something
+
+% {{habitant.name}}: Can I have something to eat?
+=> END

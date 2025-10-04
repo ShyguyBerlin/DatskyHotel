@@ -1,12 +1,109 @@
-[gd_scene load_steps=2 format=3 uid="uid://icdh0k6s0aup"]
+[gd_scene load_steps=11 format=3 uid="uid://icdh0k6s0aup"]
 
 [ext_resource type="Script" uid="uid://dnvmalkupb7uo" path="res://scripts/dataclasses/roomtypes/ResidenceDisplay.gd" id="1_dwmlp"]
+[ext_resource type="PackedScene" uid="uid://cs4kqpokmave6" path="res://nodes/HabitantDisplay.tscn" id="2_5ar7y"]
+[ext_resource type="Texture2D" uid="uid://cv4nagotorl6" path="res://Assets/Images/SVG/Residence.svg" id="2_db3kr"]
+[ext_resource type="Texture2D" uid="uid://c318kscmhsmr7" path="res://Assets/Images/SVG/NormalRoomFrame.svg" id="4_qihtl"]
+[ext_resource type="Texture2D" uid="uid://bpg744rxlstqg" path="res://Assets/Images/SVG/Whiteboard.svg" id="5_br6ei"]
+[ext_resource type="PackedScene" uid="uid://cuwfescir8knw" path="res://nodes/DialogBalloon.tscn" id="5_qihtl"]
+[ext_resource type="Texture2D" uid="uid://du02b0g6oq1ng" path="res://Assets/Images/PNG/Plate.png" id="5_wikuv"]
+
+[sub_resource type="Gradient" id="Gradient_dwmlp"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5ar7y"]
+gradient = SubResource("Gradient_dwmlp")
+fill_from = Vector2(0.521368, 0.286325)
+fill_to = Vector2(0.700855, 0.867521)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_db3kr"]
+radius = 47.0
+height = 110.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_dwmlp")
+dialog_balloon = ExtResource("5_qihtl")
+
+[node name="RoomSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_db3kr")
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 scale = Vector2(16, 12)
 points = PackedVector2Array(-1, -1, -1, 1, 1, 1, 1, -1, -1, -1, -1, 1)
 width = 3.0
 default_color = Color(0.882353, 1, 0.839216, 1)
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 12.0
+icon = SubResource("GradientTexture2D_5ar7y")
+icon_alignment = 1
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+clip_contents = true
+offset_left = -40.0
+offset_top = -30.0
+offset_right = 40.0
+offset_bottom = 30.0
+
+[node name="Habitant" parent="MarginContainer" instance=ExtResource("2_5ar7y")]
+unique_name_in_owner = true
+position = Vector2(60, 75)
+scale = Vector2(-0.08, 0.08)
+expression = 0
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Whiteboard" type="TextureRect" parent="MarginContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 45.0
+offset_bottom = 43.0
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("5_br6ei")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="QuestIcon" type="TextureRect" parent="MarginContainer/Control/Whiteboard"]
+unique_name_in_owner = true
+self_modulate = Color(0.20511743, 0.20511743, 0.20511743, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("5_wikuv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="FrameSprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_qihtl")
+
+[node name="MouseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_db3kr")
+metadata/_edit_lock_ = true
+
+[connection signal="mouse_entered" from="MouseArea" to="." method="on_mouse_hovering"]
+[connection signal="mouse_exited" from="MouseArea" to="." method="on_mouse_stop_hovering"]

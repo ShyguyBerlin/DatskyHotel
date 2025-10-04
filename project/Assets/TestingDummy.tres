@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Habitant" load_steps=8 format=3 uid="uid://ciobwsodntxsf"]
+
+[ext_resource type="Script" uid="uid://bsfncf7jj3c7e" path="res://scripts/dataclasses/habitant/HabitantProperty.gd" id="1_g760e"]
+[ext_resource type="Script" uid="uid://cdjrb84dqswik" path="res://scripts/dataclasses/habitant/needs/HabitantNeed.gd" id="2_fi05l"]
+[ext_resource type="Script" uid="uid://betq8xj4f7dx6" path="res://scripts/dataclasses/clothing/HabitantOutfit.gd" id="3_b4xjn"]
+[ext_resource type="Resource" uid="uid://b1c4153nl18ai" path="res://Assets/Clothing/Pants/DefaultPants.tres" id="3_fi05l"]
+[ext_resource type="Resource" uid="uid://4x54hn4og2t4" path="res://Assets/Clothing/TorsoCover/BlueShirt.tres" id="4_qaxpb"]
+[ext_resource type="Script" uid="uid://7r3tv7wgr4ee" path="res://scripts/dataclasses/habitant/Habitant.gd" id="5_frppl"]
+
+[sub_resource type="Resource" id="Resource_u4cey"]
+script = ExtResource("3_b4xjn")
+torso_behind = ExtResource("4_qaxpb")
+pants = ExtResource("3_fi05l")
+metadata/_custom_type_script = "uid://betq8xj4f7dx6"
+
+[resource]
+script = ExtResource("5_frppl")
+body_color = Color(0.8175213, 0.8175213, 0.81752115, 1)
+outfit = SubResource("Resource_u4cey")
+metadata/_custom_type_script = "uid://7r3tv7wgr4ee"

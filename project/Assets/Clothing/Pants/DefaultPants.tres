@@ -1,0 +1,74 @@
+[gd_resource type="Resource" script_class="Clothing" load_steps=18 format=3 uid="uid://b1c4153nl18ai"]
+
+[ext_resource type="Script" uid="uid://cojwsx7xatk52" path="res://scripts/dataclasses/clothing/ClothingPart.gd" id="1_obnh3"]
+[ext_resource type="Script" uid="uid://ha6btnofgk80" path="res://scripts/dataclasses/clothing/ClothingPartOverride.gd" id="2_46ulx"]
+[ext_resource type="Script" uid="uid://csy0hs5tpip6u" path="res://scripts/dataclasses/clothing/Clothing.gd" id="2_ifgkv"]
+[ext_resource type="Texture2D" uid="uid://dnm28kdjif1vi" path="res://Assets/Images/PNG/Clothing/Pants/DefaultPants/PantsTorsoDown.PNG" id="3_46ulx"]
+[ext_resource type="Texture2D" uid="uid://cp4xeatejwwup" path="res://Assets/Images/PNG/Clothing/Pants/DefaultPants/PantsRightUpperLeg.PNG" id="4_tjv41"]
+[ext_resource type="Texture2D" uid="uid://ro1vphvk8a61" path="res://Assets/Images/PNG/Clothing/Pants/DefaultPants/PantsRightLowerLeg.PNG" id="5_wjyx6"]
+[ext_resource type="Texture2D" uid="uid://blnw6nuqj5tky" path="res://Assets/Images/PNG/Clothing/Pants/DefaultPants/PantsRightFoot.PNG" id="6_c1a4o"]
+[ext_resource type="Texture2D" uid="uid://mjr7nom6ps14" path="res://Assets/Images/PNG/Clothing/Pants/DefaultPants/PantsLeftUpperLeg.PNG" id="7_t4gpw"]
+[ext_resource type="Texture2D" uid="uid://bbbu6wv6qm1ke" path="res://Assets/Images/PNG/Clothing/Pants/DefaultPants/PantsLeftLowerLeg.PNG" id="8_fgljo"]
+[ext_resource type="Texture2D" uid="uid://backsfq5yd3e2" path="res://Assets/Images/PNG/Clothing/Pants/DefaultPants/PantsLeftFoot.PNG" id="9_1shcc"]
+
+[sub_resource type="Resource" id="Resource_su6ah"]
+script = ExtResource("1_obnh3")
+bodypart = 4
+layer = 6
+texture = ExtResource("3_46ulx")
+offset = Vector2(8, 23)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_tjv41"]
+script = ExtResource("1_obnh3")
+bodypart = 11
+layer = 6
+texture = ExtResource("4_tjv41")
+offset = Vector2(7.5, 41)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_wjyx6"]
+script = ExtResource("1_obnh3")
+bodypart = 12
+layer = 6
+texture = ExtResource("5_wjyx6")
+offset = Vector2(-15.738516, 49.601723)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_m44p7"]
+script = ExtResource("1_obnh3")
+bodypart = 13
+layer = 6
+texture = ExtResource("6_c1a4o")
+offset = Vector2(16.026304, -33.947773)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_qxksy"]
+script = ExtResource("1_obnh3")
+bodypart = 14
+layer = 6
+texture = ExtResource("7_t4gpw")
+offset = Vector2(1, 37)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_c1a4o"]
+script = ExtResource("1_obnh3")
+bodypart = 16
+layer = 6
+texture = ExtResource("8_fgljo")
+offset = Vector2(-19, 52.5)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[sub_resource type="Resource" id="Resource_t4gpw"]
+script = ExtResource("1_obnh3")
+bodypart = 17
+layer = 6
+texture = ExtResource("9_1shcc")
+offset = Vector2(6.5039687, -29.770037)
+metadata/_custom_type_script = "uid://cojwsx7xatk52"
+
+[resource]
+script = ExtResource("2_ifgkv")
+tint = Color(0.14815447, 0.26510113, 0.54770565, 1)
+parts = Array[ExtResource("1_obnh3")]([SubResource("Resource_su6ah"), SubResource("Resource_tjv41"), SubResource("Resource_wjyx6"), SubResource("Resource_m44p7"), SubResource("Resource_qxksy"), SubResource("Resource_c1a4o"), SubResource("Resource_t4gpw")])
+metadata/_custom_type_script = "uid://csy0hs5tpip6u"

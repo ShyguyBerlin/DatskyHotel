@@ -6,28 +6,27 @@ class_name HotelDisplay
 
 signal current_room_changed(new_room : Room)
 
+signal generated_new_spatial_room_finder(room_finder : HotelSpatialRoomFinder)
+
 var current_room : set = change_current_room
 
 ## Node instantiation stuff
-@onready var hotel_coverage_area: CollisionShape2D = %HotelCoverageArea
 @onready var display_nodes_folder: Node = %DisplayNodesFolder
 
 # I really do not want this to exist
 var room_mapping : Dictionary # dataclass -> displaynode
 
-# Initial room is always at 0,0; this is the physical extension beyond that point as 2 corners
-var bl_corner:Vector2=Vector2.ZERO
-var tr_corner:Vector2=Vector2.ZERO
+# Center of the rendered area, offsetting this to 0 will make everything look equal distance apart
+var rendered_center : Vector2 = Vector2.ZERO
 
 # The current offset applied to all rooms as the vector from 0,0 to the offset position of the inital room
 var current_offset:Vector2=Vector2.ZERO
-
-var room_finder:HotelSpatialRoomFinder=HotelSpatialRoomFinder.new()
 
 ## Node instantiation stuff end
 
 func _ready() -> void:
 	draw_hotel()
+	
 
 func change_current_room(new_room):
 	if current_room==new_room:
@@ -49,6 +48,8 @@ class renderInfo:
 		self.renderPosition=renderPosition
 		self.distance=distance
 
+func get_current_display_node():
+	return room_mapping[current_room]
 
 func draw_hotel():
 	
@@ -70,8 +71,8 @@ func draw_hotel():
 	var banned_connections=[]
 	var banned_rooms=[primary_room]
 	
-	bl_corner = bfs_rooms[0].renderPosition
-	tr_corner = bfs_rooms[0].renderPosition
+	var bl_corner = bfs_rooms[0].renderPosition
+	var tr_corner = bfs_rooms[0].renderPosition
 	
 	var room_areas : Array[Rect2]= []
 	var room_nodes : Array[Node2D]= []
@@ -81,7 +82,6 @@ func draw_hotel():
 		var render_room= info.room
 		var render_position = info.renderPosition
 		var render_node = render_room.get_display_node()
-		
 		# Actually render room
 		if render_node:
 			room_mapping[render_room]=render_node
@@ -124,7 +124,9 @@ func draw_hotel():
 				var room_position = connection_position+i.get_size(i.connected_rooms.get(r))/2  +  r.get_size(i.connected_rooms.get(r))/2
 				var is_horizontal = i.connected_rooms.get(r)==RoomConnection.display_direction.DISPLAY_LEFT || i.connected_rooms.get(r)==RoomConnection.display_direction.DISPLAY_RIGHT
 				bfs_rooms.append(renderInfo.new(r,room_position,info.distance+ (1 if is_horizontal else 10)))
-	
+
+	var room_finder:HotelSpatialRoomFinder=HotelSpatialRoomFinder.new()
+
 	room_finder.construct_spatial_map(room_areas,room_nodes)
 
 	if not current_room:
@@ -132,8 +134,8 @@ func draw_hotel():
 	else:
 		center_around_current_room()
 	
-	hotel_coverage_area.scale=room_finder.covered_rect.size
-	hotel_coverage_area.position=(tr_corner-bl_corner)/2+bl_corner
+	rendered_center = (tr_corner-bl_corner)/2+bl_corner
+	generated_new_spatial_room_finder.emit(room_finder)
 
 func displaynode_real_position(node):
 	return node.position#-current_offset
@@ -145,9 +147,7 @@ func center_around(pos:Vector2):
 		current_offset=-pos
 
 func center_around_center():
-		var draw_size= tr_corner-bl_corner
-		var center=draw_size/2+bl_corner
-		center_around(center)
+		center_around(rendered_center)
 
 func center_around_current_room():
 	# no hotel to center
@@ -158,27 +158,3 @@ func center_around_current_room():
 	if not current_room in room_mapping:
 		return
 	center_around(displaynode_real_position(room_mapping[current_room]))
-
-var mouse_inside_coverage=false
-
-func mouse_entered_coverage() -> void:
-	mouse_inside_coverage=true
-	print("Mouse entered!")
-
-func mouse_exited_coverage() -> void:
-	mouse_inside_coverage=false
-	print("Mouse exited!")
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		print("LEFT MOUSE CLICK")
-		if mouse_inside_coverage:
-			var mouse_pos=get_local_mouse_position()
-			print(mouse_pos,mouse_pos-current_offset)
-			var adjusted_mouse_pos=mouse_pos-current_offset
-			var rooms = room_finder.find_room(adjusted_mouse_pos)
-			print("I have found ",len(rooms)," valid rooms")
-			if len(rooms)>0:
-				var room_instance=rooms[0].get_dataclass_instance()
-				if room_instance:
-					change_current_room(room_instance)

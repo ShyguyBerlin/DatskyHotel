@@ -1,12 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtuxbhn4fhqbl"]
+[gd_scene load_steps=3 format=3 uid="uid://dtuxbhn4fhqbl"]
 
 [ext_resource type="Script" uid="uid://1w57nykrk5ti" path="res://scripts/dataclasses/roomtypes/ElevatorDisplay.gd" id="1_n0mtf"]
+[ext_resource type="Texture2D" uid="uid://dx5o7anbqow46" path="res://Assets/Images/SVG/Elevator.svg" id="2_rob1q"]
 
 [node name="Room" type="Node2D"]
 script = ExtResource("1_n0mtf")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_rob1q")
+
 [node name="Line2D" type="Line2D" parent="."]
-scale = Vector2(16, 12)
+visible = false
+scale = Vector2(12, 12)
 points = PackedVector2Array(-1, -1, -1, 1, 1, 1, 1, -1, -1, -1, -1, 1)
 width = 3.0
 default_color = Color(0.54902, 0.580392, 0.54902, 1)

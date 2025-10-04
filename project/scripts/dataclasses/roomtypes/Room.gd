@@ -1,6 +1,8 @@
 extends Resource
 class_name Room
 
+signal requested_quest_icon(action : ValueRequestAction)
+
 var connections : Array[RoomConnection]
 
 func connect_to_room(room : Room,direction : RoomConnection.display_direction):
@@ -13,7 +15,6 @@ func connect_to_room(room : Room,direction : RoomConnection.display_direction):
 	room.connections.append(new_connection)
 
 func get_rooms_in_direction(direction : RoomConnection.display_direction) -> Array[Room]:
-	
 	var cons : Array[RoomConnection] = connections
 	var dircons : Array[RoomConnection] = []
 	for i in cons:
@@ -26,6 +27,9 @@ func get_rooms_in_direction(direction : RoomConnection.display_direction) -> Arr
 			if dircon.connected_rooms.get(cr)==direction:
 				rooms.append(cr)
 	return rooms
+
+func generate_request() -> Array[Request]:
+	return []
 
 ###################################################
 #########   Display related functions #############
@@ -61,6 +65,10 @@ func get_total_size() -> Vector2:
 		abs(get_size(RoomConnection.display_direction.DISPLAY_DOWN))
 		#abs(get_size(RoomConnection.display_direction.DISPLAY_LEFT))+ \
 		#abs(get_size(RoomConnection.display_direction.DISPLAY_UP))+ \
+
+func get_quest_icon(action : ValueRequestAction) -> void:
+	requested_quest_icon.emit(action)
+	return
 
 ###################################################
 #########   Display related functions end #########

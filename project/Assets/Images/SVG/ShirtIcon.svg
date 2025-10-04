@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="32"
+   height="32"
+   viewBox="0 0 32 32"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="ShirtIcon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="36.90625"
+     inkscape:cx="16"
+     inkscape:cy="11.664691"
+     inkscape:window-width="3440"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#9bcdf4;fill-opacity:1;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="M 1.5640702,8.8934324 C 2.9083104,10.206572 3.0665151,11.875512 2.6728131,13.676637 L 7.1366346,12.141706 11.363935,30.22919 27.527367,28.204115 21.475835,10.246061 26.568512,10.196823 C 25.880396,9.0767062 25.354418,7.2907231 25.786823,5.874159 L 19.963638,5.7905447 C 17.557562,5.7522322 17.205807,4.5106376 15.685398,3.880466 16.778761,7.6576753 9.8227223,8.1213996 10.105919,4.5021867 9.2012448,5.4239719 7.7620245,6.1153139 6.3992439,6.7657412 Z"
+       id="path1"
+       sodipodi:nodetypes="ccccccccccccc" />
+  </g>
+</svg>

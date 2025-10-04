@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cg06p7wap1l8u"
+path="res://.godot/imported/HabitantDialog.dialogue-d4e869fe13051a2e08674ae69d819147.tres"
+
+[deps]
+
+source_file="res://Assets/Dialog/HabitantDialog.dialogue"
+dest_files=["res://.godot/imported/HabitantDialog.dialogue-d4e869fe13051a2e08674ae69d819147.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cbindtcewx1va"]
+
+[node name="Button" type="Button"]
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Build Room Left
+"
+autowrap_mode = 1
+clip_text = true

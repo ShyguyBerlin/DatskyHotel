@@ -12,18 +12,28 @@ config_version=5
 
 config/name="DatskyHotel"
 run/main_scene="uid://ccp45kjeqnsyn"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="uid://b4v78fkqahgmj"
 
 [autoload]
 
-HotelManager="*res://scripts/dataclasses/HotelManager.gd"
+HotelManager="*res://scripts/HotelManager.gd"
+RequestManager="*res://scripts/RequestManager.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+runtime/balloon_path="res://nodes/DialogBalloon.tscn"
 
 [display]
 
 window/size/viewport_width=1200
 window/size/viewport_height=800
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/soupik/plugin.cfg")
 
 [input]
 
@@ -56,10 +66,11 @@ hotel_move_left={
 
 locale/translation_remaps={}
 locale/translations=PackedStringArray("res://Assets/localizations/en_en.po")
-locale/translations_pot_files=PackedStringArray("res://Main.tscn")
+locale/translations_pot_files=PackedStringArray("res://Main.tscn", "res://Assets/Dialog/HabitantDialog.dialogue", "res://Assets/Dialog/FoodRequestDialog.dialogue")
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true

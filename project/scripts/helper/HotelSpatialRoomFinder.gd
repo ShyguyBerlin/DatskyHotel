@@ -53,12 +53,9 @@ func construct_spatial_map(node_areas:Array[Rect2],nodes:Array[Node2D]):
 
 func find_room(pos:Vector2) -> Array:
 	var block_pos = to_map_coords(pos)
-	print(block_pos)
 	if not block_pos in spatial_map:
 		return []
 	var block : Array= spatial_map[block_pos]
-	print(block)
-	print(spatial_map)
 	var eligible = []
 	for i in block:
 		if i.area.has_point(pos):
