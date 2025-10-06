@@ -116,7 +116,9 @@ func enter_residence():
 	var tk_action=TalkAction.new()
 	tk_action.display_node=hotel_display_node.get_current_display_node()
 	residence.consume_talk_action(tk_action)
-	
+
+func open_gifting_menu():
+	pass
 
 func select_habitant_to_reside_finish(habitant_selected:Habitant):
 	

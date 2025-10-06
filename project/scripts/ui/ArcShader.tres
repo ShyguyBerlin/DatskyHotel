@@ -58,6 +58,6 @@ void fragment() {
 
 [resource]
 shader = SubResource("Shader_ay5hd")
-shader_parameter/fill_percentage = 0.62
+shader_parameter/fill_percentage = 0.105
 shader_parameter/start_angle = -1.5707963267948966
 shader_parameter/clockwise = true

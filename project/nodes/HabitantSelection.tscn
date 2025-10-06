@@ -1,17 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cn8tnkricq2cr"]
 
 [ext_resource type="Script" uid="uid://cy0yx3lfbsoso" path="res://scripts/ui/HabitantSelection.gd" id="1_yfolk"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_msh15"]
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.151276, 0.151276, 0.151276, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[ext_resource type="StyleBox" uid="uid://bgsav0hcj27qw" path="res://Assets/UI/MenuMainPanel.tres" id="2_020bc"]
 
 [node name="SelectHabitant" type="Control"]
 layout_mode = 3
@@ -31,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_msh15")
+theme_override_styles/panel = ExtResource("2_020bc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
