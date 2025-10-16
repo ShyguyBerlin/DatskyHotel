@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceBundle" load_steps=3 format=3 uid="uid://ta8aj6kjow8o"]
+
+[ext_resource type="Script" uid="uid://dn671tnq6ygpo" path="res://scripts/helper/ResourceBundle.gd" id="1_t3di2"]
+[ext_resource type="Resource" uid="uid://dgbmfm5niyqn7" path="res://Assets/Items/Priozhki.tres" id="1_xfgnb"]
+
+[resource]
+script = ExtResource("1_t3di2")
+resources = Array[Resource]([ExtResource("1_xfgnb")])
+directory = "res://Assets/Items"
+ScriptName = "Item"
+metadata/_custom_type_script = "uid://dn671tnq6ygpo"

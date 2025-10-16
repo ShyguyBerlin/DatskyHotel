@@ -3,8 +3,8 @@ extends Node2D
 # The dataclass instance this display node represents
 @export var room_connection : RoomConnection
 
-@onready var horizontal_line: Line2D = %HorizontalLine
-@onready var vertical_line: Line2D = %VerticalLine
+@onready var horizontal_line: Sprite2D = %HorizontalLine
+@onready var vertical_line: Sprite2D = %VerticalLine
 
 # Returns the dataclass instance associated with this display node
 func get_dataclass_instance() -> RoomConnection:

@@ -1,6 +1,7 @@
 extends Node
 class_name HotelInputManager
 
+@export var player_instance : Player
 @export var hotel_display_node : HotelDisplay
 @export var builder_node : HotelBuilder
 @export var habitant_selection: Control

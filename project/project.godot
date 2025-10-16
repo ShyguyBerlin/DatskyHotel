@@ -17,9 +17,10 @@ config/icon="uid://b4v78fkqahgmj"
 
 [autoload]
 
-HotelManager="*res://scripts/HotelManager.gd"
-RequestManager="*res://scripts/RequestManager.gd"
+HotelManager="*res://scripts/autoloads/HotelManager.gd"
+RequestManager="*res://scripts/autoloads/RequestManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+ItemManager="*res://scripts/autoloads/ItemManager.gd"
 
 [dialogue_manager]
 

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dgbmfm5niyqn7"]
+
+[ext_resource type="Texture2D" uid="uid://42rc21bivfu" path="res://Assets/Images/SVG/Pirozhki.svg" id="1_duhhb"]
+[ext_resource type="Script" uid="uid://b5k0jxoklom6x" path="res://scripts/helper/Item.gd" id="1_ohkmu"]
+
+[resource]
+script = ExtResource("1_ohkmu")
+system_name = "pirozhki"
+name = "Pirozhki"
+icon = ExtResource("1_duhhb")
+metadata/_custom_type_script = "uid://b5k0jxoklom6x"

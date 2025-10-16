@@ -1,20 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6aa0asulf87"]
+[gd_scene load_steps=4 format=3 uid="uid://c6aa0asulf87"]
 
 [ext_resource type="Script" uid="uid://bapx2rtq8xlax" path="res://scripts/dataclasses/roomtypes/RoomConnectionDisplay.gd" id="1_wq1y2"]
+[ext_resource type="Texture2D" uid="uid://cwncr44axnbb6" path="res://Assets/Images/SVG/RoomConnectionH.svg" id="2_8uurw"]
+[ext_resource type="Texture2D" uid="uid://b8ay4aa3fbpjf" path="res://Assets/Images/SVG/RoomConnectionV.svg" id="3_svl4v"]
 
 [node name="ConnectionDisplay" type="Node2D"]
 script = ExtResource("1_wq1y2")
 
-[node name="HorizontalLine" type="Line2D" parent="."]
+[node name="HorizontalLine" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 z_index = -1
-points = PackedVector2Array(-42, -5, 42, -5, 42, 5, -42, 5, -42, -5, 42, -5)
-default_color = Color(0.65834, 0.65834, 0.65834, 1)
+texture = ExtResource("2_8uurw")
 
-[node name="VerticalLine" type="Line2D" parent="."]
+[node name="VerticalLine" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 z_index = -1
-rotation = 1.5708
-scale = Vector2(0.6, 1.8)
-points = PackedVector2Array(-42, -5, 42, -5, 42, 5, -42, 5, -42, -5, 42, -5)
-default_color = Color(0.65834, 0.65834, 0.65834, 1)
+rotation = 1.5707964
+texture = ExtResource("3_svl4v")

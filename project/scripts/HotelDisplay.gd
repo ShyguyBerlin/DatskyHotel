@@ -12,6 +12,8 @@ var current_room : set = change_current_room
 
 ## Node instantiation stuff
 @onready var display_nodes_folder: Node = %DisplayNodesFolder
+@onready var terrain_sprite_rect: NinePatchRect = %TerrainSpriteRect
+@onready var building_sprite_rect: NinePatchRect = %BuildingSpriteRect
 
 # I really do not want this to exist
 var room_mapping : Dictionary # dataclass -> displaynode
@@ -134,6 +136,9 @@ func draw_hotel():
 	else:
 		center_around_current_room()
 	
+	
+	building_sprite_rect.position=bl_corner
+	building_sprite_rect.size=tr_corner-bl_corner
 	rendered_center = (tr_corner-bl_corner)/2+bl_corner
 	generated_new_spatial_room_finder.emit(room_finder)
 

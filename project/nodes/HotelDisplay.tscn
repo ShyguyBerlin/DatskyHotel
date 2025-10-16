@@ -1,9 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://vbxq2syg5rg2"]
+[gd_scene load_steps=4 format=3 uid="uid://vbxq2syg5rg2"]
 
 [ext_resource type="Script" uid="uid://dkba5utgm4twv" path="res://scripts/HotelDisplay.gd" id="1_2gg85"]
+[ext_resource type="Texture2D" uid="uid://b70ur2rs42icn" path="res://Assets/Images/SVG/GrassPlane.svg" id="3_2ytrc"]
+[ext_resource type="Texture2D" uid="uid://2jevdkklooef" path="res://Assets/Images/SVG/HotelBuildingSimple.svg" id="3_lju6m"]
 
 [node name="Hotel" type="Node2D"]
 script = ExtResource("1_2gg85")
+
+[node name="HotelDecoFolder" type="Control" parent="."]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TerrainSpriteRect" type="NinePatchRect" parent="HotelDecoFolder"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -1697.945
+offset_top = 9.0
+offset_right = 1899.055
+offset_bottom = 1055.0
+texture = ExtResource("3_2ytrc")
+patch_margin_top = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="BuildingSpriteRect" type="NinePatchRect" parent="HotelDecoFolder"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -58.0
+offset_top = -87.0
+offset_right = 58.0
+offset_bottom = 47.0
+texture = ExtResource("3_lju6m")
+region_rect = Rect2(38, 28, 164, 124)
+patch_margin_left = 11
+patch_margin_top = 11
+patch_margin_right = 11
+patch_margin_bottom = 3
 
 [node name="DisplayNodesFolder" type="Node2D" parent="."]
 unique_name_in_owner = true

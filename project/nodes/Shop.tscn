@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmbhro44k7v3m"]
+
+[ext_resource type="Script" uid="uid://dnm7u76sk8y0e" path="res://scripts/ui/Shop.gd" id="1_84oiw"]
+[ext_resource type="Texture2D" uid="uid://bsnu6uhl1pc05" path="res://Assets/Images/SVG/AlrekaSign.svg" id="2_xce7c"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_woj3e"]
+texture = ExtResource("2_xce7c")
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_84oiw")
+
+[node name="Backpanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_woj3e")
+
+[node name="ItemArea" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -424.0
+offset_top = 61.0
+offset_right = 436.0
+offset_bottom = 262.0
+grow_horizontal = 2
+grow_vertical = 2
