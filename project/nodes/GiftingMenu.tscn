@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dp8ysxvi24x3p"]
+[gd_scene load_steps=3 format=3 uid="uid://dp8ysxvi24x3p"]
 
 [ext_resource type="StyleBox" uid="uid://bgsav0hcj27qw" path="res://Assets/UI/MenuMainPanel.tres" id="1_hb0bl"]
+[ext_resource type="Script" uid="uid://020kwa3ipb4h" path="res://scripts/ui/GiftingMenu.gd" id="1_hc6kk"]
 
 [node name="GiftingMenu" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hc6kk")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -18,3 +20,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_hb0bl")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 2
+item_0/text = "A"
+item_1/text = "B"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Gift"
+
+[connection signal="item_activated" from="MarginContainer/VBoxContainer/ItemList" to="." method="item_selected_final"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/ItemList" to="." method="item_selected"]
