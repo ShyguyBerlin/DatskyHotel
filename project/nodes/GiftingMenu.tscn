@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dp8ysxvi24x3p"]
+[gd_scene load_steps=4 format=3 uid="uid://dp8ysxvi24x3p"]
 
 [ext_resource type="StyleBox" uid="uid://bgsav0hcj27qw" path="res://Assets/UI/MenuMainPanel.tres" id="1_hb0bl"]
 [ext_resource type="Script" uid="uid://020kwa3ipb4h" path="res://scripts/ui/GiftingMenu.gd" id="1_hc6kk"]
+[ext_resource type="PackedScene" uid="uid://dp80dwfgl170u" path="res://nodes/ItemCountList.tscn" id="3_rui4e"]
 
 [node name="GiftingMenu" type="Control"]
 layout_mode = 3
@@ -36,12 +37,20 @@ theme_override_constants/margin_bottom = 8
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-item_count = 2
-item_0/text = "A"
-item_1/text = "B"
+scroll_deadzone = 1
+
+[node name="ItemList" parent="MarginContainer/VBoxContainer/ScrollContainer" instance=ExtResource("3_rui4e")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FakeItemList" type="ItemList" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -52,8 +61,8 @@ theme_override_constants/margin_bottom = 12
 custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 32
 text = "Gift"
 
-[connection signal="item_activated" from="MarginContainer/VBoxContainer/ItemList" to="." method="item_selected_final"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/ItemList" to="." method="item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/ScrollContainer/ItemList" to="." method="list_item_selected"]
+[connection signal="item_selection_confirmed" from="MarginContainer/VBoxContainer/ScrollContainer/ItemList" to="." method="list_item_selected_final"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/Button" to="." method="gift_button_pressed"]

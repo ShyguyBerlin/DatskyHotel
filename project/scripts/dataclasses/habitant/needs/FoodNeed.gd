@@ -7,6 +7,6 @@ func process(delta : float):
 
 func generate_request(residence : Residence) -> Array[Request]:
 	if foodLevel<0:
-		var req = FoodRequest.new(residence,habitant)
+		var req = FoodRequest.new(residence,habitant,self)
 		return [req]
 	return []

@@ -5,7 +5,7 @@ class_name HotelInputManager
 @export var hotel_display_node : HotelDisplay
 @export var builder_node : HotelBuilder
 @export var habitant_selection: Control
-
+@export var gift_menu : Control
 var spatial_room_finder : HotelSpatialRoomFinder
 
 func set_spatial_room_finder(room_finder: HotelSpatialRoomFinder) -> void:
@@ -118,9 +118,6 @@ func enter_residence():
 	tk_action.display_node=hotel_display_node.get_current_display_node()
 	residence.consume_talk_action(tk_action)
 
-func open_gifting_menu():
-	pass
-
 func select_habitant_to_reside_finish(habitant_selected:Habitant):
 	
 	if not hotel_display_node.current_room:
@@ -137,6 +134,25 @@ func select_habitant_to_reside_finish(habitant_selected:Habitant):
 	
 	habitant_selected.residence=hotel_display_node.current_room
 	hotel_display_node.current_room.resident=habitant_selected
+
+func open_gift_menu():
+	if not gift_menu:
+		return
+	if not gift_menu.has_method("open"):
+		return
+	if not hotel_display_node.current_room.resident:
+		return
+	gift_menu.open(player_instance)
+
+func finished_gift_menu(item_name: String) -> void:
+	if not hotel_display_node.current_room is Residence or hotel_display_node.current_room.resident==null:
+		return
+	if player_instance.inventory[item_name]<=0:
+		return
+	player_instance.inventory[item_name]-=1
+	var gift_action = GiftAction.new(item_name)
+	gift_action.display_node = hotel_display_node.get_current_display_node()
+	hotel_display_node.current_room.resident.recieve_gift(gift_action)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("hotel_move_left"):

@@ -1,0 +1,9 @@
+~ start
+%2 {{habitant.name}}: Thanks a lot.
+% {{habitant.name}}: I really appreciate this.
+% {{habitant.name}}: This is better.
+% {{habitant.name}}: This {{food.name}} was really tasty. Thank you.
+
+% {{habitant.name}}: See you soon!
+% {{habitant.name}}: Have a good day!
+=> END

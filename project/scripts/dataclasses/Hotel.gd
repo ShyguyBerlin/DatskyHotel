@@ -39,3 +39,7 @@ func get_rooms() -> Array[Room]:
 				conn_room_info.room=connected_room
 				room_check_stack.append(conn_room_info)
 	return room_ignores
+
+func remove_request(req:Request):
+	requests.erase(req)
+	print("Erased request from hotel")

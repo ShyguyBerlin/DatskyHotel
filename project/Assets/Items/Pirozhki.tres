@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://dgbmfm5niyqn7"]
+
+[ext_resource type="Texture2D" uid="uid://42rc21bivfu" path="res://Assets/Images/SVG/Pirozhki.svg" id="1_duhhb"]
+[ext_resource type="Script" uid="uid://q1dm5apc6txp" path="res://scripts/dataclasses/item/FoodItem.gd" id="2_gy2p3"]
+
+[resource]
+script = ExtResource("2_gy2p3")
+nutritional_value = 180.0
+system_name = "pirozhki"
+name = "Pirozhki"
+icon = ExtResource("1_duhhb")
+metadata/_custom_type_script = "uid://b5k0jxoklom6x"

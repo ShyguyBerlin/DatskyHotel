@@ -8,6 +8,8 @@ enum RequestFulfillmentType {
 	GIFT
 }
 
+signal fulfilled
+
 # Not sure if this is necessary as the request itself is mostly reponsible for handling its completion
 @export var type : RequestFulfillmentType
 @export var priority : int

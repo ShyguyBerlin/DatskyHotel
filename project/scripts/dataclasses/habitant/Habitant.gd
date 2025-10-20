@@ -21,21 +21,21 @@ func process(delta : float):
 	for i in needs:
 		i.process(delta)
 
-func generate_request(residence:Residence) -> Array[Request]:
+func generate_request(source_residence:Residence) -> Array[Request]:
 	var arr : Array[Request] = []
 	for n in needs:
-		arr.append_array(n.generate_request(residence))
+		arr.append_array(n.generate_request(source_residence))
 	return arr
 
 func add_need(need : HabitantNeed):
 	needs.append(need)
 	need.habitant=self
 
-func recieve_gift(obj):
-	var gift_action :GiftAction=GiftAction.new()
-	recieved_gift.emit(gift_action)
-	if gift_action.is_consumed():
+func recieve_gift(gift:GiftAction):
+	recieved_gift.emit(gift)
+	if gift.is_consumed():
 		return
+	print("No reason for gift, thanks tho")
 
 func consume_talk_action(action : TalkAction):
 	began_talk.emit(action)

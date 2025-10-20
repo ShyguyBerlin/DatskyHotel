@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://dlehpeacpmbfk"]
+
+[ext_resource type="Texture2D" uid="uid://jqskfnwptrf" path="res://Assets/Images/SVG/Bretzel.svg" id="1_rfi4n"]
+[ext_resource type="Script" uid="uid://q1dm5apc6txp" path="res://scripts/dataclasses/item/FoodItem.gd" id="2_rfi4n"]
+
+[resource]
+script = ExtResource("2_rfi4n")
+nutritional_value = 60.0
+system_name = "bretzel"
+name = "Bretzel"
+icon = ExtResource("1_rfi4n")
+metadata/_custom_type_script = "uid://b5k0jxoklom6x"

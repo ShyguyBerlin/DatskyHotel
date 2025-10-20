@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FoodItem" load_steps=3 format=3 uid="uid://bielywd1clnjg"]
+
+[ext_resource type="Texture2D" uid="uid://55dkuvuguqvq" path="res://Assets/Images/SVG/Pelmeni.svg" id="1_jkjie"]
+[ext_resource type="Script" uid="uid://q1dm5apc6txp" path="res://scripts/dataclasses/item/FoodItem.gd" id="2_jkjie"]
+
+[resource]
+script = ExtResource("2_jkjie")
+nutritional_value = 600.0
+system_name = "pelmeni"
+name = "Pelmeni"
+icon = ExtResource("1_jkjie")
+metadata/_custom_type_script = "uid://b5k0jxoklom6x"

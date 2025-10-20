@@ -1,0 +1,91 @@
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://c2803i265ic3m"]
+
+[ext_resource type="FontFile" uid="uid://dwol5nwdjx26p" path="res://Assets/Fonts/BBHSansHegarty-Regular.ttf" id="1_fx3ep"]
+[ext_resource type="StyleBox" uid="uid://bgsav0hcj27qw" path="res://Assets/UI/MenuMainPanel.tres" id="1_t1tdr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2rf7t"]
+bg_color = Color(0.23, 0.17135, 0.11270001, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2mdii"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fx3ep"]
+bg_color = Color(0.23137255, 0.1254902, 0.019607844, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ramhq"]
+bg_color = Color(0.55, 0.4092, 0.28599998, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2dt1g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7w0a7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.225, 0.225, 0.225, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3isot"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ccg6f"]
+bg_color = Color(0.23, 0.124199994, 0.018399997, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.151276, 0.151276, 0.151276, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dt1g"]
+bg_color = Color(0.12156863, 0.15294118, 0.21960784, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.56379765, 0.7761974, 0.8860405, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny071"]
+bg_color = Color(1, 0.6591482, 0.30153242, 0.75100005)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[resource]
+default_font = ExtResource("1_fx3ep")
+default_font_size = 36
+Button/styles/disabled = SubResource("StyleBoxFlat_2rf7t")
+Button/styles/focus = SubResource("StyleBoxEmpty_2mdii")
+Button/styles/hover = SubResource("StyleBoxFlat_fx3ep")
+Button/styles/normal = SubResource("StyleBoxFlat_fx3ep")
+Button/styles/pressed = SubResource("StyleBoxFlat_ramhq")
+InvisibleButton/base_type = &"Button"
+InvisibleButton/styles/disabled = SubResource("StyleBoxEmpty_2dt1g")
+InvisibleButton/styles/disabled_mirrored = SubResource("StyleBoxEmpty_2dt1g")
+InvisibleButton/styles/focus = SubResource("StyleBoxEmpty_2dt1g")
+InvisibleButton/styles/hover = SubResource("StyleBoxFlat_7w0a7")
+InvisibleButton/styles/hover_mirrored = SubResource("StyleBoxFlat_7w0a7")
+InvisibleButton/styles/hover_pressed = SubResource("StyleBoxFlat_7w0a7")
+InvisibleButton/styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_7w0a7")
+InvisibleButton/styles/normal = SubResource("StyleBoxEmpty_3isot")
+InvisibleButton/styles/normal_mirrored = SubResource("StyleBoxEmpty_3isot")
+InvisibleButton/styles/pressed = SubResource("StyleBoxFlat_7w0a7")
+InvisibleButton/styles/pressed_mirrored = SubResource("StyleBoxFlat_7w0a7")
+ItemPanel/base_type = &"SubmenuPanel"
+ItemPanel/styles/panel = SubResource("StyleBoxFlat_ccg6f")
+ItemPanelSelected/base_type = &"SubmenuPanel"
+ItemPanelSelected/styles/panel = SubResource("StyleBoxFlat_2dt1g")
+Panel/styles/panel = ExtResource("1_t1tdr")
+SubmenuPanel/base_type = &"Panel"
+SubmenuPanel/styles/panel = SubResource("StyleBoxFlat_ny071")
+VBoxContainer/constants/separation = 6

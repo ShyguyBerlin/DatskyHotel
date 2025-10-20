@@ -85,9 +85,13 @@ func perform_request_cycle(hotel:Hotel=null) -> void:
 			new_requests.append(req)
 			banned_rooms.append(req.origin)
 			req.accept()
+			req.fulfilled.connect(hotel.remove_request.bind(req))
 			accepted+=1
-			if accepted==target:
+			if accepted>=target:
 				break
+		# TODO
+		#for req in old_requests[c]:
+		#	new_requests.append(req)
 	hotel.requests=new_requests
 	new_request_cycle.emit()
 	print("NEW REQUESTS!!!")

@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp80dwfgl170u"]
+
+[ext_resource type="Script" uid="uid://cek6laf43jj2q" path="res://scripts/ui/ItemCountList.gd" id="1_ny071"]
+[ext_resource type="Texture2D" uid="uid://jqskfnwptrf" path="res://Assets/Images/SVG/Bretzel.svg" id="3_ccg6f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny071"]
+bg_color = Color(1, 0.6591482, 0.30153242, 0.75100005)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="ItemList" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"SubmenuPanel"
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny071")
+script = ExtResource("1_ny071")
+
+[node name="ListMargins" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ItemContainer" type="VBoxContainer" parent="ListMargins"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ItemLine" type="Button" parent="ListMargins/ItemContainer"]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"InvisibleButton"
+
+[node name="BackgroundPanelNormal" type="Panel" parent="ListMargins/ItemContainer/ItemLine"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"ItemPanel"
+
+[node name="BackgroundPanelSelected" type="Panel" parent="ListMargins/ItemContainer/ItemLine"]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"ItemPanelSelected"
+
+[node name="TextContent" type="MarginContainer" parent="ListMargins/ItemContainer/ItemLine"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ListMargins/ItemContainer/ItemLine/TextContent"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ItemIcon" type="Control" parent="ListMargins/ItemContainer/ItemLine/TextContent/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ListMargins/ItemContainer/ItemLine/TextContent/HBoxContainer/ItemIcon"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 0
+offset_top = -8.0
+offset_right = 72.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("3_ccg6f")
+expand_mode = 1
+
+[node name="LabelLeft" type="RichTextLabel" parent="ListMargins/ItemContainer/ItemLine/TextContent/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+text = "bb"
+fit_content = true
+vertical_alignment = 1
+
+[node name="LabelRight" type="RichTextLabel" parent="ListMargins/ItemContainer/ItemLine/TextContent/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+mouse_filter = 2
+text = "x324"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
