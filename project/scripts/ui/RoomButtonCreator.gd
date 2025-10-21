@@ -9,10 +9,13 @@ var buttonTemplate = preload("res://nodes/StandardHotelButton.tscn")
 
 @onready var input_handler = %HotelInputHandler
 
+var __current_room :Room = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		apply_button_list_func.call()
+	update_button_visibility.call_deferred()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -95,10 +98,16 @@ func matches_type(value: Variant, T: Variant, exact: bool = false) -> bool:
 	# Fallback: assume T is a class reference (like Button)
 	return value.get_class() == T.get_class() if exact else is_instance_of(value, T)
 
+
 func current_room_updated(new_current_room):
+	__current_room=new_current_room
+	update_button_visibility()
+
+func update_button_visibility():
 	if not is_node_ready():
 		return
-	if new_current_room == null:
+
+	if __current_room == null:
 		for i in get_children():
 			i.hide()
 		return
@@ -109,7 +118,7 @@ func current_room_updated(new_current_room):
 		if not button_data.room_whitelist.is_empty():
 			var allowed=false
 			for rt in button_data.room_whitelist:
-				if matches_type(new_current_room,rt,true):
+				if matches_type(__current_room,rt,true):
 					allowed=true
 					break
 			if not allowed:
@@ -117,7 +126,7 @@ func current_room_updated(new_current_room):
 				continue
 		button.show()
 		for rt in button_data.room_blacklist:
-				if is_instance_of(new_current_room,rt):
+				if is_instance_of(__current_room,rt):
 					button.hide()
 					break
 				
