@@ -9,6 +9,7 @@ var habitant : Habitant
 var origin_hunger
 
 func _init(room : Residence, _habitant: Habitant, original_need:HabitantNeed) -> void:
+	super()
 	type=RequestFulfillmentType.GIFT
 	priority=3
 	title="I want food"
@@ -37,7 +38,7 @@ func consume_gift_action(action:GiftAction):
 		action.consume()
 		origin_hunger.foodLevel+=item.nutritional_value
 		action.display_node.start_habitant_dialog(fed_dialog,[{"food":item}])
-		fulfilled.emit()
+		fulfill()
 
 func accept():
 	habitant.began_talk.connect(consume_talk_action)

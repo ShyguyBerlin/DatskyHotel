@@ -8,7 +8,7 @@ enum RequestFulfillmentType {
 	GIFT
 }
 
-signal fulfilled
+signal fulfilled(req : Request)
 
 # Not sure if this is necessary as the request itself is mostly reponsible for handling its completion
 @export var type : RequestFulfillmentType
@@ -22,3 +22,18 @@ func can_be_added_to_accepted_request_list(accepted_requests:Array[Request]) -> 
 	return true
 
 @abstract func accept() -> void
+
+static var count=0
+
+func _init():
+	print("I am being created ", self)
+	count+=1
+	print("There are now ",count," requests active")
+
+func _notification(what: int) -> void:
+	if what==NOTIFICATION_PREDELETE:
+		print("I am a request and I am being deleted ",self)
+		count-=1
+
+func fulfill():
+	fulfilled.emit(self)

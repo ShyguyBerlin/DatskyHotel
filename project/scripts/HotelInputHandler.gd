@@ -148,10 +148,15 @@ func finished_gift_menu(item_name: String) -> void:
 	if not hotel_display_node.current_room is Residence or hotel_display_node.current_room.resident==null:
 		return
 	if player_instance.inventory[item_name]<=0:
+		player_instance.inventory.erase(item_name)
 		return
 	player_instance.inventory[item_name]-=1
+	if player_instance.inventory[item_name]<=0:
+		player_instance.inventory.erase(item_name)
 	var gift_action = GiftAction.new(item_name)
 	gift_action.display_node = hotel_display_node.get_current_display_node()
+	if hotel_display_node.get_current_display_node():
+		hotel_display_node.get_current_display_node().queue_redraw()
 	hotel_display_node.current_room.resident.recieve_gift(gift_action)
 
 func _input(event: InputEvent) -> void:
