@@ -38,6 +38,7 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://add
 
 [gui]
 
+theme/default_font_multichannel_signed_distance_field=true
 theme/custom="uid://c2803i265ic3m"
 
 [input]

@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmbhro44k7v3m"]
+[gd_scene load_steps=5 format=3 uid="uid://dmbhro44k7v3m"]
 
 [ext_resource type="Script" uid="uid://dnm7u76sk8y0e" path="res://scripts/ui/Shop.gd" id="1_84oiw"]
-[ext_resource type="Texture2D" uid="uid://bsnu6uhl1pc05" path="res://Assets/Images/SVG/AlrekaSign.svg" id="2_xce7c"]
+[ext_resource type="Texture2D" uid="uid://b4tr0alsee1u" path="res://icon.svg" id="2_xce7c"]
+[ext_resource type="Texture2D" uid="uid://jqskfnwptrf" path="res://Assets/Images/SVG/Bretzel.svg" id="3_woj3e"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_woj3e"]
-texture = ExtResource("2_xce7c")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xce7c"]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -15,25 +15,100 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_84oiw")
 
-[node name="Backpanel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_woj3e")
 
-[node name="ItemArea" type="Panel" parent="."]
+[node name="ListMargins" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -424.0
-offset_top = 61.0
-offset_right = 436.0
-offset_bottom = 262.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ItemContainer" type="VBoxContainer" parent="ListMargins"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CenterContainer" type="MarginContainer" parent="ListMargins/ItemContainer"]
+layout_mode = 2
+
+[node name="ItemLine" type="Button" parent="ListMargins/ItemContainer/CenterContainer"]
+unique_name_in_owner = true
+z_index = 1
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"InvisibleButton"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ListMargins/ItemContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+texture = ExtResource("2_xce7c")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="BackgroundPanelNormal" type="PanelContainer" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer"]
+z_index = -1
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"SubMenuPanelContainer"
+theme_override_styles/panel = SubResource("StyleBoxFlat_xce7c")
+
+[node name="TextContent" type="MarginContainer" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal"]
+z_index = -1
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal/TextContent"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ItemIcon" type="Control" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal/TextContent/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal/TextContent/HBoxContainer/ItemIcon"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 0
+offset_top = -8.0
+offset_right = 72.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("3_woj3e")
+expand_mode = 1
+
+[node name="LabelLeft" type="RichTextLabel" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal/TextContent/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+text = "bb"
+fit_content = true
+vertical_alignment = 1
+
+[node name="LabelRight" type="RichTextLabel" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal/TextContent/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+mouse_filter = 2
+text = "x324"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
