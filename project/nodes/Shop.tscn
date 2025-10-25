@@ -1,10 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dmbhro44k7v3m"]
 
 [ext_resource type="Script" uid="uid://dnm7u76sk8y0e" path="res://scripts/ui/Shop.gd" id="1_84oiw"]
-[ext_resource type="Texture2D" uid="uid://b4tr0alsee1u" path="res://icon.svg" id="2_xce7c"]
+[ext_resource type="Theme" uid="uid://c2803i265ic3m" path="res://Assets/UI/Theme.tres" id="1_xce7c"]
+[ext_resource type="Texture2D" uid="uid://bsnu6uhl1pc05" path="res://Assets/Images/SVG/AlrekaSign.svg" id="3_0y2pf"]
 [ext_resource type="Texture2D" uid="uid://jqskfnwptrf" path="res://Assets/Images/SVG/Bretzel.svg" id="3_woj3e"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xce7c"]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -13,7 +12,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_xce7c")
 script = ExtResource("1_84oiw")
+shop_items = null
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -35,80 +36,163 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ItemContainer" type="VBoxContainer" parent="ListMargins"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="ListMargins"]
 layout_mode = 2
 
-[node name="CenterContainer" type="MarginContainer" parent="ListMargins/ItemContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ListMargins/VBoxContainer"]
 layout_mode = 2
 
-[node name="ItemLine" type="Button" parent="ListMargins/ItemContainer/CenterContainer"]
+[node name="TextureRect" type="TextureRect" parent="ListMargins/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(212, 128)
+layout_mode = 2
+texture = ExtResource("3_0y2pf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Current Balance: "
+horizontal_alignment = 2
+
+[node name="BalanceLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 60
+text = "3€"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Button" type="Button" parent="ListMargins/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ListMargins/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemContainer" type="GridContainer" parent="ListMargins/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
-z_index = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="ItemLine" type="PanelContainer" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SubMenuPanelContainer"
+
+[node name="ItemBuyButton" type="Button" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine"]
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 theme_type_variation = &"InvisibleButton"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ListMargins/ItemContainer/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 128)
-layout_mode = 2
-texture = ExtResource("2_xce7c")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="BackgroundPanelNormal" type="PanelContainer" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer"]
-z_index = -1
-layout_mode = 2
-mouse_filter = 2
-theme_type_variation = &"SubMenuPanelContainer"
-theme_override_styles/panel = SubResource("StyleBoxFlat_xce7c")
-
-[node name="TextContent" type="MarginContainer" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal"]
-z_index = -1
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_right = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal/TextContent"]
+[node name="TextContent" type="HBoxContainer" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer"]
+z_index = 1
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ItemIcon" type="Control" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal/TextContent/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(72, 0)
+[node name="Buffer" type="Control" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/TextContent"]
+custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
-mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal/TextContent/HBoxContainer/ItemIcon"]
-custom_minimum_size = Vector2(72, 0)
-layout_mode = 0
-offset_top = -8.0
-offset_right = 72.0
-offset_bottom = 64.0
-mouse_filter = 2
-texture = ExtResource("3_woj3e")
-expand_mode = 1
-
-[node name="LabelLeft" type="RichTextLabel" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal/TextContent/HBoxContainer"]
+[node name="ItemNameLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/TextContent"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-text = "bb"
+text = "Bretzel"
 fit_content = true
-vertical_alignment = 1
 
-[node name="LabelRight" type="RichTextLabel" parent="ListMargins/ItemContainer/CenterContainer/VBoxContainer/BackgroundPanelNormal/TextContent/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/TextContent"]
+layout_mode = 2
+text = "Owned: "
+fit_content = true
+autowrap_mode = 0
+
+[node name="CountLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/TextContent"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 mouse_filter = 2
+theme_type_variation = &"RichTextLabelHighlight"
 text = "x324"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/HBoxContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_woj3e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Buffer2" type="Control" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/HBoxContainer/Control"]
+custom_minimum_size = Vector2(22, 0)
+anchors_preset = 0
+offset_right = 22.0
+
+[node name="NutrientLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/HBoxContainer/Control/Buffer2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = -8.0
+offset_right = 113.0
+offset_bottom = 135.0
+theme_type_variation = &"RichTextLabelBackground"
+text = "3 nutrients
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="PriceLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 80
+text = "1.09€"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 2
+
+[node name="PricePerNutrientLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RichTextLabelBackground"
+text = "0.33€ per nutrient"
+fit_content = true
+autowrap_mode = 0

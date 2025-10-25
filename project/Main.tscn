@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ccp45kjeqnsyn"]
+[gd_scene load_steps=28 format=3 uid="uid://ccp45kjeqnsyn"]
 
 [ext_resource type="Theme" uid="uid://c2803i265ic3m" path="res://Assets/UI/Theme.tres" id="1_c2ibq"]
 [ext_resource type="PackedScene" uid="uid://eutlnvg2s8kt" path="res://nodes/HotelLoader.tscn" id="1_uu6xs"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bkheb4gi1iqo" path="res://scripts/dataclasses/roomtypes/Elevator.gd" id="9_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://dy1coe5jwdf0y" path="res://nodes/CycleProgress.tscn" id="11_20pc6"]
 [ext_resource type="PackedScene" uid="uid://dp8ysxvi24x3p" path="res://nodes/GiftingMenu.tscn" id="12_c6i3y"]
+[ext_resource type="Script" uid="uid://duni3ujulu4ee" path="res://scripts/ui/UIMenuHolder.gd" id="13_j4qnp"]
 
 [sub_resource type="Resource" id="Resource_fpfj3"]
 script = ExtResource("5_c2ibq")
@@ -84,6 +85,12 @@ button_text = "Gift"
 button_actions = Array[String](["open_gift_menu"])
 room_whitelist = ["Residence"]
 metadata/_custom_type_script = "uid://b74ejcotfcsul"
+
+[sub_resource type="InputEventAction" id="InputEventAction_j4qnp"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_fpfj3"]
+events = [SubResource("InputEventAction_j4qnp")]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -190,6 +197,10 @@ offset_bottom = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[node name="CloseHotkey" type="Button" parent="."]
+layout_mode = 0
+shortcut = SubResource("Shortcut_fpfj3")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 z_index = 1
 layout_mode = 1
@@ -203,6 +214,7 @@ theme_override_constants/margin_left = 200
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 200
 theme_override_constants/margin_bottom = 80
+script = ExtResource("13_j4qnp")
 
 [node name="GiftingMenu" parent="MarginContainer" instance=ExtResource("12_c6i3y")]
 unique_name_in_owner = true
@@ -218,6 +230,7 @@ layout_mode = 2
 [connection signal="current_room_changed" from="Builder" to="Control/Hotel" method="change_current_room"]
 [connection signal="current_room_changed" from="Control/Hotel" to="HotelUtilButtons" method="current_room_updated"]
 [connection signal="generated_new_spatial_room_finder" from="Control/Hotel" to="HotelInputHandler" method="set_spatial_room_finder"]
+[connection signal="pressed" from="CloseHotkey" to="MarginContainer" method="close_menu"]
 [connection signal="item_selected" from="MarginContainer/GiftingMenu" to="HotelInputHandler" method="finished_gift_menu"]
 [connection signal="selected_habitant" from="MarginContainer/SelectHabitant" to="HotelInputHandler" method="select_habitant_to_reside_finish"]
 
