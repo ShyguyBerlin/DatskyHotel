@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_jkjie")
-nutritional_value = 600.0
+nutritional_value = 180.0
 system_name = "pelmeni"
 name = "Pelmeni"
 icon = ExtResource("1_jkjie")

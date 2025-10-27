@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ccp45kjeqnsyn"]
+[gd_scene load_steps=29 format=3 uid="uid://ccp45kjeqnsyn"]
 
 [ext_resource type="Theme" uid="uid://c2803i265ic3m" path="res://Assets/UI/Theme.tres" id="1_c2ibq"]
 [ext_resource type="PackedScene" uid="uid://eutlnvg2s8kt" path="res://nodes/HotelLoader.tscn" id="1_uu6xs"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dy1coe5jwdf0y" path="res://nodes/CycleProgress.tscn" id="11_20pc6"]
 [ext_resource type="PackedScene" uid="uid://dp8ysxvi24x3p" path="res://nodes/GiftingMenu.tscn" id="12_c6i3y"]
 [ext_resource type="Script" uid="uid://duni3ujulu4ee" path="res://scripts/ui/UIMenuHolder.gd" id="13_j4qnp"]
+[ext_resource type="PackedScene" uid="uid://dmbhro44k7v3m" path="res://nodes/Shop.tscn" id="16_fpfj3"]
 
 [sub_resource type="Resource" id="Resource_fpfj3"]
 script = ExtResource("5_c2ibq")
@@ -226,6 +227,21 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
+[node name="Shop" parent="MarginContainer" instance=ExtResource("16_fpfj3")]
+visible = false
+layout_mode = 2
+items_in_stock = 2
+inventory_holder = SubResource("Resource_fpfj3")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(144.08, 81.335)
+layout_mode = 0
+offset_left = 35.0
+offset_top = 15.0
+offset_right = 179.08
+offset_bottom = 96.335
+text = "Shop"
+
 [connection signal="built_stuff" from="Builder" to="Control/Hotel" method="draw_hotel"]
 [connection signal="current_room_changed" from="Builder" to="Control/Hotel" method="change_current_room"]
 [connection signal="current_room_changed" from="Control/Hotel" to="HotelUtilButtons" method="current_room_updated"]
@@ -233,6 +249,7 @@ layout_mode = 2
 [connection signal="pressed" from="CloseHotkey" to="MarginContainer" method="close_menu"]
 [connection signal="item_selected" from="MarginContainer/GiftingMenu" to="HotelInputHandler" method="finished_gift_menu"]
 [connection signal="selected_habitant" from="MarginContainer/SelectHabitant" to="HotelInputHandler" method="select_habitant_to_reside_finish"]
+[connection signal="pressed" from="Button" to="MarginContainer/Shop" method="open"]
 
 [editable path="MoveLeft"]
 [editable path="MoveRight"]

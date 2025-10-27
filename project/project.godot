@@ -30,7 +30,7 @@ runtime/balloon_path="res://nodes/DialogBalloon.tscn"
 
 window/size/viewport_width=1200
 window/size/viewport_height=800
-window/stretch/mode="canvas_items"
+window/stretch/aspect="ignore"
 
 [editor_plugins]
 

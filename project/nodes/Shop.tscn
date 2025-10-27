@@ -1,9 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmbhro44k7v3m"]
+[gd_scene load_steps=9 format=3 uid="uid://dmbhro44k7v3m"]
 
 [ext_resource type="Script" uid="uid://dnm7u76sk8y0e" path="res://scripts/ui/Shop.gd" id="1_84oiw"]
 [ext_resource type="Theme" uid="uid://c2803i265ic3m" path="res://Assets/UI/Theme.tres" id="1_xce7c"]
 [ext_resource type="Texture2D" uid="uid://bsnu6uhl1pc05" path="res://Assets/Images/SVG/AlrekaSign.svg" id="3_0y2pf"]
+[ext_resource type="Script" uid="uid://delt4yexho1p2" path="res://scripts/dataclasses/ShopItem.gd" id="3_uh8wc"]
 [ext_resource type="Texture2D" uid="uid://jqskfnwptrf" path="res://Assets/Images/SVG/Bretzel.svg" id="3_woj3e"]
+
+[sub_resource type="Resource" id="Resource_d742j"]
+script = ExtResource("3_uh8wc")
+item_name = "pirozhki"
+price = 4.99
+metadata/_custom_type_script = "uid://delt4yexho1p2"
+
+[sub_resource type="Resource" id="Resource_2et6v"]
+script = ExtResource("3_uh8wc")
+item_name = "pelmeni"
+price = 2.99
+metadata/_custom_type_script = "uid://delt4yexho1p2"
+
+[sub_resource type="Resource" id="Resource_3oem2"]
+script = ExtResource("3_uh8wc")
+item_name = "bretzel"
+price = 0.79
+metadata/_custom_type_script = "uid://delt4yexho1p2"
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -14,7 +33,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_xce7c")
 script = ExtResource("1_84oiw")
-shop_items = null
+catalog = Array[ExtResource("3_uh8wc")]([SubResource("Resource_d742j"), SubResource("Resource_2et6v"), SubResource("Resource_3oem2")])
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -56,6 +75,7 @@ text = "Current Balance: "
 horizontal_alignment = 2
 
 [node name="BalanceLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 60
@@ -196,3 +216,5 @@ theme_type_variation = &"RichTextLabelBackground"
 text = "0.33€ per nutrient"
 fit_content = true
 autowrap_mode = 0
+
+[connection signal="pressed" from="ListMargins/VBoxContainer/HBoxContainer/Button" to="." method="hide"]
