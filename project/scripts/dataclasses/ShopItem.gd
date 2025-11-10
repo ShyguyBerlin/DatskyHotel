@@ -1,7 +1,7 @@
 extends Resource
 class_name ShopItem
 
-@export var item_name : String
+@export var item_name : StringName
 @export var price : float
 
 func get_item() -> Item:

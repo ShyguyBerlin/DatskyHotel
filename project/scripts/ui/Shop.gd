@@ -17,9 +17,7 @@ extends Control
 @onready var price_per_nutrient_label: RichTextLabel = %PricePerNutrientLabel
 @onready var icon: TextureRect = %Icon
 
-signal item_selected(idx:int)
-
-signal item_selection_confirmed(idx:int)
+signal item_bought(item:String)
 
 # need to change this if I want to deal with smth else than the player
 @export var inventory_holder : Player
@@ -38,7 +36,16 @@ func clear() -> void:
 			c.queue_free()
 
 func selected_item(idx):
-	pass
+	bought_item(idx)
+
+func bought_item(idx):
+	var item= current_stock[idx]
+	
+	if inventory_holder.money>=item.price:
+		item_bought.emit(item.item_name)
+		inventory_holder.inventory[item.item_name]+=1
+		inventory_holder.money-=item.price
+		change_player_balance(inventory_holder.money)
 
 func add_item(shop_item : ShopItem) -> void:
 	var item=shop_item.get_item()
@@ -65,10 +72,13 @@ func add_item(shop_item : ShopItem) -> void:
 	item_container.add_child(item_line)
 	print("added itemline to item container ",item_line, " ", item_line.get_parent())
 
-func open():
+func load_stock():
 	clear()
 	for i in current_stock:
 		add_item(i)
+
+func open():
+	load_stock()
 	show()
 
 func restock() -> void:
@@ -79,6 +89,9 @@ func restock() -> void:
 		var rnd_idx = rem_catalog_items.pick_random()
 		current_stock.append(catalog[rnd_idx])
 		rem_catalog_items.erase(rnd_idx)
+	
+	if visible:
+		load_stock()
 
 func change_player_balance(new_balance):
 	balance_label.text=str(new_balance)+"€"
