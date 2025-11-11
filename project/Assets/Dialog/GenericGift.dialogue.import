@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://b5jpjcroevjc"
+path="res://.godot/imported/GenericGift.dialogue-093b19116d9861d0f783bbe379eab9fc.tres"
+
+[deps]
+
+source_file="res://Assets/Dialog/GenericGift.dialogue"
+dest_files=["res://.godot/imported/GenericGift.dialogue-093b19116d9861d0f783bbe379eab9fc.tres"]
+
+[params]
+
+defaults=true

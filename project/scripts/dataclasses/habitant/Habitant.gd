@@ -16,6 +16,7 @@ signal requested_quest_icon(action:ValueRequestAction)
 
 const std_dialog_path="res://Assets/Dialog/HabitantDialog.dialogue"
 const std_dialog=preload(std_dialog_path)
+const std_gift_dialog=preload("uid://b5jpjcroevjc")#Assets/Dialog/GenericGift.dialogue
 
 func process(delta : float):
 	for i in needs:
@@ -36,6 +37,7 @@ func recieve_gift(gift:GiftAction):
 	if gift.is_consumed():
 		return
 	print("No reason for gift, thanks tho")
+	gift.display_node.start_habitant_dialog(std_gift_dialog,[{"gift":gift.get_item()}])
 
 func consume_talk_action(action : TalkAction):
 	began_talk.emit(action)
