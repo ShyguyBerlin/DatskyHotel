@@ -40,19 +40,20 @@ func selected_item(idx):
 
 func bought_item(idx):
 	var item= current_stock[idx]
-	
 	if inventory_holder.money>=item.price:
 		item_bought.emit(item.item_name)
-		inventory_holder.inventory[item.item_name]+=1
+		inventory_holder.inventory[item.item_name]=inventory_holder.inventory.get(item.item_name,0)+1
 		inventory_holder.money-=item.price
+		
 		change_player_balance(inventory_holder.money)
+		item_container.get_child(idx+1).get_child(1).get_child(0).get_child(3).text="x"+str(inventory_holder.inventory[item.item_name])
 
 func add_item(shop_item : ShopItem) -> void:
 	var item=shop_item.get_item()
 	if not item:
 		return
 	item_name_label.text=item.name
-	var own_count=inventory_holder.inventory.get(item.name,0)
+	var own_count=inventory_holder.inventory.get(item.system_name,0)
 	count_label.text="x"+str(own_count)
 	price_label.text=str(snappedf(shop_item.price,0.01))+"€"
 	if item is FoodItem:
@@ -78,6 +79,7 @@ func load_stock():
 		add_item(i)
 
 func open():
+	change_player_balance(inventory_holder.money)
 	load_stock()
 	show()
 
@@ -94,4 +96,4 @@ func restock() -> void:
 		load_stock()
 
 func change_player_balance(new_balance):
-	balance_label.text=str(new_balance)+"€"
+	balance_label.text=str(snapped(new_balance,0.01))+"€"

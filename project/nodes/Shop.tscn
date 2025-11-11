@@ -8,16 +8,19 @@
 
 [sub_resource type="Resource" id="Resource_d742j"]
 script = ExtResource("3_uh8wc")
+item_name = &"pirozhki"
 price = 4.99
 metadata/_custom_type_script = "uid://delt4yexho1p2"
 
 [sub_resource type="Resource" id="Resource_2et6v"]
 script = ExtResource("3_uh8wc")
+item_name = &"pelmeni"
 price = 2.99
 metadata/_custom_type_script = "uid://delt4yexho1p2"
 
 [sub_resource type="Resource" id="Resource_3oem2"]
 script = ExtResource("3_uh8wc")
+item_name = &"bretzel"
 price = 0.79
 metadata/_custom_type_script = "uid://delt4yexho1p2"
 

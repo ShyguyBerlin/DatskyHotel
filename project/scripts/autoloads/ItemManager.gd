@@ -1,9 +1,9 @@
 extends Node
 
-var items:Dictionary[String,Item]
+var items:Dictionary[StringName,Item]
 
 # Collection of items which are specifically Food, may be used for Food Quests idk
-var food_items:Array[String]
+var food_items:Array[StringName]
 var preloaded_items : ResourceBundle=preload("uid://ta8aj6kjow8o")# Assets/ItemCollection.tres : ResourceBundle
 
 func _init():
@@ -22,7 +22,7 @@ func add_item(item:Item):
 	items[item.system_name]=item
 	print("added Item ",item.name," [",item.system_name,"]")
 
-func get_item(system_name:String) -> Item:
+func get_item(system_name:StringName) -> Item:
 	if not system_name in items:
 		printerr("ERROR ItemManager.get_item: Item ",system_name," not present!")
 		return null
