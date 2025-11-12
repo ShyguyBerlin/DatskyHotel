@@ -1,3 +1,4 @@
+@tool
 extends Resource
 class_name Item
 
@@ -8,3 +9,6 @@ class_name Item
 
 # Ideally this is a 64x64 pixel or higher res picture.
 @export var icon : Texture2D
+
+func _get_custom_preview_texture() -> Texture2D:
+	return icon
