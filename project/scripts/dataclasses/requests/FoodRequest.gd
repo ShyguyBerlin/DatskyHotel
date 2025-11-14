@@ -36,7 +36,6 @@ func consume_gift_action(action:GiftAction):
 	var item = action.get_item()
 	if item is FoodItem:
 		action.consume()
-		origin_hunger.foodLevel+=item.nutritional_value
 		action.display_node.start_habitant_dialog(fed_dialog,[{"gift":item}])
 		fulfill()
 
