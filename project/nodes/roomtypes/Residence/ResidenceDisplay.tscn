@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cv4nagotorl6" path="res://Assets/Images/SVG/Residence.svg" id="2_db3kr"]
 [ext_resource type="Texture2D" uid="uid://c318kscmhsmr7" path="res://Assets/Images/SVG/NormalRoomFrame.svg" id="4_qihtl"]
 [ext_resource type="Texture2D" uid="uid://bpg744rxlstqg" path="res://Assets/Images/SVG/Whiteboard.svg" id="5_br6ei"]
-[ext_resource type="PackedScene" uid="uid://cuwfescir8knw" path="res://nodes/DialogBalloon.tscn" id="5_qihtl"]
+[ext_resource type="PackedScene" uid="uid://cuwfescir8knw" path="res://nodes/ui/DialogBalloon.tscn" id="5_qihtl"]
 [ext_resource type="Texture2D" uid="uid://du02b0g6oq1ng" path="res://Assets/Images/PNG/Plate.png" id="5_wikuv"]
 
 [sub_resource type="Gradient" id="Gradient_dwmlp"]

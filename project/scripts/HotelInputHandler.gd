@@ -135,8 +135,10 @@ func select_habitant_to_reside_finish(habitant_selected:Habitant):
 	if not hotel_display_node.current_room is Residence:
 		if hotel_display_node.get_script():
 			printerr("Trying to move a resident to a non-residence room",hotel_display_node.current_room.get_script().get_global_name())
+			return
 		else:
 			printerr("Trying to move a resident to a non-residence room of unknown type")
+			return
 	if habitant_selected.residence:
 		habitant_selected.residence.resident=null
 	

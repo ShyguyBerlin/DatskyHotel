@@ -50,8 +50,12 @@ func selected_item(idx):
 		item_selected.emit(idx)
 
 func add_item(text,textr="",icon:Texture2D=null) -> void:
-	var tex_rect = item_icon.get_child(0) as TextureRect
-	tex_rect.texture=icon
+	if use_icons:
+		item_icon.show()
+		var tex_rect = item_icon.get_child(0) as TextureRect
+		tex_rect.texture=icon
+	else:
+		item_icon.hide()
 	label_left.text=text
 	label_right.text=textr
 	var item_line=item_line_node_prefab.duplicate()

@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://bgsav0hcj27qw" path="res://Assets/UI/MenuMainPanel.tres" id="1_hb0bl"]
 [ext_resource type="Script" uid="uid://020kwa3ipb4h" path="res://scripts/ui/GiftingMenu.gd" id="1_hc6kk"]
-[ext_resource type="PackedScene" uid="uid://dp80dwfgl170u" path="res://nodes/ItemCountList.tscn" id="3_rui4e"]
+[ext_resource type="PackedScene" uid="uid://dp80dwfgl170u" path="res://nodes/ui/ItemCountList.tscn" id="3_rui4e"]
 
 [node name="GiftingMenu" type="Control"]
 layout_mode = 3

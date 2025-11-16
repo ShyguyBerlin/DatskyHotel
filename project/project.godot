@@ -24,7 +24,7 @@ ItemManager="*res://scripts/autoloads/ItemManager.gd"
 
 [dialogue_manager]
 
-runtime/balloon_path="res://nodes/DialogBalloon.tscn"
+runtime/balloon_path="res://nodes/ui/DialogBalloon.tscn"
 
 [display]
 
