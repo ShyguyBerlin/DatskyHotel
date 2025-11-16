@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://418kkop5fyws"
+path="res://.godot/imported/GenericItemReward.dialogue-a1e0819dbbaf126f2550d1b0df862aa9.tres"
+
+[deps]
+
+source_file="res://Assets/Dialog/GenericItemReward.dialogue"
+dest_files=["res://.godot/imported/GenericItemReward.dialogue-a1e0819dbbaf126f2550d1b0df862aa9.tres"]
+
+[params]
+
+defaults=true

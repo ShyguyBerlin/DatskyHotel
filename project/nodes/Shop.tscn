@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmbhro44k7v3m"]
+[gd_scene load_steps=10 format=3 uid="uid://dmbhro44k7v3m"]
 
 [ext_resource type="Script" uid="uid://dnm7u76sk8y0e" path="res://scripts/ui/Shop.gd" id="1_84oiw"]
 [ext_resource type="Theme" uid="uid://c2803i265ic3m" path="res://Assets/UI/Theme.tres" id="1_xce7c"]
 [ext_resource type="Texture2D" uid="uid://bsnu6uhl1pc05" path="res://Assets/Images/SVG/AlrekaSign.svg" id="3_0y2pf"]
 [ext_resource type="Script" uid="uid://delt4yexho1p2" path="res://scripts/dataclasses/ShopItem.gd" id="3_uh8wc"]
 [ext_resource type="Texture2D" uid="uid://jqskfnwptrf" path="res://Assets/Images/SVG/Bretzel.svg" id="3_woj3e"]
+[ext_resource type="Script" uid="uid://btligk40mbgh6" path="res://scripts/ui/MoneyLabel.gd" id="5_uh8wc"]
 
 [sub_resource type="Resource" id="Resource_d742j"]
 script = ExtResource("3_uh8wc")
@@ -72,6 +73,7 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Current Balance: "
+scroll_active = false
 horizontal_alignment = 2
 
 [node name="BalanceLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/HBoxContainer"]
@@ -81,7 +83,9 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 60
 text = "3€"
 fit_content = true
+scroll_active = false
 autowrap_mode = 0
+script = ExtResource("5_uh8wc")
 
 [node name="Button" type="Button" parent="ListMargins/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -133,12 +137,14 @@ size_flags_horizontal = 3
 mouse_filter = 2
 text = "Bretzel"
 fit_content = true
+scroll_active = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/TextContent"]
 layout_mode = 2
 mouse_filter = 2
 text = "Owned: "
 fit_content = true
+scroll_active = false
 autowrap_mode = 0
 
 [node name="CountLabel" type="RichTextLabel" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/TextContent"]
@@ -199,6 +205,7 @@ theme_type_variation = &"RichTextLabelBackground"
 text = "3 nutrients
 "
 fit_content = true
+scroll_active = false
 autowrap_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ListMargins/VBoxContainer/ScrollContainer/ItemContainer/ItemLine/VBoxContainer/HBoxContainer"]
@@ -214,6 +221,7 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 80
 text = "1.09€"
 fit_content = true
+scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 2
 
@@ -225,6 +233,7 @@ mouse_filter = 2
 theme_type_variation = &"RichTextLabelBackground"
 text = "0.33€ per nutrient"
 fit_content = true
+scroll_active = false
 autowrap_mode = 0
 
 [connection signal="pressed" from="ListMargins/VBoxContainer/HBoxContainer/Button" to="." method="hide"]

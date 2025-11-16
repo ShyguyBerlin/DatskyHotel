@@ -6,7 +6,14 @@ class_name HotelInputManager
 @export var builder_node : HotelBuilder
 @export var habitant_selection: Control
 @export var gift_menu : Control
+@export var money_label : RichTextLabel
 var spatial_room_finder : HotelSpatialRoomFinder
+
+func _ready() -> void:
+	if player_instance:
+		player_instance.money_changed.connect(player_money_changed)
+		if money_label:
+			money_label.set_target_value(player_instance.money,true)
 
 func set_spatial_room_finder(room_finder: HotelSpatialRoomFinder) -> void:
 	spatial_room_finder=room_finder
@@ -115,6 +122,7 @@ func enter_residence():
 		return
 	
 	var tk_action=TalkAction.new()
+	tk_action.player=player_instance
 	tk_action.display_node=hotel_display_node.get_current_display_node()
 	residence.consume_talk_action(tk_action)
 
@@ -147,6 +155,8 @@ func open_gift_menu():
 func finished_gift_menu(item_name: String) -> void:
 	if not hotel_display_node.current_room is Residence or hotel_display_node.current_room.resident==null:
 		return
+	if not item_name in player_instance.inventory:
+		return
 	if player_instance.inventory[item_name]<=0:
 		player_instance.inventory.erase(item_name)
 		return
@@ -154,10 +164,15 @@ func finished_gift_menu(item_name: String) -> void:
 	if player_instance.inventory[item_name]<=0:
 		player_instance.inventory.erase(item_name)
 	var gift_action = GiftAction.new(item_name)
+	gift_action.player=player_instance
 	gift_action.display_node = hotel_display_node.get_current_display_node()
 	if hotel_display_node.get_current_display_node():
 		hotel_display_node.get_current_display_node().queue_redraw()
 	hotel_display_node.current_room.resident.recieve_gift(gift_action)
+
+func player_money_changed():
+	if money_label and player_instance:
+		money_label.set_target_value(player_instance.money)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("hotel_move_left"):

@@ -79,7 +79,7 @@ func load_stock():
 		add_item(i)
 
 func open():
-	change_player_balance(inventory_holder.money)
+	change_player_balance(inventory_holder.money,false)
 	load_stock()
 	show()
 
@@ -95,5 +95,5 @@ func restock() -> void:
 	if visible:
 		load_stock()
 
-func change_player_balance(new_balance):
-	balance_label.text=str(snapped(new_balance,0.01))+"€"
+func change_player_balance(new_balance,animated=true):
+	balance_label.set_target_value(snapped(new_balance,0.01),not animated)

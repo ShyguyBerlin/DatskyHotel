@@ -3,7 +3,7 @@
 % {{habitant.name}}: I really appreciate this.
 % {{habitant.name}}: This is better.
 % {{habitant.name}}: This {{gift.name}} was really tasty. Thank you.
-% {{habitant.name}}: I like {{gift.name}}. I like how it fills my tummy for {{int(gift.nutritional_value/10)}} seconds
+%20 {{habitant.name}}: I like {{gift.name}}. I like how it fills my tummy for {{gift.nutritional_value}} seconds
 
 % {{habitant.name}}: See you soon!
 % {{habitant.name}}: Have a good day!

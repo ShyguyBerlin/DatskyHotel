@@ -27,6 +27,7 @@ func consume_talk_action(action:TalkAction):
 func consume_quest_icon_request(action:ValueRequestAction):
 	if action.is_consumed():
 		return
+	
 	action.consume()
 	action.value=quest_icon
 
@@ -36,7 +37,12 @@ func consume_gift_action(action:GiftAction):
 	var item = action.get_item()
 	if item is FoodItem:
 		action.consume()
-		action.display_node.start_habitant_dialog(fed_dialog,[{"gift":item}])
+		await action.display_node.start_habitant_dialog(fed_dialog,[{"gift":item}])
+		if randf()<0.2:
+			action.reward_item("bretzel")
+		else:
+			action.reward_money(randf()*2+1)
+		action.display_node.draw_quest_icon.call_deferred()
 		fulfill()
 
 func accept():
