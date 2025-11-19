@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://bgsav0hcj27qw" path="res://Assets/UI/MenuMainPanel.tres" id="2_020bc"]
 [ext_resource type="PackedScene" uid="uid://dp80dwfgl170u" path="res://nodes/ui/ItemCountList.tscn" id="3_bcnh3"]
 [ext_resource type="PackedScene" uid="uid://cs4kqpokmave6" path="res://nodes/HabitantDisplay.tscn" id="4_r4ojn"]
-[ext_resource type="Texture2D" uid="uid://d2mjxk47wra7j" path="res://Assets/Images/SVG/Gift.svg" id="4_spc4u"]
+[ext_resource type="Texture2D" uid="uid://dv86yigw0cm4b" path="res://Assets/Images/SVG/Passport.svg" id="5_spc4u"]
 
 [node name="SelectHabitant" type="Control"]
 layout_mode = 3
@@ -144,7 +144,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("4_spc4u")
+texture_normal = ExtResource("5_spc4u")
 ignore_texture_size = true
 stretch_mode = 0
 

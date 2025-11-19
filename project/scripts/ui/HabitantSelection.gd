@@ -18,9 +18,19 @@ func _ready() -> void:
 	populate_habitant_list()
 	draw_selected_habitant()
 
+func open():
+	habitant_list.unselect_item()
+	populate_habitant_list()
+	show()
+
+func open_keep_last_selection():
+	var tmp_selection=currently_selected_habitant
+	open()
+	habitant_list.selected_item(tmp_selection)
+	draw_selected_habitant()
+
 func set_register(reg:HabitantRegister):
 	register=reg
-	currently_selected_habitant=-1
 	populate_habitant_list()
 
 func populate_habitant_list():
@@ -54,6 +64,7 @@ func add_habitant_button_pressed():
 	if not register:
 		print("No register set")
 		return
+	currently_selected_habitant=-1
 	var new_habitant=Habitant.new()
 	var possible_names=["Alice","Bob","Charlie","Dora","Eric","Foo","Greg","Historia","Imyr","John","Kirk","Louis","Minato","Nugget","Omar","Popeye","Rhaast"]
 	new_habitant.name=possible_names.pick_random()
@@ -63,15 +74,11 @@ func add_habitant_button_pressed():
 	var food_need = preload("uid://dqew5h564cmig").new()
 	new_habitant.add_need(food_need)
 	
-	register.register_habitant(new_habitant)
-	populate_habitant_list()
-	habitant_list.selected_item(register.habitants.size()-1)
-	draw_selected_habitant()
-	open_habitant_creator.emit(new_habitant,true)
 	hide()
+	open_habitant_creator.emit(new_habitant,true)
 
 func habitant_selected(idx:int):
-	if idx==currently_selected_habitant:
+	if (idx==currently_selected_habitant) and (idx!=-1):
 		habitant_selected_final(idx)
 		return
 	currently_selected_habitant=idx
@@ -85,11 +92,20 @@ func on_edit_button_pressed():
 	if currently_selected_habitant==-1:
 		return
 	var hab= register.habitants[currently_selected_habitant]
-	open_habitant_creator.emit(hab,false)
 	hide()
+	open_habitant_creator.emit(hab,false)
 
 # From creator data, should only overwrite fields which the creator can edit
 func overwrite_current_habitant(habitant: Habitant):
-	register.habitants[currently_selected_habitant].name=habitant.name
-	register.habitants[currently_selected_habitant].bodytype=habitant.bodytype
-	register.habitants[currently_selected_habitant].body_color=habitant.body_color
+	if currently_selected_habitant==-1:
+		# New habitant
+		register.register_habitant(habitant)
+		populate_habitant_list()
+		habitant_list.selected_item(register.habitants.size()-1)
+		draw_selected_habitant()
+	else:
+		# Edited habitant
+		register.habitants[currently_selected_habitant].name=habitant.name
+		register.habitants[currently_selected_habitant].bodytype=habitant.bodytype
+		register.habitants[currently_selected_habitant].body_color=habitant.body_color
+	

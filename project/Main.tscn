@@ -266,7 +266,7 @@ script = ExtResource("17_sc1dx")
 [connection signal="open_habitant_creator" from="MarginContainer/SelectHabitant" to="MarginContainer/CreateResident" method="open_with_habitant"]
 [connection signal="selected_habitant" from="MarginContainer/SelectHabitant" to="HotelInputHandler" method="select_habitant_to_reside_finish"]
 [connection signal="habitant_changes_confirmed" from="MarginContainer/CreateResident" to="MarginContainer/SelectHabitant" method="overwrite_current_habitant"]
-[connection signal="habitant_changes_confirmed" from="MarginContainer/CreateResident" to="MarginContainer/SelectHabitant" method="show" unbinds=1]
+[connection signal="hidden" from="MarginContainer/CreateResident" to="MarginContainer/SelectHabitant" method="open_keep_last_selection"]
 [connection signal="pressed" from="ShopButton" to="MarginContainer/Shop" method="open"]
 
 [editable path="MoveLeft"]

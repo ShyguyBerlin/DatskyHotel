@@ -38,12 +38,22 @@ func set_use_icons(val):
 	else:
 		item_icon.show()
 
+func unselect_item():
+	if selected_idx!=-1:
+		item_list[selected_idx].get_child(1).hide()
+	selected_idx=-1
+	item_selected.emit(-1)
+
 func selected_item(idx):
+	if idx==-1:
+		return unselect_item()
+	
 	if selected_idx==idx:
 		item_selection_confirmed.emit(idx)
 	else:
 		# Switch to normal panel
-		item_list[selected_idx].get_child(1).hide()
+		if selected_idx!=-1:
+			item_list[selected_idx].get_child(1).hide()
 		selected_idx=idx
 		# Switch to selected panel
 		item_list[selected_idx].get_child(1).show()

@@ -10,6 +10,8 @@ var habitant_backup : Habitant = null
 @onready var habitant_display: HabitantDisplay = %HabitantDisplay
 @onready var name_edit: LineEdit = %NameEdit
 
+@onready var expression_button: OptionButton = %ExpressionButton
+
 signal habitant_changes_confirmed(habitant: Habitant)
 
 # Called when the node enters the scene tree for the first time.
@@ -44,15 +46,23 @@ func open_with_habitant(hab,creator):
 	open()
 
 func on_cancel_button_pressed():
-	habitant_changes_confirmed.emit(habitant_backup)
 	hide()
+	# No action should be intended here
+	# habitant_changes_confirmed.emit(habitant_backup)
 
 func on_apply_button_pressed():
-	habitant_changes_confirmed.emit(habitant)
 	hide()
+	habitant_changes_confirmed.emit(habitant)
 
 func open():
+
 	visible=true
+
+func on_hidden() -> void:
+	if not is_node_ready():
+		return
+	expression_button.select(0)
+	expression_button.item_selected.emit(0)
 
 func change_habitant_name(new_text: String) -> void:
 	habitant.name=new_text
@@ -69,4 +79,3 @@ func cycle_habitant_body(next:bool) -> void:
 	cidx%=len(colors)
 	habitant.body_color=colors[cidx]
 	habitant_display.update_display()
-	print(cidx)
