@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cn8tnkricq2cr"]
+[gd_scene load_steps=6 format=3 uid="uid://cn8tnkricq2cr"]
 
 [ext_resource type="Script" uid="uid://cy0yx3lfbsoso" path="res://scripts/ui/HabitantSelection.gd" id="1_yfolk"]
 [ext_resource type="StyleBox" uid="uid://bgsav0hcj27qw" path="res://Assets/UI/MenuMainPanel.tres" id="2_020bc"]
 [ext_resource type="PackedScene" uid="uid://dp80dwfgl170u" path="res://nodes/ui/ItemCountList.tscn" id="3_bcnh3"]
 [ext_resource type="PackedScene" uid="uid://cs4kqpokmave6" path="res://nodes/HabitantDisplay.tscn" id="4_r4ojn"]
+[ext_resource type="Texture2D" uid="uid://d2mjxk47wra7j" path="res://Assets/Images/SVG/Gift.svg" id="4_spc4u"]
 
 [node name="SelectHabitant" type="Control"]
 layout_mode = 3
@@ -77,6 +78,29 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 1.4
 theme_type_variation = &"SubmenuPanel"
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/View/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/View/VBoxContainer/Panel/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+gui_disable_input = true
+size = Vector2i(586, 452)
+size_2d_override = Vector2i(586, 512)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="HabitantDisplay" parent="HBoxContainer/View/VBoxContainer/Panel/SubViewportContainer/SubViewport" instance=ExtResource("4_r4ojn")]
+unique_name_in_owner = true
+position = Vector2(428.99994, 551.64606)
+scale = Vector2(-0.565, 0.565)
+
 [node name="HabitantNamePanel" type="Panel" parent="HBoxContainer/View/VBoxContainer/Panel"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -101,28 +125,28 @@ text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/View/VBoxContainer/Panel"]
+[node name="EditPanel" type="Panel" parent="HBoxContainer/View/VBoxContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6
+anchor_right = 0.6
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 76.0
+offset_bottom = 76.0
+theme_type_variation = &"ItemPanel"
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/View/VBoxContainer/Panel/EditPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer/View/VBoxContainer/Panel/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-gui_disable_input = true
-size = Vector2i(586, 452)
-size_2d_override = Vector2i(586, 512)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="HabitantDisplay" parent="HBoxContainer/View/VBoxContainer/Panel/SubViewportContainer/SubViewport" instance=ExtResource("4_r4ojn")]
-unique_name_in_owner = true
-position = Vector2(428.99994, 551.64606)
-scale = Vector2(-0.565, 0.565)
+texture_normal = ExtResource("4_spc4u")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="Control" type="Control" parent="HBoxContainer/View/VBoxContainer"]
 layout_mode = 2
@@ -131,3 +155,4 @@ size_flags_vertical = 3
 [connection signal="pressed" from="HBoxContainer/Selection/VBoxContainer/HBoxContainer/AddHabButton" to="." method="add_habitant_button_pressed"]
 [connection signal="item_selected" from="HBoxContainer/Selection/VBoxContainer/ScrollContainer/HabitantList" to="." method="habitant_selected"]
 [connection signal="item_selection_confirmed" from="HBoxContainer/Selection/VBoxContainer/ScrollContainer/HabitantList" to="." method="habitant_selected_final"]
+[connection signal="pressed" from="HBoxContainer/View/VBoxContainer/Panel/EditPanel/TextureButton" to="." method="on_edit_button_pressed"]

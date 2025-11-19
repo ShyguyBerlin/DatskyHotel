@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dp80dwfgl170u"]
 
 [ext_resource type="Script" uid="uid://cek6laf43jj2q" path="res://scripts/ui/ItemCountList.gd" id="1_ny071"]
-[ext_resource type="Texture2D" uid="uid://jqskfnwptrf" path="res://Assets/Images/SVG/Bretzel.svg" id="3_ccg6f"]
+[ext_resource type="Texture2D" uid="uid://b4tr0alsee1u" path="res://icon.svg" id="2_3ngk3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny071"]
 bg_color = Color(1, 0.6591482, 0.30153242, 0.75100005)
@@ -99,7 +99,7 @@ offset_top = -8.0
 offset_right = 72.0
 offset_bottom = 64.0
 mouse_filter = 2
-texture = ExtResource("3_ccg6f")
+texture = ExtResource("2_3ngk3")
 expand_mode = 1
 
 [node name="LabelLeft" type="RichTextLabel" parent="ListMargins/ItemContainer/ItemLine/TextContent/HBoxContainer"]
@@ -107,7 +107,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-text = "bb"
+text = "Item"
 fit_content = true
 vertical_alignment = 1
 
@@ -116,7 +116,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 mouse_filter = 2
-text = "x324"
+text = "text"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0

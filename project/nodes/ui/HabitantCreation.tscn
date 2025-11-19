@@ -1,0 +1,198 @@
+[gd_scene load_steps=10 format=3 uid="uid://bql70mqvjwyq3"]
+
+[ext_resource type="PackedScene" uid="uid://cs4kqpokmave6" path="res://nodes/HabitantDisplay.tscn" id="1_3rbqo"]
+[ext_resource type="Script" uid="uid://b0ga4urns7qwd" path="res://scripts/ui/GrabFocus.gd" id="1_i1d6k"]
+[ext_resource type="Script" uid="uid://cd2kyj7nj54bx" path="res://scripts/ui/HabitantCreator.gd" id="1_y7pg5"]
+[ext_resource type="Script" uid="uid://bsfncf7jj3c7e" path="res://scripts/dataclasses/habitant/HabitantProperty.gd" id="2_7nx6e"]
+[ext_resource type="Texture2D" uid="uid://dvr53wsi855pe" path="res://Assets/Images/SVG/ArrowRight.svg" id="2_i2he7"]
+[ext_resource type="Script" uid="uid://cdjrb84dqswik" path="res://scripts/dataclasses/habitant/needs/HabitantNeed.gd" id="3_cch1j"]
+[ext_resource type="Script" uid="uid://36y1prp1d5fa" path="res://nodes/ui/ExpressionSelector.gd" id="4_ntxv0"]
+[ext_resource type="Script" uid="uid://7r3tv7wgr4ee" path="res://scripts/dataclasses/habitant/Habitant.gd" id="4_p4wcx"]
+
+[sub_resource type="Resource" id="Resource_bswe7"]
+script = ExtResource("4_p4wcx")
+
+[node name="CreateResident" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_next = NodePath("Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/NameEdit")
+script = ExtResource("1_y7pg5")
+habitant = SubResource("Resource_bswe7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="MainPanel" type="Panel" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_type_variation = &"SubmenuPanel"
+
+[node name="MainPanelDiv" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="NameBodyMargin" type="MarginContainer" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="NameBodyColumn" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameEdit" type="LineEdit" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_next = NodePath("../MarginContainer/BodyTypeSelector/ArrowLeftContainer/ArrowLeft")
+placeholder_text = "Hab's name"
+alignment = 1
+max_length = 12
+
+[node name="GrabFocus" type="Node2D" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/NameEdit"]
+visible = false
+script = ExtResource("1_i1d6k")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="BodyTypeSelector" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ArrowLeftContainer" type="AspectRatioContainer" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+ratio = 0.4
+stretch_mode = 0
+
+[node name="ArrowLeft" type="TextureButton" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector/ArrowLeftContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_next = NodePath("../../ArrowRightContainer/ArrowRight")
+focus_previous = NodePath("../../../../NameEdit")
+texture_normal = ExtResource("2_i2he7")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.5
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(345, 530)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector/SubViewportContainer/SubViewport"]
+position = Vector2(169.5, 277)
+
+[node name="HabitantDisplay" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector/SubViewportContainer/SubViewport" instance=ExtResource("1_3rbqo")]
+unique_name_in_owner = true
+position = Vector2(155, 531)
+scale = Vector2(0.6, 0.6)
+expression = 0
+
+[node name="ArrowRightContainer" type="AspectRatioContainer" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+ratio = 0.4
+stretch_mode = 0
+
+[node name="ArrowRight" type="TextureButton" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector/ArrowRightContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("2_i2he7")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn"]
+layout_mode = 2
+ratio = 4.0
+
+[node name="OptionButton" type="OptionButton" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/AspectRatioContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+alignment = 1
+selected = 0
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "Idle"
+popup/item_0/id = 0
+popup/item_1/text = "Wave"
+popup/item_1/id = 1
+popup/item_2/text = "Pain"
+popup/item_2/id = 2
+script = ExtResource("4_ntxv0")
+
+[node name="MoreInfoMargin" type="MarginContainer" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="MoreInfoColumn" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/MainPanelDiv/MoreInfoMargin"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="CancelButton" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+text = "Cancel"
+
+[node name="ApplyButton" type="Button" parent="Panel/VBoxContainer/MarginContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+text = "Apply
+"
+
+[connection signal="text_changed" from="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/NameEdit" to="." method="change_habitant_name"]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector/ArrowLeftContainer/ArrowLeft" to="." method="cycle_habitant_body" binds= [false]]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector/ArrowRightContainer/ArrowRight" to="." method="cycle_habitant_body" binds= [true]]
+[connection signal="item_selected" from="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/AspectRatioContainer/OptionButton" to="Panel/VBoxContainer/MarginContainer/MainPanelDiv/NameBodyMargin/NameBodyColumn/MarginContainer/BodyTypeSelector/SubViewportContainer/SubViewport/HabitantDisplay" method="set_expression"]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/CancelButton" to="." method="on_cancel_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MarginContainer2/HBoxContainer/ApplyButton" to="." method="on_apply_button_pressed"]
