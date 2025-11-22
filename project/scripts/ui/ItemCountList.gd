@@ -38,20 +38,34 @@ func set_use_icons(val):
 	else:
 		item_icon.show()
 
+func unselect_item():
+	if selected_idx!=-1:
+		item_list[selected_idx].get_child(1).hide()
+	selected_idx=-1
+	item_selected.emit(-1)
+
 func selected_item(idx):
+	if idx==-1:
+		return unselect_item()
+	
 	if selected_idx==idx:
 		item_selection_confirmed.emit(idx)
 	else:
 		# Switch to normal panel
-		item_list[selected_idx].get_child(1).hide()
+		if selected_idx!=-1:
+			item_list[selected_idx].get_child(1).hide()
 		selected_idx=idx
 		# Switch to selected panel
 		item_list[selected_idx].get_child(1).show()
 		item_selected.emit(idx)
 
 func add_item(text,textr="",icon:Texture2D=null) -> void:
-	var tex_rect = item_icon.get_child(0) as TextureRect
-	tex_rect.texture=icon
+	if use_icons:
+		item_icon.show()
+		var tex_rect = item_icon.get_child(0) as TextureRect
+		tex_rect.texture=icon
+	else:
+		item_icon.hide()
 	label_left.text=text
 	label_right.text=textr
 	var item_line=item_line_node_prefab.duplicate()

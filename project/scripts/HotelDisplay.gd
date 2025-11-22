@@ -132,9 +132,9 @@ func draw_hotel():
 	room_finder.construct_spatial_map(room_areas,room_nodes)
 
 	if not current_room:
-		center_around_center()
+		center_around_center(false)
 	else:
-		center_around_current_room()
+		center_around_current_room(false)
 	
 	
 	building_sprite_rect.position=bl_corner
@@ -145,16 +145,26 @@ func draw_hotel():
 func displaynode_real_position(node):
 	return node.position#-current_offset
 
-func center_around(pos:Vector2):
-		var practical_translation:Vector2 = -pos - current_offset
-		for i in get_children():
-			i.position+=practical_translation
-		current_offset=-pos
+var tweens : Array[Tween]
 
-func center_around_center():
-		center_around(rendered_center)
+func center_around(pos:Vector2,animate=true):
+	for i in tweens:
+		i.kill()
+	tweens.clear()
+	#var practical_translation:Vector2 = -pos - current_offset
+	for i in get_children():
+		if animate:
+			var tween = get_tree().create_tween()
+			tweens.append(tween)
+			tween.tween_property(i,"position",-pos,0.2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+		else:
+			i.position=-pos
+	current_offset=-pos
 
-func center_around_current_room():
+func center_around_center(animate=true):
+		center_around(rendered_center,animate)
+
+func center_around_current_room(animate=true):
 	# no hotel to center
 	if not room_mapping:
 		return
@@ -162,4 +172,4 @@ func center_around_current_room():
 	# current room not drawn
 	if not current_room in room_mapping:
 		return
-	center_around(displaynode_real_position(room_mapping[current_room]))
+	center_around(displaynode_real_position(room_mapping[current_room]),animate)

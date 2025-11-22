@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2mjxk47wra7j"
-path="res://.godot/imported/Gift.svg-12ace3be1c3be2a3054b4b5601a3a642.ctex"
+uid="uid://dv86yigw0cm4b"
+path="res://.godot/imported/Passport.svg-f973ba7723a7dd5229b86f450243124a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/SVG/Gift.svg"
-dest_files=["res://.godot/imported/Gift.svg-12ace3be1c3be2a3054b4b5601a3a642.ctex"]
+source_file="res://Assets/Images/SVG/Passport.svg"
+dest_files=["res://.godot/imported/Passport.svg-f973ba7723a7dd5229b86f450243124a.ctex"]
 
 [params]
 

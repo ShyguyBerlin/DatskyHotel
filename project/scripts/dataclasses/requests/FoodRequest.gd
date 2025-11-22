@@ -40,6 +40,9 @@ func consume_gift_action(action:GiftAction):
 		await action.display_node.start_habitant_dialog(fed_dialog,[{"gift":item}])
 		if randf()<0.2:
 			action.reward_item("bretzel")
+		
+		if randf()<0.05:
+			action.reward_money(randf()*27+3)
 		else:
 			action.reward_money(randf()*2+1)
 		action.display_node.draw_quest_icon.call_deferred()

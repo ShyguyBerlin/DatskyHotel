@@ -14,7 +14,7 @@ func child_visibility_changed(child):
 		mouse_filter=Control.MOUSE_FILTER_IGNORE
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.is_pressed()==true:
 		close_menu()
 	get_viewport().set_input_as_handled()
 
