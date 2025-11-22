@@ -68,7 +68,7 @@ func change_habitant_name(new_text: String) -> void:
 	habitant.name=new_text
 
 func cycle_habitant_body(next:bool) -> void:
-	var colors = [Color.BISQUE, Color.MEDIUM_AQUAMARINE, Color.DARK_GRAY, Color.LAVENDER_BLUSH, Color.PALE_VIOLET_RED]
+	var colors = [Color.BISQUE, Color.MEDIUM_AQUAMARINE, Color.DARK_GRAY, Color.LAVENDER_BLUSH, Color.PALE_VIOLET_RED, Color.STEEL_BLUE, Color.INDIAN_RED,Color.SADDLE_BROWN]
 	var cidx = 0
 	while colors[cidx]!=habitant.body_color:
 		cidx+=1
