@@ -15,7 +15,8 @@ func set_dataclass_instance(new_model : Residence):
 	if residence:
 		residence.resident_changed.disconnect(_draw)
 	residence=new_model
-	residence.resident_changed.connect(_draw)
+	if residence:
+		residence.resident_changed.connect(_draw)
 	queue_redraw()
 
 func _ready() -> void:
