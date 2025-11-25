@@ -5,7 +5,7 @@ extends GdUnitTestSuite
 @warning_ignore('return_value_discarded')
 
 # TestSuite generated from
-const __source: String = "res://nodes/Shop.tscn"
+const __source: String = "res://nodes/ui/Shop.tscn"
 
 
 func test_bought_item() -> void:
