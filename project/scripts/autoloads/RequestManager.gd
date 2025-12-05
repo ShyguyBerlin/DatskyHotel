@@ -6,11 +6,19 @@ var timer=TIME_BETWEEN_CYCLES
 signal request_cycle_tick(percentage:float)
 signal new_request_cycle()
 
-func _process(delta: float) -> void:
-	timer-=delta
-	request_cycle_tick.emit((TIME_BETWEEN_CYCLES-timer)/TIME_BETWEEN_CYCLES)
-	if timer<0:
-		timer=TIME_BETWEEN_CYCLES
+func _ready():
+	GameTimeManager.ShortCycleTick.connect(on_short_cycle_ticks)
+	GameTimeManager.ShortCycleProgress.connect(request_cycle_tick.emit)
+#func _process(delta: float) -> void:
+#	timer-=delta
+#	request_cycle_tick.emit((TIME_BETWEEN_CYCLES-timer)/TIME_BETWEEN_CYCLES)
+#	if timer<0:
+#		timer=TIME_BETWEEN_CYCLES
+#		perform_request_cycle(HotelManager.hotel_instance)
+
+func on_short_cycle_ticks(num:int):
+	num=min(num,5)
+	for i in range(num):
 		perform_request_cycle(HotelManager.hotel_instance)
 
 func perform_request_cycle(hotel:Hotel=null) -> void:

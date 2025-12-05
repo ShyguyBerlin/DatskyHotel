@@ -11,7 +11,7 @@
 export.cfg
 export_credentials.cfg
 *.tmp
-*/~*.dll
+addons/godot-git-plugin/win64/~*.dll
 
 # GDunit ignores
 reports/
