@@ -10,7 +10,7 @@ signal cycles_completed(num:int)
 @export var last_fire_unixtime : int
 
 # Should only be read
-var progress_current_cycle=0
+var progress_current_cycle:float=0
 
 enum TimeCheckType {
 	CHECK_TIME, ## Converts timespan to seconds and checks if that amount of time has passed
@@ -23,8 +23,14 @@ enum TimeCheckType {
 
 # Set last_cycle without causing any cycle completions, might bug for the CHECK_DAYS cycles
 func reset(datetime):
+	datetime=datetime.duplicate()
+	if time_type==TimeCheckType.CHECK_DAYS:
+		datetime["hour"]=0
+		datetime["minute"]=0
+		datetime["second"]=0
 	var unixtime=Time.get_unix_time_from_datetime_dict(datetime)
 	last_fire_unixtime=unixtime
+	progress_current_cycle=0
 
 static func datetime_to_seconds(datetime):
 	return datetime.get("second",0)+60*(datetime.get("minute",0)+60*(datetime.get("hour",0)+24*datetime.get("day",0)))

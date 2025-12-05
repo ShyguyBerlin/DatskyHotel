@@ -20,8 +20,8 @@ config/icon="uid://b4v78fkqahgmj"
 HotelManager="*res://scripts/autoloads/HotelManager.gd"
 RequestManager="*res://scripts/autoloads/RequestManager.gd"
 ItemManager="*res://scripts/autoloads/ItemManager.gd"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameTimeManager="*res://scripts/autoloads/GameTimeManager.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [dialogue_manager]
 
