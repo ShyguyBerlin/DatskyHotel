@@ -18,7 +18,7 @@ func _ready():
 
 func on_short_cycle_ticks(num:int):
 	num=min(num,5)
-	for i in range(len(num)):
+	for i in range(num):
 		perform_request_cycle(HotelManager.hotel_instance)
 
 func perform_request_cycle(hotel:Hotel=null) -> void:

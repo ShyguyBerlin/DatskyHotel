@@ -43,15 +43,20 @@ func _ready():
 	reset() # TODO this should be done when a new game is started, needs to be adjusted when implementing save system
 
 func reset():
-	var unixtime=Time.get_unix_time_from_system()
-	long_cycle.last_fire_unixtime=unixtime
-	medium_cycle.last_fire_unixtime=unixtime
-	short_cycle.last_fire_unixtime=unixtime
+	var datetime= Time.get_datetime_dict_from_system()
+	long_cycle.reset(datetime)
+	medium_cycle.reset(datetime)
+	short_cycle.reset(datetime)
+
+var _last_update : Dictionary = {}
 
 func _process(delta: float) -> void:
 	var cycles : Array[TimeCycle]=[long_cycle,medium_cycle,short_cycle]
 	var cycle_progress_signals : Array[Signal] = [LongCycleProgress,MediumCycleProgress,ShortCycleProgress]
 	var datetime= Time.get_datetime_dict_from_system()
+	if datetime==_last_update:
+		return
+	_last_update=datetime
 	for i in range(len(cycles)):
 		cycles[i].process_from_datetime(datetime)
 		cycle_progress_signals[i].emit(cycles[i].progress_current_cycle)
