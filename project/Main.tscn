@@ -19,13 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://bql70mqvjwyq3" path="res://nodes/ui/HabitantCreation.tscn" id="17_kjvhd"]
 [ext_resource type="Script" uid="uid://btligk40mbgh6" path="res://scripts/ui/MoneyLabel.gd" id="17_sc1dx"]
 
-[sub_resource type="Resource" id="Resource_fpfj3"]
+[sub_resource type="Resource" id="Resource_kjvhd"]
 script = ExtResource("5_c2ibq")
 money = 300.0
-inventory = Dictionary[StringName, int]({
-&"bretzel": 4,
-&"pirozhki": 2
-})
 metadata/_custom_type_script = "uid://dsukfn0p54e76"
 
 [sub_resource type="Resource" id="Resource_trn2v"]
@@ -137,15 +133,16 @@ texture_normal = ExtResource("4_fos0i")
 action = "ui_right"
 visibility_mode = 1
 
-[node name="HotelInputHandler" type="Node" parent="." node_paths=PackedStringArray("hotel_display_node", "builder_node", "habitant_selection", "gift_menu", "money_label")]
+[node name="HotelInputHandler" type="Node" parent="." node_paths=PackedStringArray("hotel_display_node", "builder_node", "habitant_selection", "gift_menu", "money_label", "shop")]
 unique_name_in_owner = true
 script = ExtResource("4_3dxm6")
-player_instance = SubResource("Resource_fpfj3")
+player_instance = SubResource("Resource_kjvhd")
 hotel_display_node = NodePath("../Control/Hotel")
 builder_node = NodePath("../Builder")
 habitant_selection = NodePath("../MarginContainer/SelectHabitant")
 gift_menu = NodePath("../MarginContainer/GiftingMenu")
 money_label = NodePath("../MoneyLabel")
+shop = NodePath("../MarginContainer/Shop")
 
 [node name="Builder" type="Node" parent="."]
 unique_name_in_owner = true
@@ -232,7 +229,6 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 items_in_stock = 2
-inventory_holder = SubResource("Resource_fpfj3")
 
 [node name="CreateResident" parent="MarginContainer" instance=ExtResource("17_kjvhd")]
 visible = false

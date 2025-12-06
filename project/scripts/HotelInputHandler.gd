@@ -7,13 +7,20 @@ class_name HotelInputManager
 @export var habitant_selection: Control
 @export var gift_menu : Control
 @export var money_label : RichTextLabel
+@export var shop: Control
 var spatial_room_finder : HotelSpatialRoomFinder
 
 func _ready() -> void:
+	if SaveSystem.save.first_start:
+		SaveSystem.save.player=player_instance
+	else:
+		player_instance=SaveSystem.save.player
+		
 	if player_instance:
 		player_instance.money_changed.connect(player_money_changed)
 		if money_label:
 			money_label.set_target_value(player_instance.money,true)
+		shop.inventory_holder=player_instance
 
 func set_spatial_room_finder(room_finder: HotelSpatialRoomFinder) -> void:
 	spatial_room_finder=room_finder

@@ -2,7 +2,7 @@ extends Resource
 class_name RoomConnection
 
 # Room -> display_direction
-var connected_rooms : Dictionary
+@export var connected_rooms : Dictionary
 
 enum display_direction{
 	DISPLAY_LEFT = 0,

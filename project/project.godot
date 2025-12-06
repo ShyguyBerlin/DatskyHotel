@@ -17,6 +17,7 @@ config/icon="uid://b4v78fkqahgmj"
 
 [autoload]
 
+SaveSystem="*res://scripts/autoloads/SaveSystem.gd"
 HotelManager="*res://scripts/autoloads/HotelManager.gd"
 RequestManager="*res://scripts/autoloads/RequestManager.gd"
 ItemManager="*res://scripts/autoloads/ItemManager.gd"
