@@ -5,8 +5,11 @@ class_name Hotel
 @export var register : HabitantRegister
 @export var requests : Array[Request] = []
 
+@export var __rooms : Array[Room]
+
 func _init():
-	register=HabitantRegister.new()
+	if not register:
+		register=HabitantRegister.new()
 
 # Shall return a node which displays the properties of this Resource
 func get_display_node():
@@ -38,6 +41,7 @@ func get_rooms() -> Array[Room]:
 				conn_room_info.pos=next.pos+RoomConnection.get_display_direction_vector(next_conn.connected_rooms[connected_room])
 				conn_room_info.room=connected_room
 				room_check_stack.append(conn_room_info)
+	__rooms=room_ignores
 	return room_ignores
 
 func remove_request(req:Request):

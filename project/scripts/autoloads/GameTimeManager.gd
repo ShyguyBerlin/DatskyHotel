@@ -21,26 +21,34 @@ signal ShortCycleProgress(progress:float)
 var short_cycle:TimeCycle
 
 func _ready():
-	if not long_cycle:
+	var cycles=SaveSystem.save.gametimecycles
+	var newgame=false
+	if len(cycles)!=3:
+		cycles.clear()
 		long_cycle=TimeCycle.new()
-	if not medium_cycle:
 		medium_cycle=TimeCycle.new()
-	if not short_cycle:
 		short_cycle=TimeCycle.new()
+		cycles.append_array([long_cycle,medium_cycle,short_cycle])
+		newgame=true
+	else:
+		long_cycle=cycles[0]
+		medium_cycle=cycles[1]
+		short_cycle=cycles[2]
 	long_cycle.datetime_between_fire={"day":1}
 	long_cycle.time_type=TimeCycle.TimeCheckType.CHECK_DAYS
 
 	medium_cycle.datetime_between_fire={"minute":20}
 	medium_cycle.time_type=TimeCycle.TimeCheckType.CHECK_TIME
 
-	short_cycle.datetime_between_fire={"minute":2}
+	short_cycle.datetime_between_fire={"second":10}
 	short_cycle.time_type=TimeCycle.TimeCheckType.CHECK_TIME
 	
 	long_cycle.cycles_completed.connect(LongCycleTick.emit)
 	medium_cycle.cycles_completed.connect(MediumCycleTick.emit)
 	short_cycle.cycles_completed.connect(ShortCycleTick.emit)
-
-	reset() # TODO this should be done when a new game is started, needs to be adjusted when implementing save system
+	
+	if newgame:
+		reset() # TODO this should be done when a new game is started, needs to be adjusted when implementing save system
 
 func reset():
 	var datetime= Time.get_datetime_dict_from_system()

@@ -3,7 +3,10 @@ class_name Room
 
 signal requested_quest_icon(action : ValueRequestAction)
 
-var connections : Array[RoomConnection]
+@export var connections : Array[RoomConnection]
+
+# Used for saving, do not set or use in-game
+@export var room_id : int
 
 func connect_to_room(room : Room,direction : RoomConnection.display_direction):
 	var new_connection = RoomConnection.new()
