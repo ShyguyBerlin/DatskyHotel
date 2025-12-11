@@ -1,6 +1,6 @@
 extends HabitantNeed
 
-var foodLevel=4
+@export var foodLevel=4
 
 func unbind_habitant() -> void:
 	habitant.recieved_gift.disconnect(consume_gift_action)
@@ -31,6 +31,6 @@ func reduce_food_level(seconds : float):
 
 func generate_request(residence : Residence) -> Array[Request]:
 	if foodLevel<=6:
-		var req = FoodRequest.new(residence,habitant,self)
+		var req = FoodRequest.create(residence,habitant,self)
 		return [req]
 	return []

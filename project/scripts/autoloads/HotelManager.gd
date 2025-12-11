@@ -5,6 +5,9 @@ var hotel_instance : Hotel = null : set = set_hotel_instance
 signal kill_hotel_instance_event
 signal set_hotel_instance_event
 
+func _ready():
+	pass
+
 func is_hotel_instanced():
 	return hotel_instance==null
 

@@ -1,7 +1,7 @@
 extends Resource
 class_name HabitantNeed
 
-var habitant : Habitant : set = set_habitant
+@export var habitant : Habitant : set = set_habitant
 
 # Probably not necessary
 func unbind_habitant() -> void:
