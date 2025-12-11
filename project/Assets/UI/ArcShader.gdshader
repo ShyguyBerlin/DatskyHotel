@@ -1,0 +1,54 @@
+shader_type canvas_item;
+
+uniform float fill_percentage : hint_range(0.0, 1.0) = 1.0;
+uniform float start_angle : hint_range(0.0, 6.28318) = -1.5708; // -90 degrees in radians
+uniform bool clockwise = true;
+
+void fragment() {
+	vec2 center = vec2(0.5, 0.5);
+	vec2 pos = UV - center;
+
+	// Calculate angle from center
+	float angle = atan(pos.y, pos.x);
+
+	// Normalize angle to 0-2π range
+	if (angle < 0.0) {
+		angle += 6.28318; // 2π
+	}
+
+	// Normalize start_angle to 0-2π range
+	float norm_start = start_angle;
+	if (norm_start < 0.0) {
+		norm_start += 6.28318;
+	}
+
+	// Calculate if this pixel should be visible
+	float arc_length = 6.28318 * fill_percentage; // 2π * percentage
+	bool visible = false;
+
+	if (clockwise) {
+		float end_angle = norm_start + arc_length;
+		if (end_angle <= 6.28318) {
+			// No wraparound
+			visible = angle >= norm_start && angle <= end_angle;
+		} else {
+			// Wraparound case
+			visible = angle >= norm_start || angle <= (end_angle - 6.28318);
+		}
+	} else {
+		float end_angle = norm_start - arc_length;
+		if (end_angle >= 0.0) {
+			// No wraparound
+			visible = angle <= norm_start && angle >= end_angle;
+		} else {
+			// Wraparound case
+			visible = angle <= norm_start || angle >= (end_angle + 6.28318);
+		}
+	}
+
+	if (visible) {
+		COLOR = texture(TEXTURE, UV);
+	} else {
+		COLOR = vec4(0.0, 0.0, 0.0, 0.0); // Transparent
+	}
+}

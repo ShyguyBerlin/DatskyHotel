@@ -24,11 +24,7 @@ class_name ShaderArcMaskedSprite
 			material.set_shader_parameter("clockwise", clockwise)
 
 func _ready():
-	
-	var shader_material = preload("uid://sjnwtn5s1ar7")
-	
-	material = shader_material
-	
+		
 	# Set initial values
 	self.fill_percentage = fill_percentage
 	self.start_angle_degrees = start_angle_degrees
