@@ -258,6 +258,7 @@ script = ExtResource("17_sc1dx")
 [connection signal="current_room_changed" from="Control/Hotel" to="HotelUtilButtons" method="current_room_updated"]
 [connection signal="generated_new_spatial_room_finder" from="Control/Hotel" to="HotelInputHandler" method="set_spatial_room_finder"]
 [connection signal="pressed" from="CloseHotkey" to="MarginContainer" method="close_menu"]
+[connection signal="menu_opened" from="MarginContainer" to="Control/Hotel" method="draw_hotel"]
 [connection signal="item_selected" from="MarginContainer/GiftingMenu" to="HotelInputHandler" method="finished_gift_menu"]
 [connection signal="open_habitant_creator" from="MarginContainer/SelectHabitant" to="MarginContainer/CreateResident" method="open_with_habitant"]
 [connection signal="selected_habitant" from="MarginContainer/SelectHabitant" to="HotelInputHandler" method="select_habitant_to_reside_finish"]

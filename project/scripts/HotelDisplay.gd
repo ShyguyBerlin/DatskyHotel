@@ -54,7 +54,7 @@ func get_current_display_node():
 	return room_mapping[current_room]
 
 func draw_hotel():
-	
+	HotelManager.hotel_instance.apply_new_requests([current_room])
 	var children = display_nodes_folder.get_children()
 	for i in children:
 		display_nodes_folder.remove_child(i)

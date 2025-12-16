@@ -1,5 +1,6 @@
 extends MarginContainer
 
+signal menu_opened
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,6 +11,7 @@ func child_visibility_changed(child):
 	print("UI Visiblity changed to ",child.visible)
 	if child.visible:
 		mouse_filter=Control.MOUSE_FILTER_STOP
+		menu_opened.emit()
 	else:
 		mouse_filter=Control.MOUSE_FILTER_IGNORE
 

@@ -5,6 +5,9 @@ class_name Hotel
 @export var register : HabitantRegister
 @export var requests : Array[Request] = []
 
+@export var buffered_requests : Array[Request] = []
+@export var buffered_requests_flag : bool = false
+
 @export var __rooms : Array[Room]
 
 func _init():
@@ -43,6 +46,26 @@ func get_rooms() -> Array[Room]:
 				room_check_stack.append(conn_room_info)
 	__rooms=room_ignores
 	return room_ignores
+
+func apply_new_requests(except=[]):
+	if not buffered_requests_flag:
+		return
+	buffered_requests_flag=false
+	var recovered_rooms : Array[Room]=[]
+	var recovered_requests : Array[Request]=[]
+	
+	for i in requests:
+		if i.origin in except:
+			recovered_rooms.append(i.origin)
+			recovered_requests.append(i)
+	requests.clear()
+	
+	for i in buffered_requests:
+		if not i.origin in recovered_rooms:
+			requests.append(i)
+	
+	requests.append_array(recovered_requests)
+	buffered_requests=[]
 
 func remove_request(req:Request):
 	requests.erase(req)
