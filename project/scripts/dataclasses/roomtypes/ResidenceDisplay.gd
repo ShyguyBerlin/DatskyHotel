@@ -66,6 +66,7 @@ func start_habitant_dialog(dialogue_resource: DialogueResource, extra_info : Arr
 		balloon.call_deferred("start",dialogue_resource,"start",extra_game_states)
 		add_child(balloon)
 		await balloon.tree_exited
+	draw_quest_icon()
 
 func on_mouse_hovering() -> void:
 	habitant_display.expression=HabitantDisplay.HabitantExpression.Wave

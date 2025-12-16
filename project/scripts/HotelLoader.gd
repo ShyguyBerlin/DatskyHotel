@@ -30,4 +30,4 @@ func _ready() -> void:
 		hotel_display_node.current_room=a.initial_room
 
 	RequestManager.request_cycle_tick.connect(func(perc): cycle_progress.set("fill_percentage",perc))
-	RequestManager.new_request_cycle.connect(hotel_display_node.draw_hotel)
+	#RequestManager.new_request_cycle.connect(hotel_display_node.draw_hotel)

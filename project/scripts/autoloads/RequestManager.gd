@@ -50,7 +50,6 @@ func perform_request_cycle(hotel:Hotel=null) -> void:
 			if not i.origin.get_script().get_global_name() in old_requests:
 				old_requests[i.origin.get_script().get_global_name()]=[]
 			old_requests[i.origin.get_script().get_global_name()].append(i)
-	hotel.requests.clear()
 
 	var new_requests: Array[Request]=[]
 	# pick a few quests per room type, according to the formula in target_quantity
@@ -78,9 +77,6 @@ func perform_request_cycle(hotel:Hotel=null) -> void:
 		if target==0:
 			continue
 		#proposed requests for this room type
-		print("requests")
-		print(proposed_requests)
-		print(proposed_requests[c])
 		var preqs : Array=proposed_requests[c]
 		preqs = preqs as Array[Request]
 		preqs.shuffle()
@@ -100,6 +96,8 @@ func perform_request_cycle(hotel:Hotel=null) -> void:
 		# TODO
 		#for req in old_requests[c]:
 		#	new_requests.append(req)
-	hotel.requests=new_requests
+	hotel.buffered_requests=new_requests
+	hotel.buffered_requests_flag=true
 	new_request_cycle.emit()
 	print("NEW REQUESTS!!!")
+	print(new_requests)
