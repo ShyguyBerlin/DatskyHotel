@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://c2803i265ic3m"]
+[gd_resource type="Theme" format=3 uid="uid://c2803i265ic3m"]
 
 [ext_resource type="FontFile" uid="uid://dwol5nwdjx26p" path="res://Assets/Fonts/BBHSansHegarty-Regular.ttf" id="1_fx3ep"]
 [ext_resource type="StyleBox" uid="uid://bgsav0hcj27qw" path="res://Assets/UI/MenuMainPanel.tres" id="1_t1tdr"]
@@ -89,6 +89,10 @@ ItemPanel/base_type = &"SubmenuPanel"
 ItemPanel/styles/panel = SubResource("StyleBoxFlat_ccg6f")
 ItemPanelSelected/base_type = &"SubmenuPanel"
 ItemPanelSelected/styles/panel = SubResource("StyleBoxFlat_2dt1g")
+MarginContainer/constants/margin_bottom = 6
+MarginContainer/constants/margin_left = 6
+MarginContainer/constants/margin_right = 6
+MarginContainer/constants/margin_top = 6
 Panel/styles/panel = ExtResource("1_t1tdr")
 RichTextLabelBackground/base_type = &"RichTextLabel"
 RichTextLabelBackground/colors/default_color = Color(0.89684683, 0.9123418, 0.9071379, 1)

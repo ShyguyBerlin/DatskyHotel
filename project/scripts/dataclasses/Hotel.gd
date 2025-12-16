@@ -65,6 +65,10 @@ func apply_new_requests(except=[]):
 			requests.append(i)
 	
 	requests.append_array(recovered_requests)
+	for req in requests:
+		req.accept()
+		if not req.fulfilled.is_connected(remove_request):
+			req.fulfilled.connect(remove_request)
 	buffered_requests=[]
 
 func remove_request(req:Request):

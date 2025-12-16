@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://42rc21bivfu"
-path="res://.godot/imported/Pirozhki.svg-bf070b5ed1cbbcf649ddcf7ac973a7b6.ctex"
+uid="uid://cbxclkdd6tdx8"
+path="res://.godot/imported/Friends.svg-cd74efad4ab50ffe11ba1a9c9a6fdd60.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/SVG/Pirozhki.svg"
-dest_files=["res://.godot/imported/Pirozhki.svg-bf070b5ed1cbbcf649ddcf7ac973a7b6.ctex"]
+source_file="res://Assets/Images/SVG/Friends.svg"
+dest_files=["res://.godot/imported/Friends.svg-cd74efad4ab50ffe11ba1a9c9a6fdd60.ctex"]
 
 [params]
 
@@ -38,6 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=4.0
+svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

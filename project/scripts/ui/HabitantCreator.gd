@@ -3,7 +3,6 @@ extends Control
 
 @export var creation : bool = true : set = set_creation
 @export var habitant : Habitant = null
-var habitant_backup : Habitant = null
 @onready var arrow_left: TextureButton = %ArrowLeft
 @onready var arrow_right: TextureButton = %ArrowRight
 
@@ -31,14 +30,14 @@ func set_creation(should_be_in_create_mode : bool) -> void:
 		i.visible=creation
 
 func set_habitant(template:Habitant):
+	print("template needs: ",len(template.needs))
+	print("habitant needs: ",len(habitant.needs))
 	if template:
-		habitant=template.duplicate()
-		habitant_backup=habitant.duplicate()
+		habitant.bodytype=template.bodytype
+		habitant.name=template.name
+		habitant.body_color=template.body_color
 		habitant_display.habitant=habitant
 		name_edit.text=habitant.name
-	else:
-		habitant=null
-		habitant_backup=null
 
 func open_with_habitant(hab,creator):
 	set_creation(creator)
@@ -47,12 +46,10 @@ func open_with_habitant(hab,creator):
 
 func on_cancel_button_pressed():
 	hide()
-	# No action should be intended here
-	# habitant_changes_confirmed.emit(habitant_backup)
 
 func on_apply_button_pressed():
 	hide()
-	habitant_changes_confirmed.emit(habitant)
+	habitant_changes_confirmed.emit(habitant.duplicate())
 
 func open():
 

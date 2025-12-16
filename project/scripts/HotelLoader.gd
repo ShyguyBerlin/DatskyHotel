@@ -3,6 +3,7 @@ extends Node
 @export var hotel_display_node : HotelDisplay
 
 @onready var cycle_progress: ShaderArcMaskedSprite = %CycleProgress
+@onready var cycle_progress2: ShaderArcMaskedSprite = %CycleProgress2
 
 func _ready() -> void:
 	
@@ -12,7 +13,7 @@ func _ready() -> void:
 	
 	var a = SaveSystem.save.hotel
 	if SaveSystem.save.first_start:
-		a.initial_room = Room.new()
+		a.initial_room = MonitoringRoom.new()
 		
 		var b = Room.new()
 		
@@ -23,11 +24,10 @@ func _ready() -> void:
 		b.connect_to_room(c,RoomConnection.display_direction.DISPLAY_RIGHT)
 
 	HotelManager.hotel_instance=a
-	if a:
-		for r in a.requests:
-			r.accept()
 	if hotel_display_node:
 		hotel_display_node.current_room=a.initial_room
 
 	RequestManager.request_cycle_tick.connect(func(perc): cycle_progress.set("fill_percentage",perc))
 	#RequestManager.new_request_cycle.connect(hotel_display_node.draw_hotel)
+
+	GameTimeManager.MediumCycleProgress.connect(func(perc): cycle_progress2.set("fill_percentage",perc))

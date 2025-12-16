@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Clothing" load_steps=12 format=3 uid="uid://4x54hn4og2t4"]
+[gd_resource type="Resource" script_class="Clothing" format=3 uid="uid://4x54hn4og2t4"]
 
 [ext_resource type="Script" uid="uid://cojwsx7xatk52" path="res://scripts/dataclasses/clothing/ClothingPart.gd" id="1_2li0d"]
 [ext_resource type="Script" uid="uid://ha6btnofgk80" path="res://scripts/dataclasses/clothing/ClothingPartOverride.gd" id="2_hu2qq"]

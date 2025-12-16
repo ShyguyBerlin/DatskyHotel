@@ -66,13 +66,10 @@ func add_habitant_button_pressed():
 		return
 	currently_selected_habitant=-1
 	var new_habitant=Habitant.new()
-	var possible_names=["Alice","Bob","Charlie","Dora","Eric","Foo","Greg","Historia","Imyr","John","Kirk","Louis","Minato","Nugget","Omar","Popeye","Rhaast"]
+	var possible_names=["Alice","Bob","Charlie","Dora","Eric","Foo","Greg","Historia","Imyr","John","Kirk","Louis","Minato","Nugget","Omar","Popeye","Rhaast","Sarah","Tora","Ursula"]
 	new_habitant.name=possible_names.pick_random()
 	var colors = [Color.BISQUE,Color.MEDIUM_AQUAMARINE,Color.DARK_GRAY,Color.LAVENDER_BLUSH,Color.PALE_VIOLET_RED]
 	new_habitant.body_color=colors[randi_range(0,len(colors)-1)]
-	
-	var food_need = preload("uid://dqew5h564cmig").new()
-	new_habitant.add_need(food_need)
 	
 	hide()
 	open_habitant_creator.emit(new_habitant,true)
@@ -99,6 +96,12 @@ func on_edit_button_pressed():
 func overwrite_current_habitant(habitant: Habitant):
 	if currently_selected_habitant==-1:
 		# New habitant
+		# Ensure needs array is empty (creator should not have needs)
+		habitant.needs=[]
+		var food_need = preload("uid://dqew5h564cmig").new()
+		habitant.add_need(food_need)
+		var relationship_need = preload("uid://cxvi02je2ae4i").new()
+		habitant.add_need(relationship_need)
 		register.register_habitant(habitant)
 		populate_habitant_list()
 		habitant_list.selected_item(register.habitants.size()-1)

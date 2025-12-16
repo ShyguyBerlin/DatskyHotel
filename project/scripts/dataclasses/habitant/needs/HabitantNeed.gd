@@ -7,16 +7,12 @@ class_name HabitantNeed
 func unbind_habitant() -> void:
 	pass
 
-# Bind to signals
+# Do init stuff which should only happen once per savegame
 func bind_habitant() -> void:
 	pass
 
 func set_habitant(new_habitant):
-	if habitant:
-		unbind_habitant()
 	habitant=new_habitant
-	if habitant:
-		bind_habitant()
 
 func process(delta : float):
 	pass

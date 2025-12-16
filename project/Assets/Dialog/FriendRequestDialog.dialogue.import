@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://rev28o3xghn"
+path="res://.godot/imported/FriendRequestDialog.dialogue-54d7f20907ef3d6b17374f9f7cfa05c1.tres"
+
+[deps]
+
+source_file="res://Assets/Dialog/FriendRequestDialog.dialogue"
+dest_files=["res://.godot/imported/FriendRequestDialog.dialogue-54d7f20907ef3d6b17374f9f7cfa05c1.tres"]
+
+[params]
+
+defaults=true

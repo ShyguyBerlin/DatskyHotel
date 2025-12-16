@@ -11,7 +11,9 @@ class_name Habitant
 @export var outfit : HabitantOutfit
 
 signal began_talk(talk:TalkAction)
+signal began_request_talk(talk:TalkAction)
 signal recieved_gift(gift:GiftAction)
+signal recieved_request_gift(gift:GiftAction)
 signal requested_quest_icon(action:ValueRequestAction)
 
 const std_dialog_path="res://Assets/Dialog/HabitantDialog.dialogue"
@@ -31,8 +33,10 @@ func generate_request(source_residence:Residence) -> Array[Request]:
 func add_need(need : HabitantNeed):
 	needs.append(need)
 	need.habitant=self
+	need.bind_habitant()
 
 func recieve_gift(gift:GiftAction):
+	recieved_request_gift.emit(gift)
 	recieved_gift.emit(gift)
 	if gift.is_consumed():
 		return
@@ -40,6 +44,7 @@ func recieve_gift(gift:GiftAction):
 	gift.display_node.start_habitant_dialog(std_gift_dialog,[{"gift":gift.get_item()}])
 
 func consume_talk_action(action : TalkAction):
+	began_request_talk.emit(action)
 	began_talk.emit(action)
 	if action.is_consumed():
 		return
@@ -48,3 +53,9 @@ func consume_talk_action(action : TalkAction):
 
 func consume_quest_icon_request(action : ValueRequestAction) -> void:
 	requested_quest_icon.emit(action)
+
+func _notification(what: int) -> void:
+	if what==NOTIFICATION_PREDELETE:
+		print("I die")
+		for need in needs:
+			need.unbind_habitant()

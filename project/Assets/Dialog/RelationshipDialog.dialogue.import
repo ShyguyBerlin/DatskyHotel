@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://v71rq2gyta76"
+path="res://.godot/imported/RelationshipDialog.dialogue-27213e9e84fe347cd6ae7f344290e376.tres"
+
+[deps]
+
+source_file="res://Assets/Dialog/RelationshipDialog.dialogue"
+dest_files=["res://.godot/imported/RelationshipDialog.dialogue-27213e9e84fe347cd6ae7f344290e376.tres"]
+
+[params]
+
+defaults=true

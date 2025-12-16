@@ -8,6 +8,7 @@ class_name HotelInputManager
 @export var gift_menu : Control
 @export var money_label : RichTextLabel
 @export var shop: Control
+@export var room_view_menu : RoomViewMenu
 var spatial_room_finder : HotelSpatialRoomFinder
 
 func _ready() -> void:
@@ -120,18 +121,18 @@ func select_habitant_to_reside():
 	habitant_selection.register=HotelManager.hotel_instance.register
 	habitant_selection.open()
 
-func enter_residence():
+func enter_room():
 	if not hotel_display_node.current_room:
 		return
 	
-	var residence=hotel_display_node.current_room
-	if not residence is Residence:
+	var node=hotel_display_node.get_current_display_node()
+	if not node.has_method("enter"):
 		return
+		
+	var enter_data : Input_EnterRoomData = Input_EnterRoomData.new()
+	enter_data.room_view_menu=room_view_menu
 	
-	var tk_action=TalkAction.new()
-	tk_action.player=player_instance
-	tk_action.display_node=hotel_display_node.get_current_display_node()
-	residence.consume_talk_action(tk_action)
+	node.enter(enter_data)
 
 func select_habitant_to_reside_finish(habitant_selected:Habitant):
 	
