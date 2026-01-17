@@ -199,6 +199,25 @@ grow_vertical = 0
 layout_mode = 0
 shortcut = SubResource("Shortcut_fpfj3")
 
+[node name="ShopButton" type="Button" parent="."]
+custom_minimum_size = Vector2(144.08, 81.335)
+layout_mode = 0
+offset_left = 35.0
+offset_top = 15.0
+offset_right = 179.08
+offset_bottom = 96.335
+text = "Shop"
+
+[node name="MoneyLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 15.0
+offset_right = 232.0
+offset_bottom = 97.0
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("17_sc1dx")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 z_index = 1
 layout_mode = 1
@@ -234,37 +253,18 @@ items_in_stock = 2
 visible = false
 layout_mode = 2
 
-[node name="ShopButton" type="Button" parent="."]
-custom_minimum_size = Vector2(144.08, 81.335)
-layout_mode = 0
-offset_left = 35.0
-offset_top = 15.0
-offset_right = 179.08
-offset_bottom = 96.335
-text = "Shop"
-
-[node name="MoneyLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 192.0
-offset_top = 15.0
-offset_right = 232.0
-offset_bottom = 97.0
-fit_content = true
-autowrap_mode = 0
-script = ExtResource("17_sc1dx")
-
 [connection signal="built_stuff" from="Builder" to="Control/Hotel" method="draw_hotel"]
 [connection signal="current_room_changed" from="Builder" to="Control/Hotel" method="change_current_room"]
 [connection signal="current_room_changed" from="Control/Hotel" to="HotelUtilButtons" method="current_room_updated"]
 [connection signal="generated_new_spatial_room_finder" from="Control/Hotel" to="HotelInputHandler" method="set_spatial_room_finder"]
 [connection signal="pressed" from="CloseHotkey" to="MarginContainer" method="close_menu"]
 [connection signal="menu_opened" from="MarginContainer" to="Control/Hotel" method="draw_hotel"]
+[connection signal="pressed" from="ShopButton" to="MarginContainer/Shop" method="open"]
 [connection signal="item_selected" from="MarginContainer/GiftingMenu" to="HotelInputHandler" method="finished_gift_menu"]
 [connection signal="open_habitant_creator" from="MarginContainer/SelectHabitant" to="MarginContainer/CreateResident" method="open_with_habitant"]
 [connection signal="selected_habitant" from="MarginContainer/SelectHabitant" to="HotelInputHandler" method="select_habitant_to_reside_finish"]
 [connection signal="habitant_changes_confirmed" from="MarginContainer/CreateResident" to="MarginContainer/SelectHabitant" method="overwrite_current_habitant"]
 [connection signal="hidden" from="MarginContainer/CreateResident" to="MarginContainer/SelectHabitant" method="open_keep_last_selection"]
-[connection signal="pressed" from="ShopButton" to="MarginContainer/Shop" method="open"]
 
 [editable path="MoveLeft"]
 [editable path="MoveRight"]
