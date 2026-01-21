@@ -20,7 +20,8 @@ func _ready() -> void:
 		player_instance.money_changed.connect(player_money_changed)
 		if money_label:
 			money_label.set_target_value(player_instance.money,true)
-		shop.inventory_holder=player_instance
+		if shop:
+			shop.inventory_holder=player_instance
 
 func set_spatial_room_finder(room_finder: HotelSpatialRoomFinder) -> void:
 	spatial_room_finder=room_finder
@@ -166,10 +167,13 @@ func open_gift_menu():
 
 func finished_gift_menu(item_name: String) -> void:
 	if not hotel_display_node.current_room is Residence or hotel_display_node.current_room.resident==null:
+		print("No residence to gift to")
 		return
 	if not item_name in player_instance.inventory:
+		print("Item not in player inventory")
 		return
 	if player_instance.inventory[item_name]<=0:
+		print("Item not enough in player inventory")
 		player_instance.inventory.erase(item_name)
 		return
 	player_instance.inventory[item_name]-=1
@@ -203,7 +207,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		mouse_pos-=hotel_display_node.global_position
 		mouse_pos=Vector2(mouse_pos.x/hotel_display_node.scale.x,mouse_pos.y/hotel_display_node.scale.y)
 		var adjusted_mouse_pos=mouse_pos-hotel_display_node.current_offset
-		var rooms = spatial_room_finder.find_room(adjusted_mouse_pos)
+		var rooms=[]
+		if spatial_room_finder:
+			rooms = spatial_room_finder.find_room(adjusted_mouse_pos)
 		if len(rooms)>0:
 			var room_instance=rooms[0].get_dataclass_instance()
 			if room_instance:
