@@ -1,0 +1,94 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj8x5ymqkr2pb"]
+
+[ext_resource type="Script" uid="uid://c2qara3att872" path="res://scripts/ui/RelationshipCell.gd" id="1_abc123"]
+
+[node name="RelationshipCell" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 120)
+offset_right = 200.0
+offset_bottom = 200.0
+script = ExtResource("1_abc123")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HappinessALabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "H: 0.0"
+horizontal_alignment = 1
+
+[node name="HabitantALabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Habitant A"
+horizontal_alignment = 1
+
+[node name="MetricsAContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BondingALabel" type="Label" parent="MarginContainer/VBoxContainer/MetricsAContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "B: 0.0"
+horizontal_alignment = 1
+
+[node name="SatisfactionALabel" type="Label" parent="MarginContainer/VBoxContainer/MetricsAContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "S: 0.0"
+horizontal_alignment = 1
+
+[node name="LineDrawing" type="Control" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="MetricsBContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BondingBLabel" type="Label" parent="MarginContainer/VBoxContainer/MetricsBContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "B: 0.0"
+horizontal_alignment = 1
+
+[node name="SatisfactionBLabel" type="Label" parent="MarginContainer/VBoxContainer/MetricsBContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "S: 0.0"
+horizontal_alignment = 1
+
+[node name="HabitantBLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Habitant B"
+horizontal_alignment = 1
+
+[node name="HappinessBLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "H: 0.0"
+horizontal_alignment = 1
+
+[connection signal="draw" from="MarginContainer/VBoxContainer/LineDrawing" to="." method="_on_line_drawing_draw"]

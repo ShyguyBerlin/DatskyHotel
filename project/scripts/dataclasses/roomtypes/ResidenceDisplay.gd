@@ -50,6 +50,12 @@ func draw_quest_icon():
 	whiteboard.show()
 	quest_icon.texture=reqAction.value
 
+func enter(input_data : Input_EnterRoomData):
+	var tk_action=TalkAction.new()
+	tk_action.player=input_data.player
+	tk_action.display_node=self
+	residence.consume_talk_action(tk_action)
+
 func start_habitant_dialog(dialogue_resource: DialogueResource, extra_info : Array=[]):
 	#start(dialogue_resource: DialogueResource, title: String, extra_game_states: Array = []) -> void:
 	if not residence or not residence.resident:

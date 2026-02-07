@@ -28,76 +28,101 @@ func perform_request_cycle(hotel:Hotel=null) -> void:
 		return
 	
 	var rooms : Array[Room]=hotel.get_rooms()
-	var hotel_size=len(rooms)
 	
-	# Maps Room type to list of requests for this room type
-	var proposed_requests={}
+	# ========== STEP 1: Collect proposed requests from all rooms ==========
+	# Maps room type (String) -> Array of proposed requests from rooms of that type
+	var proposed_requests_by_type = {}
+	# Maps room type (String) -> count of rooms of that type
+	var room_type_counts = {}
 	
-	# Figure out how much of each kind of room there is in the hotel
-	var room_quantities={}
-	for i : Room in rooms:
-		if not i.get_script().get_global_name() in proposed_requests:
-			proposed_requests[i.get_script().get_global_name()]=[]
-			room_quantities[i.get_script().get_global_name()]=0
-		proposed_requests[i.get_script().get_global_name()].append_array(i.generate_request())
-		room_quantities[i.get_script().get_global_name()]+=1
-	
-	# Keep some of the old quests, also sort them by room type
-	var old_requests={}
-	for i in hotel.requests:
-		var survival_chance=i.priority*0.06
-		if randf()<survival_chance:
-			if not i.origin.get_script().get_global_name() in old_requests:
-				old_requests[i.origin.get_script().get_global_name()]=[]
-			old_requests[i.origin.get_script().get_global_name()].append(i)
-
-	var new_requests: Array[Request]=[]
-	# pick a few quests per room type, according to the formula in target_quantity
-	for c in proposed_requests.keys():
-		var type_quantity=room_quantities[c]
+	for room : Room in rooms:
+		var room_type = room.get_script().get_global_name()
 		
-		var target_quantity_min
-		var target_quantity_max
-		if c=="Residence": # This might need a better way if we add more residency types
-			if type_quantity<=3:
-				target_quantity_max=round(type_quantity)
-			elif type_quantity<=10:
-				target_quantity_max=round(2./5.*type_quantity+1.8)
+		# Initialize dictionaries for new room types
+		if not room_type in proposed_requests_by_type:
+			proposed_requests_by_type[room_type] = []
+			room_type_counts[room_type] = 0
+		
+		# Collect all proposed requests from this room
+		proposed_requests_by_type[room_type].append_array(room.generate_request())
+		room_type_counts[room_type] += 1
+	
+	# ========== STEP 2: Filter old requests that should survive ==========
+	# Base survival: ~20%, scales with priority (higher priority = higher survival)
+	# Priority 1: ~23%, Priority 5: ~55%, Priority 10: ~95%
+	var surviving_old_requests_by_type = {}
+	
+	for old_request in hotel.requests:
+		var survival_chance = 0.15 + old_request.priority * 0.08
+		if randf() < survival_chance:
+			var room_type = old_request.origin.get_script().get_global_name()
+			
+			if not room_type in surviving_old_requests_by_type:
+				surviving_old_requests_by_type[room_type] = []
+			
+			surviving_old_requests_by_type[room_type].append(old_request)
+	
+	# ========== STEP 3: Select new requests per room type ==========
+	var final_requests : Array[Request] = []
+	
+	for room_type in proposed_requests_by_type.keys():
+		var type_count = room_type_counts[room_type]
+		var old_request_count = len(surviving_old_requests_by_type.get(room_type, []))
+		
+		# Calculate target range based on room type and count
+		var target_min : int
+		var target_max : int
+		
+		if room_type == "Residence":
+			# Residence rooms generate more requests (scale with hotel size)
+			if type_count <= 3:
+				target_max = round(type_count)
+			elif type_count <= 10:
+				target_max = round(2.0 / 5.0 * type_count + 1.8)
 			else:
-				target_quantity_max=round(sqrt(type_quantity+10)+1.4)
-			target_quantity_min=round(sqrt(type_quantity*0.6+3)-1)
+				target_max = round(sqrt(type_count + 10) + 1.4)
+			target_min = round(sqrt(type_count * 0.6 + 3) - 1)
 		else:
-			target_quantity_max=round(sqrt(type_quantity*0.6+3)-1)
-			target_quantity_min=0
+			# Other room types generate fewer requests
+			target_max = round(sqrt(type_count * 0.6 + 3) - 1)
+			target_min = 0
 		
-		var target = randi_range(target_quantity_min,target_quantity_max)-len(old_requests.get_or_add(c,[]))
-		if target<0:
-			target=0
+		# Calculate how many NEW requests we need (accounting for surviving old ones)
+		var new_request_target = randi_range(target_min, target_max) - old_request_count
+		if new_request_target < 0:
+			new_request_target = 0
 		
-		if target==0:
-			continue
-		#proposed requests for this room type
-		var preqs : Array=proposed_requests[c]
-		preqs = preqs as Array[Request]
-		preqs.shuffle()
-		preqs.sort_custom(func(a,b): a.priority>b.priority)
-		var banned_rooms=[]
-		var accepted=0
-		for req :Request in preqs:
-			if req.origin in banned_rooms:
-				continue
-			new_requests.append(req)
-			banned_rooms.append(req.origin)
-			req.accept()
-			req.fulfilled.connect(hotel.remove_request)
-			accepted+=1
-			if accepted>=target:
-				break
-		# TODO
-		#for req in old_requests[c]:
-		#	new_requests.append(req)
-	hotel.buffered_requests=new_requests
-	hotel.buffered_requests_flag=true
+		# Prepare proposed requests: shuffle and sort by priority (highest first)
+		var proposed : Array = proposed_requests_by_type[room_type]
+		proposed = proposed as Array[Request]
+		proposed.shuffle()
+		proposed.sort_custom(func(a, b): return a.priority > b.priority)
+		
+		# Select new requests (one per room maximum, prioritize high-priority requests)
+		if new_request_target > 0:
+			var rooms_with_requests = []  # Track which rooms already have a request
+			var selected_count = 0
+			
+			for request : Request in proposed:
+				# Skip if this room already has a request selected
+				if request.origin in rooms_with_requests:
+					continue
+				
+				final_requests.append(request)
+				rooms_with_requests.append(request.origin)
+				selected_count += 1
+				
+				if selected_count >= new_request_target:
+					break
+		
+		# Add back all surviving old requests
+		for old_request in surviving_old_requests_by_type.get(room_type, []):
+			final_requests.append(old_request)
+	
+	# ========== STEP 4: Apply new request list ==========
+	hotel.buffered_requests = final_requests
+	hotel.buffered_requests_flag = true
 	new_request_cycle.emit()
 	print("NEW REQUESTS!!!")
-	print(new_requests)
+	print(final_requests)
+

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Habitant" load_steps=8 format=3 uid="uid://ciobwsodntxsf"]
+[gd_resource type="Resource" script_class="Habitant" format=3 uid="uid://ciobwsodntxsf"]
 
 [ext_resource type="Script" uid="uid://bsfncf7jj3c7e" path="res://scripts/dataclasses/habitant/HabitantProperty.gd" id="1_g760e"]
 [ext_resource type="Script" uid="uid://cdjrb84dqswik" path="res://scripts/dataclasses/habitant/needs/HabitantNeed.gd" id="2_fi05l"]

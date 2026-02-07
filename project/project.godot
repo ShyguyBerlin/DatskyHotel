@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="DatskyHotel"
 run/main_scene="uid://ccp45kjeqnsyn"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="uid://b4v78fkqahgmj"
 
 [autoload]
@@ -79,7 +83,7 @@ hotel_move_left={
 
 locale/translation_remaps={}
 locale/translations=PackedStringArray("res://Assets/localizations/en_en.po")
-locale/translations_pot_files=PackedStringArray("res://Main.tscn", "res://Assets/Dialog/HabitantDialog.dialogue", "res://Assets/Dialog/FoodRequestDialog.dialogue", "res://Assets/Dialog/FoodRequestFulfilledDialog.dialogue", "res://Assets/Dialog/GenericGift.dialogue", "res://Assets/Dialog/GenericItemReward.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Main.tscn", "res://Assets/Dialog/HabitantDialog.dialogue", "res://Assets/Dialog/FoodRequestDialog.dialogue", "res://Assets/Dialog/FoodRequestFulfilledDialog.dialogue", "res://Assets/Dialog/GenericGift.dialogue", "res://Assets/Dialog/GenericItemReward.dialogue", "res://Assets/Dialog/FriendRequestDialog.dialogue", "res://Assets/Dialog/FriendRequestDialog2.dialogue", "res://Assets/Dialog/RelationshipDialog.dialogue")
 
 [rendering]
 

@@ -49,8 +49,7 @@ func consume_gift_action(action:GiftAction):
 		action.display_node.draw_quest_icon.call_deferred()
 		fulfill()
 
-func accept():
-	print("important stuff")
-	habitant.began_talk.connect(consume_talk_action)
+func _accept():
+	habitant.began_request_talk.connect(consume_talk_action)
 	habitant.requested_quest_icon.connect(consume_quest_icon_request)
-	habitant.recieved_gift.connect(consume_gift_action)
+	habitant.recieved_request_gift.connect(consume_gift_action)

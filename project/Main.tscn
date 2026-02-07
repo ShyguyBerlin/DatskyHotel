@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ccp45kjeqnsyn"]
+[gd_scene load_steps=36 format=3 uid="uid://ccp45kjeqnsyn"]
 
 [ext_resource type="Theme" uid="uid://c2803i265ic3m" path="res://Assets/UI/Theme.tres" id="1_c2ibq"]
 [ext_resource type="PackedScene" uid="uid://eutlnvg2s8kt" path="res://nodes/HotelLoader.tscn" id="1_uu6xs"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dmbhro44k7v3m" path="res://nodes/ui/Shop.tscn" id="16_fpfj3"]
 [ext_resource type="PackedScene" uid="uid://bql70mqvjwyq3" path="res://nodes/ui/HabitantCreation.tscn" id="17_kjvhd"]
 [ext_resource type="Script" uid="uid://btligk40mbgh6" path="res://scripts/ui/MoneyLabel.gd" id="17_sc1dx"]
+[ext_resource type="Script" uid="uid://mcnu8u32ab8c" path="res://scripts/ui/RoomViewMenu.gd" id="18_5tuhn"]
 
 [sub_resource type="Resource" id="Resource_kjvhd"]
 script = ExtResource("5_c2ibq")
@@ -74,8 +75,8 @@ metadata/_custom_type_script = "uid://b74ejcotfcsul"
 [sub_resource type="Resource" id="Resource_j4qnp"]
 script = ExtResource("7_03owx")
 button_text = "Enter"
-button_actions = Array[String](["enter_residence"])
-room_whitelist = ["Residence"]
+button_actions = Array[String](["enter_room"])
+room_whitelist = ["Residence", "MonitoringRoom"]
 metadata/_custom_type_script = "uid://b74ejcotfcsul"
 
 [sub_resource type="Resource" id="Resource_sc1dx"]
@@ -84,6 +85,130 @@ button_text = "Gift"
 button_actions = Array[String](["open_gift_menu"])
 room_whitelist = ["Residence"]
 metadata/_custom_type_script = "uid://b74ejcotfcsul"
+
+[sub_resource type="Shader" id="Shader_5tuhn"]
+code = "shader_type canvas_item;
+
+uniform float fill_percentage : hint_range(0.0, 1.0) = 1.0;
+uniform float start_angle : hint_range(0.0, 6.28318) = -1.5708; // -90 degrees in radians
+uniform bool clockwise = true;
+
+void fragment() {
+	vec2 center = vec2(0.5, 0.5);
+	vec2 pos = UV - center;
+
+	// Calculate angle from center
+	float angle = atan(pos.y, pos.x);
+
+	// Normalize angle to 0-2π range
+	if (angle < 0.0) {
+		angle += 6.28318; // 2π
+	}
+
+	// Normalize start_angle to 0-2π range
+	float norm_start = start_angle;
+	if (norm_start < 0.0) {
+		norm_start += 6.28318;
+	}
+
+	// Calculate if this pixel should be visible
+	float arc_length = 6.28318 * fill_percentage; // 2π * percentage
+	bool visible = false;
+
+	if (clockwise) {
+		float end_angle = norm_start + arc_length;
+		if (end_angle <= 6.28318) {
+			// No wraparound
+			visible = angle >= norm_start && angle <= end_angle;
+		} else {
+			// Wraparound case
+			visible = angle >= norm_start || angle <= (end_angle - 6.28318);
+		}
+	} else {
+		float end_angle = norm_start - arc_length;
+		if (end_angle >= 0.0) {
+			// No wraparound
+			visible = angle <= norm_start && angle >= end_angle;
+		} else {
+			// Wraparound case
+			visible = angle <= norm_start || angle >= (end_angle + 6.28318);
+		}
+	}
+
+	if (visible) {
+		COLOR = texture(TEXTURE, UV);
+	} else {
+		COLOR = vec4(0.0, 0.0, 0.0, 0.0); // Transparent
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gh4u"]
+shader = SubResource("Shader_5tuhn")
+shader_parameter/fill_percentage = 1.0
+shader_parameter/start_angle = -1.5707963267948966
+shader_parameter/clockwise = true
+
+[sub_resource type="Shader" id="Shader_kjvhd"]
+code = "shader_type canvas_item;
+
+uniform float fill_percentage : hint_range(0.0, 1.0) = 1.0;
+uniform float start_angle : hint_range(0.0, 6.28318) = -1.5708; // -90 degrees in radians
+uniform bool clockwise = true;
+
+void fragment() {
+	vec2 center = vec2(0.5, 0.5);
+	vec2 pos = UV - center;
+
+	// Calculate angle from center
+	float angle = atan(pos.y, pos.x);
+
+	// Normalize angle to 0-2π range
+	if (angle < 0.0) {
+		angle += 6.28318; // 2π
+	}
+
+	// Normalize start_angle to 0-2π range
+	float norm_start = start_angle;
+	if (norm_start < 0.0) {
+		norm_start += 6.28318;
+	}
+
+	// Calculate if this pixel should be visible
+	float arc_length = 6.28318 * fill_percentage; // 2π * percentage
+	bool visible = false;
+
+	if (clockwise) {
+		float end_angle = norm_start + arc_length;
+		if (end_angle <= 6.28318) {
+			// No wraparound
+			visible = angle >= norm_start && angle <= end_angle;
+		} else {
+			// Wraparound case
+			visible = angle >= norm_start || angle <= (end_angle - 6.28318);
+		}
+	} else {
+		float end_angle = norm_start - arc_length;
+		if (end_angle >= 0.0) {
+			// No wraparound
+			visible = angle <= norm_start && angle >= end_angle;
+		} else {
+			// Wraparound case
+			visible = angle <= norm_start || angle >= (end_angle + 6.28318);
+		}
+	}
+
+	if (visible) {
+		COLOR = texture(TEXTURE, UV);
+	} else {
+		COLOR = vec4(0.0, 0.0, 0.0, 0.0); // Transparent
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5tuhn"]
+shader = SubResource("Shader_kjvhd")
+shader_parameter/fill_percentage = 1.0
+shader_parameter/start_angle = -1.5707963267948966
+shader_parameter/clockwise = true
 
 [sub_resource type="InputEventAction" id="InputEventAction_j4qnp"]
 action = &"ui_cancel"
@@ -133,16 +258,17 @@ texture_normal = ExtResource("4_fos0i")
 action = "ui_right"
 visibility_mode = 1
 
-[node name="HotelInputHandler" type="Node" parent="." node_paths=PackedStringArray("hotel_display_node", "builder_node", "habitant_selection", "gift_menu", "money_label", "shop")]
+[node name="HotelInputHandler" type="Node" parent="." node_paths=PackedStringArray("hotel_display_node", "builder_node", "habitant_selection", "gift_menu", "money_label", "shop", "room_view_menu")]
 unique_name_in_owner = true
 script = ExtResource("4_3dxm6")
 player_instance = SubResource("Resource_kjvhd")
 hotel_display_node = NodePath("../Control/Hotel")
 builder_node = NodePath("../Builder")
-habitant_selection = NodePath("../MarginContainer/SelectHabitant")
-gift_menu = NodePath("../MarginContainer/GiftingMenu")
+habitant_selection = NodePath("../MenuHolder/SelectHabitant")
+gift_menu = NodePath("../MenuHolder/GiftingMenu")
 money_label = NodePath("../MoneyLabel")
-shop = NodePath("../MarginContainer/Shop")
+shop = NodePath("../MenuHolder/Shop")
+room_view_menu = NodePath("../MenuHolder/RoomView")
 
 [node name="Builder" type="Node" parent="."]
 unique_name_in_owner = true
@@ -182,6 +308,7 @@ buttons = Array[ExtResource("7_03owx")]([SubResource("Resource_trn2v"), SubResou
 
 [node name="CycleProgress" parent="." instance=ExtResource("11_20pc6")]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_2gh4u")
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -195,11 +322,27 @@ offset_bottom = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[node name="CycleProgress2" parent="." instance=ExtResource("11_20pc6")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_5tuhn")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -173.0
+offset_top = -334.0
+offset_right = -45.0
+offset_bottom = -206.0
+grow_horizontal = 0
+grow_vertical = 0
+
 [node name="CloseHotkey" type="Button" parent="."]
 layout_mode = 0
 shortcut = SubResource("Shortcut_fpfj3")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MenuHolder" type="MarginContainer" parent="."]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -215,24 +358,29 @@ theme_override_constants/margin_bottom = 80
 script = ExtResource("13_j4qnp")
 metadata/_edit_lock_ = true
 
-[node name="GiftingMenu" parent="MarginContainer" instance=ExtResource("12_c6i3y")]
+[node name="GiftingMenu" parent="MenuHolder" instance=ExtResource("12_c6i3y")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="SelectHabitant" parent="MarginContainer" instance=ExtResource("9_20pc6")]
+[node name="SelectHabitant" parent="MenuHolder" instance=ExtResource("9_20pc6")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="Shop" parent="MarginContainer" instance=ExtResource("16_fpfj3")]
+[node name="Shop" parent="MenuHolder" instance=ExtResource("16_fpfj3")]
 visible = false
 layout_mode = 2
 items_in_stock = 2
 
-[node name="CreateResident" parent="MarginContainer" instance=ExtResource("17_kjvhd")]
+[node name="CreateResident" parent="MenuHolder" instance=ExtResource("17_kjvhd")]
 visible = false
 layout_mode = 2
+
+[node name="RoomView" type="Control" parent="MenuHolder"]
+visible = false
+layout_mode = 2
+script = ExtResource("18_5tuhn")
 
 [node name="ShopButton" type="Button" parent="."]
 custom_minimum_size = Vector2(144.08, 81.335)
@@ -257,14 +405,15 @@ script = ExtResource("17_sc1dx")
 [connection signal="current_room_changed" from="Builder" to="Control/Hotel" method="change_current_room"]
 [connection signal="current_room_changed" from="Control/Hotel" to="HotelUtilButtons" method="current_room_updated"]
 [connection signal="generated_new_spatial_room_finder" from="Control/Hotel" to="HotelInputHandler" method="set_spatial_room_finder"]
-[connection signal="pressed" from="CloseHotkey" to="MarginContainer" method="close_menu"]
-[connection signal="menu_opened" from="MarginContainer" to="Control/Hotel" method="draw_hotel"]
-[connection signal="item_selected" from="MarginContainer/GiftingMenu" to="HotelInputHandler" method="finished_gift_menu"]
-[connection signal="open_habitant_creator" from="MarginContainer/SelectHabitant" to="MarginContainer/CreateResident" method="open_with_habitant"]
-[connection signal="selected_habitant" from="MarginContainer/SelectHabitant" to="HotelInputHandler" method="select_habitant_to_reside_finish"]
-[connection signal="habitant_changes_confirmed" from="MarginContainer/CreateResident" to="MarginContainer/SelectHabitant" method="overwrite_current_habitant"]
-[connection signal="hidden" from="MarginContainer/CreateResident" to="MarginContainer/SelectHabitant" method="open_keep_last_selection"]
-[connection signal="pressed" from="ShopButton" to="MarginContainer/Shop" method="open"]
+[connection signal="pressed" from="CloseHotkey" to="MenuHolder" method="close_menu"]
+[connection signal="menu_opened" from="MenuHolder" to="Control/Hotel" method="draw_hotel"]
+[connection signal="item_selected" from="MenuHolder/GiftingMenu" to="HotelInputHandler" method="finished_gift_menu"]
+[connection signal="open_habitant_creator" from="MenuHolder/SelectHabitant" to="MenuHolder/CreateResident" method="open_with_habitant"]
+[connection signal="selected_habitant" from="MenuHolder/SelectHabitant" to="HotelInputHandler" method="select_habitant_to_reside_finish"]
+[connection signal="habitant_changes_confirmed" from="MenuHolder/CreateResident" to="MenuHolder/SelectHabitant" method="overwrite_current_habitant"]
+[connection signal="hidden" from="MenuHolder/CreateResident" to="MenuHolder/SelectHabitant" method="open_keep_last_selection"]
+[connection signal="child_entered_tree" from="MenuHolder/RoomView" to="MenuHolder/RoomView" method="_on_child_entered_tree"]
+[connection signal="pressed" from="ShopButton" to="MenuHolder/Shop" method="open"]
 
 [editable path="MoveLeft"]
 [editable path="MoveRight"]

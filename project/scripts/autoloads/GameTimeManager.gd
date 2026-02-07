@@ -37,7 +37,7 @@ func _ready():
 	long_cycle.datetime_between_fire={"day":1}
 	long_cycle.time_type=TimeCycle.TimeCheckType.CHECK_DAYS
 
-	medium_cycle.datetime_between_fire={"minute":20}
+	medium_cycle.datetime_between_fire={"second":20}
 	medium_cycle.time_type=TimeCycle.TimeCheckType.CHECK_TIME
 
 	short_cycle.datetime_between_fire={"second":10}

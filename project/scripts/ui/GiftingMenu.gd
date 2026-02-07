@@ -46,8 +46,8 @@ func gift_button_pressed() -> void:
 
 func finalize() -> void:
 	print("final selected ",_clicked_item)
+	hide()
 	if _clicked_item==-1:
 		item_selected.emit(null)
 	else:
 		item_selected.emit(listed_inventory.keys()[_clicked_item])
-	hide()

@@ -1,11 +1,14 @@
 extends Resource
 
+const DEBUG = false  # Set to true to enable debug output
+
 @export var hotel: Hotel = Hotel.new() #HotelManager.hotel_instance
 
 @export var player: Player = Player.new() #InputManager.player
 
 @export var gametimecycles: Array[TimeCycle] #GameTimeManager.*_cycle
 
+@export var save_extension : Dictionary[String,Resource]
 var first_start=true
 
 func convert_to_ids():
@@ -81,3 +84,18 @@ func convert_habitant_needs_to_refs():
 			for i in hotel.register.habitants:
 				for n in i.needs:
 					n.habitant=i
+
+func reconnect_signals():
+	# Reconnect all habitant need signals
+	if hotel:
+		if hotel.register:
+			for habitant in hotel.register.habitants:
+				if DEBUG:
+					print("Reconnecting signals for habitant: ", habitant.name if habitant else "null")
+				for need in habitant.needs:
+					if DEBUG:
+						print("  - Reconnecting need: ", need, " habitant ref: ", need.habitant)
+					need.bind_habitant()
+		# Reconnect all request signals
+		for req in hotel.requests:
+			req.accept()

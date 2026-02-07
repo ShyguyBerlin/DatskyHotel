@@ -1,0 +1,11 @@
+~ start
+{{habitant.name}}: I feel a bit lonely.
+{{habitant.name}}: Maybe {{friend.name}} is looking for a friend?
+{{habitant.name}}: Do you think they'd want to be friends with me?
+- Yes, of course
+	{{habitant.name}}: Great! I will contact them very soon.
+	{{habitant.name}}: Thanks for giving me advice!
+	do request.befriend()
+- Maybe someone else => END
+- Nobody loves you => END
+=> END

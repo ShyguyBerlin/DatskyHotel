@@ -1,0 +1,8 @@
+~ start
+Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
+if friend!=null:
+	Nathan: I have a friend called {{friend.name}}
+if not friend!=null:
+	Nathan: I don't have a friend
+Nathan: For more information see the online documentation.
+=> END

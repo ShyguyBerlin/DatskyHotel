@@ -1,9 +1,9 @@
-# Godot 4+ specific ignores
-.godot/
-/android/
+# Obsidian client settings
+**/.obsidian/*
 
 # Godot 4+ specific ignores
 .godot/
+/android/
 .nomedia
 
 # Godot-specific ignores
@@ -23,3 +23,7 @@ reports/
 .mono/
 data_*/
 mono_crash.*.json
+
+# IDE-specific ignores
+.vscode/
+.idea/
