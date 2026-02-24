@@ -36,6 +36,7 @@ func _init() -> void:
 func unbind_habitant() -> void:
 	load_relationship_global_data()
 	habitant.recieved_gift.disconnect(consume_gift_action)
+	habitant.began_talk.disconnect(consume_talk_action)
 	relationship_global_data.delete_account(relationship_account)
 
 # Should only be called on habitant/need creation
@@ -64,10 +65,11 @@ func consume_talk_action(action:TalkAction):
 	action.consume()
 	var friend = null
 	var affiliations = relationship_global_data.view_account(relationship_account)
+	var friend_affiliation = null
 	if len(affiliations)>0:
-		var friend_affiliation = Utility.weighted_select_random(affiliations, func(x): return x.bonding_A)
+		friend_affiliation = Utility.weighted_select_random(affiliations, func(x): return x.bonding_A)
 		friend={"satisfaction":friend_affiliation.satisfaction_A,"name":relationship_global_data.get_accounts()[friend_affiliation.id_B].origin.name}
-	action.display_node.start_habitant_dialog(RELATIONSHIP_DIALOG,[{"relationship":self,"friend":friend}])
+	action.display_node.start_habitant_dialog(RELATIONSHIP_DIALOG,[{"relationship":self,"friend":friend,"friend_affiliation":friend_affiliation}])
 
 func process(_delta : float):
 	pass

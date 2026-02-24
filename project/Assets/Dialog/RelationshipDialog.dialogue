@@ -1,8 +1,30 @@
 ~ start
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
+{{habitant.name}}: [[Hi|Hello]], I was just thinking of you.
+{{habitant.name}}: I think of you as a friend.
+%2 {{habitant.name}}: Friends are important to me
+%2 => own_friend_talk
+%1 => ask_player
+=> END
+
+~ own_friend_talk
 if friend!=null:
-	Nathan: I have a friend called {{friend.name}}
-if not friend!=null:
-	Nathan: I don't have a friend
-Nathan: For more information see the online documentation.
+	{{habitant.name}}: I have other friends too though..
+	if friend_affiliation.happiness_A >1.2:
+		{{habitant.name}}: {{friend.name}} is one of my best friends ever!
+	elif friend_affiliation.happiness_A >0.5:
+		{{habitant.name}}: I like {{friend.name}}. I value that friendship.
+	else:
+		{{habitant.name}}: {{friend.name}}... but they didn't have much time for me lately.
+		{{habitant.name}}: Maybe I should pause that friendship for a while.
+if friend==null:
+	{{habitant.name}}: I don't have any other friends right now.
+	{{habitant.name}}: But there are more urgent matters in my life right now.
+=> END
+
+~ ask_player
+{{habitant.name}}: Do you have many friends?
+- Yes!
+	{{habitant.name}}: That's nice, everyone should have friends.
+- No
+	{{habitant.name}}: That's not true, at least you have me.
 => END

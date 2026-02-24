@@ -15,6 +15,8 @@ class_name RelationshipSaveData
 # Very cool, I love centralistic id counters, surely nothing bad is gonna happen to it - 14.12.2025
 @export var _account_id_counter : int = 0
 
+const BONDING_DAMPENING = .8
+
 func _init() -> void:
 	if not GameTimeManager.MediumCycleTick.is_connected(on_relationship_cycle):
 		GameTimeManager.MediumCycleTick.connect(on_relationship_cycle)
@@ -91,17 +93,27 @@ func do_simulation_cycle() -> void:
 		var a_idx : Dictionary=_affiliation_index[a]
 		var neighbor_ids = a_idx.keys()
 		var satifaction_sum = 0
+		var dampened_satisfaction_sum = 0
+		
+		# Find satisfaction scores
 		for nid in neighbor_ids:
 			var edge : RelationshipAffiliationData.AffiliationView = a_idx[nid].view(a)
 			satifaction_sum += edge.satisfaction_A
 		if satifaction_sum == 0:
 			continue
-
+		
+		# Normalize satisfaction score and apply dampening
 		for nid in neighbor_ids:
 			var edge : RelationshipAffiliationData.AffiliationView = a_idx[nid].view(a)
-			print("Setting edge bonding ",edge.bonding_A)
-			edge.bonding_A=(edge.satisfaction_A / satifaction_sum) * _accounts[a].social_strength
-			print("To ",edge.bonding_A)
+			edge.bonding_A  = (edge.satisfaction_A / satifaction_sum) * _accounts[a].social_strength + edge.bonding_A * BONDING_DAMPENING
+			edge.bonding_A /= BONDING_DAMPENING+1
+			dampened_satisfaction_sum+=edge.bonding_A
+
+		#Normalize
+		for nid in neighbor_ids:
+			var edge : RelationshipAffiliationData.AffiliationView = a_idx[nid].view(a)
+			edge.bonding_A=(edge.bonding_A / dampened_satisfaction_sum) * _accounts[a].social_strength
+		
 	# --- Step 2: satisfaction and happiness
 	for a : int in _accounts:
 		if a not in _affiliation_index:
@@ -112,6 +124,7 @@ func do_simulation_cycle() -> void:
 		for nid in neighbor_ids:
 			var edge : RelationshipAffiliationData.AffiliationView = a_idx[nid].view(a)
 			var ratio = edge.bonding_B / edge.bonding_A if edge.bonding_A > 0 else 1
+			ratio = min( ratio, _accounts[a].social_strength*2 )
 			# Satisfaction orients itself on the ratio of bonding, but increases with stronger bondings
 			edge.satisfaction_A = ratio if edge.bonding_B < 1 else (ratio + edge.bonding_B) / 2
 			# Happiness is equal to bonding from the other side
