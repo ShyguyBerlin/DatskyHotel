@@ -3,13 +3,12 @@ extends Node
 const DEBUG = false  # Set to true to enable debug output
 
 const savegametype : Script = preload("uid://c84icr3cqf5v7")
-const usersettingstype : Script = preload("uid://be6v6c6tj63yp")
 
 signal loaded_new_save
 signal loaded_old_save
 signal reloaded_settings
 
-@export var user_settings : usersettingstype = usersettingstype.new()
+@export var user_settings : UserSettings = UserSettings.new()
 @export var save : savegametype = savegametype.new()
 
 # Temporary reference used during savegame loading to provide early access to save extensions
@@ -39,6 +38,7 @@ func save_settings():
 	var config = ConfigFile.new()
 	
 	config.set_value("general","save_game_path",user_settings.save_game_path)
+	config.set_value("ui","use_alternative_button_controls",user_settings.use_alternative_button_controls)
 	
 	config.save("user://settings.cfg")
 
@@ -50,6 +50,8 @@ func load_settings():
 		return
 	
 	user_settings.save_game_path = config.get_value("general","save_game_path")
+	user_settings.use_alternative_button_controls = config.get_value("ui","use_alternative_button_controls", false)
+
 	reloaded_settings.emit()
 
 func save_savegame():

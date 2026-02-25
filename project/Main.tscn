@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ccp45kjeqnsyn"]
+[gd_scene format=3 uid="uid://ccp45kjeqnsyn"]
 
 [ext_resource type="Theme" uid="uid://c2803i265ic3m" path="res://Assets/UI/Theme.tres" id="1_c2ibq"]
 [ext_resource type="PackedScene" uid="uid://eutlnvg2s8kt" path="res://nodes/HotelLoader.tscn" id="1_uu6xs"]
@@ -16,9 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://dp8ysxvi24x3p" path="res://nodes/ui/GiftingMenu.tscn" id="12_c6i3y"]
 [ext_resource type="Script" uid="uid://duni3ujulu4ee" path="res://scripts/ui/UIMenuHolder.gd" id="13_j4qnp"]
 [ext_resource type="PackedScene" uid="uid://dmbhro44k7v3m" path="res://nodes/ui/Shop.tscn" id="16_fpfj3"]
+[ext_resource type="PackedScene" uid="uid://cwcywkytiomgv" path="res://nodes/ui/SettingsMenu.tscn" id="17_devvj"]
 [ext_resource type="PackedScene" uid="uid://bql70mqvjwyq3" path="res://nodes/ui/HabitantCreation.tscn" id="17_kjvhd"]
 [ext_resource type="Script" uid="uid://btligk40mbgh6" path="res://scripts/ui/MoneyLabel.gd" id="17_sc1dx"]
 [ext_resource type="Script" uid="uid://mcnu8u32ab8c" path="res://scripts/ui/RoomViewMenu.gd" id="18_5tuhn"]
+[ext_resource type="Texture2D" uid="uid://uv5106bmpc7n" path="res://Assets/Images/SVG/Settings.svg" id="20_3b0ty"]
 
 [sub_resource type="Resource" id="Resource_kjvhd"]
 script = ExtResource("5_c2ibq")
@@ -216,7 +218,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_fpfj3"]
 events = [SubResource("InputEventAction_j4qnp")]
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=836403994]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -226,7 +228,7 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("1_c2ibq")
 
-[node name="MoveLeft" parent="." instance=ExtResource("3_cm0pq")]
+[node name="MoveLeft" parent="." unique_id=900968389 instance=ExtResource("3_cm0pq")]
 layout_mode = 1
 
 [node name="Control" parent="MoveLeft" index="0"]
@@ -241,7 +243,7 @@ texture_normal = ExtResource("4_fos0i")
 action = "ui_left"
 visibility_mode = 1
 
-[node name="MoveRight" parent="." instance=ExtResource("3_cm0pq")]
+[node name="MoveRight" parent="." unique_id=1103553785 instance=ExtResource("3_cm0pq")]
 layout_mode = 1
 anchor_left = 0.88
 anchor_right = 0.88
@@ -258,7 +260,7 @@ texture_normal = ExtResource("4_fos0i")
 action = "ui_right"
 visibility_mode = 1
 
-[node name="HotelInputHandler" type="Node" parent="." node_paths=PackedStringArray("hotel_display_node", "builder_node", "habitant_selection", "gift_menu", "money_label", "shop", "room_view_menu")]
+[node name="HotelInputHandler" type="Node" parent="." unique_id=1798192008 node_paths=PackedStringArray("hotel_display_node", "builder_node", "habitant_selection", "gift_menu", "money_label", "shop", "room_view_menu")]
 unique_name_in_owner = true
 script = ExtResource("4_3dxm6")
 player_instance = SubResource("Resource_kjvhd")
@@ -270,14 +272,14 @@ money_label = NodePath("../MoneyLabel")
 shop = NodePath("../MenuHolder/Shop")
 room_view_menu = NodePath("../MenuHolder/RoomView")
 
-[node name="Builder" type="Node" parent="."]
+[node name="Builder" type="Node" parent="." unique_id=1447207759]
 unique_name_in_owner = true
 script = ExtResource("5_fos0i")
 
-[node name="HotelLoader" parent="." node_paths=PackedStringArray("hotel_display_node") instance=ExtResource("1_uu6xs")]
+[node name="HotelLoader" parent="." unique_id=1578136510 node_paths=PackedStringArray("hotel_display_node") instance=ExtResource("1_uu6xs")]
 hotel_display_node = NodePath("../Control/Hotel")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=2054478906]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -288,10 +290,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Hotel" parent="Control" instance=ExtResource("2_r0du0")]
+[node name="Hotel" parent="Control" unique_id=1516271833 instance=ExtResource("2_r0du0")]
 scale = Vector2(2, 2)
 
-[node name="HotelUtilButtons" type="HBoxContainer" parent="."]
+[node name="HotelUtilButtons" type="HBoxContainer" parent="." unique_id=491354016]
 z_index = 1
 custom_minimum_size = Vector2(800, 140)
 layout_mode = 1
@@ -306,7 +308,7 @@ grow_vertical = 0
 script = ExtResource("6_trn2v")
 buttons = Array[ExtResource("7_03owx")]([SubResource("Resource_trn2v"), SubResource("Resource_03owx"), SubResource("Resource_20pc6"), SubResource("Resource_5vvyt"), SubResource("Resource_wkp8b"), SubResource("Resource_c6i3y"), SubResource("Resource_c2ibq"), SubResource("Resource_j4qnp"), SubResource("Resource_sc1dx")])
 
-[node name="CycleProgress" parent="." instance=ExtResource("11_20pc6")]
+[node name="CycleProgress" parent="." unique_id=2012219598 instance=ExtResource("11_20pc6")]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_2gh4u")
 layout_mode = 1
@@ -322,7 +324,7 @@ offset_bottom = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="CycleProgress2" parent="." instance=ExtResource("11_20pc6")]
+[node name="CycleProgress2" parent="." unique_id=183540543 instance=ExtResource("11_20pc6")]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_5tuhn")
 layout_mode = 1
@@ -338,11 +340,11 @@ offset_bottom = -206.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="CloseHotkey" type="Button" parent="."]
+[node name="CloseHotkey" type="Button" parent="." unique_id=498517106]
 layout_mode = 0
 shortcut = SubResource("Shortcut_fpfj3")
 
-[node name="MenuHolder" type="MarginContainer" parent="."]
+[node name="MenuHolder" type="MarginContainer" parent="." unique_id=1999925184]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -358,40 +360,64 @@ theme_override_constants/margin_bottom = 80
 script = ExtResource("13_j4qnp")
 metadata/_edit_lock_ = true
 
-[node name="GiftingMenu" parent="MenuHolder" instance=ExtResource("12_c6i3y")]
+[node name="GiftingMenu" parent="MenuHolder" unique_id=519930054 instance=ExtResource("12_c6i3y")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="SelectHabitant" parent="MenuHolder" instance=ExtResource("9_20pc6")]
+[node name="SelectHabitant" parent="MenuHolder" unique_id=1655271121 instance=ExtResource("9_20pc6")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="Shop" parent="MenuHolder" instance=ExtResource("16_fpfj3")]
+[node name="Shop" parent="MenuHolder" unique_id=2013413085 instance=ExtResource("16_fpfj3")]
 visible = false
 layout_mode = 2
 items_in_stock = 2
 
-[node name="CreateResident" parent="MenuHolder" instance=ExtResource("17_kjvhd")]
+[node name="Settings" parent="MenuHolder" unique_id=1861014793 instance=ExtResource("17_devvj")]
 visible = false
 layout_mode = 2
 
-[node name="RoomView" type="Control" parent="MenuHolder"]
+[node name="CreateResident" parent="MenuHolder" unique_id=1668951875 instance=ExtResource("17_kjvhd")]
+visible = false
+layout_mode = 2
+
+[node name="RoomView" type="Control" parent="MenuHolder" unique_id=1145870134]
 visible = false
 layout_mode = 2
 script = ExtResource("18_5tuhn")
 
-[node name="ShopButton" type="Button" parent="."]
+[node name="ShopButton" type="Button" parent="." unique_id=1322098054]
 custom_minimum_size = Vector2(144.08, 81.335)
-layout_mode = 0
-offset_left = 35.0
-offset_top = 15.0
-offset_right = 179.08
-offset_bottom = 96.335
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -175.0
+offset_top = 22.0
+offset_right = -30.920044
+offset_bottom = 103.335
+grow_horizontal = 0
 text = "Shop"
 
-[node name="MoneyLabel" type="RichTextLabel" parent="."]
+[node name="Settingsbutton" type="Button" parent="." unique_id=83540468]
+custom_minimum_size = Vector2(81.335, 81.335)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -275.255
+offset_top = 24.0
+offset_right = -193.91998
+offset_bottom = 105.335
+grow_horizontal = 0
+icon = ExtResource("20_3b0ty")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MoneyLabel" type="RichTextLabel" parent="." unique_id=359548930]
 layout_mode = 0
 offset_left = 192.0
 offset_top = 15.0
@@ -414,6 +440,7 @@ script = ExtResource("17_sc1dx")
 [connection signal="hidden" from="MenuHolder/CreateResident" to="MenuHolder/SelectHabitant" method="open_keep_last_selection"]
 [connection signal="child_entered_tree" from="MenuHolder/RoomView" to="MenuHolder/RoomView" method="_on_child_entered_tree"]
 [connection signal="pressed" from="ShopButton" to="MenuHolder/Shop" method="open"]
+[connection signal="pressed" from="Settingsbutton" to="MenuHolder/Settings" method="open"]
 
 [editable path="MoveLeft"]
 [editable path="MoveRight"]

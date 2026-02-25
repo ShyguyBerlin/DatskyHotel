@@ -107,7 +107,9 @@ func update_button_visibility():
 	if not is_node_ready():
 		return
 
-	if __current_room == null:
+	var system_used = Engine.is_editor_hint() or SaveSystem.user_settings.use_alternative_button_controls
+
+	if not system_used or __current_room == null:
 		for i in get_children():
 			i.hide()
 		return

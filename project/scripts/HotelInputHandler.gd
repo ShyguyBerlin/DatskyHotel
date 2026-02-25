@@ -208,6 +208,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if len(rooms)>0:
 			var room_instance=rooms[0].get_dataclass_instance()
 			if room_instance:
+				if room_instance == hotel_display_node.current_room:
+					enter_room.call_deferred()
 				hotel_display_node.current_room=room_instance
 			get_viewport().set_input_as_handled()
 			print("Swapped current room")
