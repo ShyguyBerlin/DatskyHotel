@@ -204,6 +204,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		mouse_pos-=hotel_display_node.global_position
 		mouse_pos=Vector2(mouse_pos.x/hotel_display_node.scale.x,mouse_pos.y/hotel_display_node.scale.y)
 		var adjusted_mouse_pos=mouse_pos-hotel_display_node.current_offset
+		if not spatial_room_finder:
+			print("no room finder configured")
+			return
 		var rooms = spatial_room_finder.find_room(adjusted_mouse_pos)
 		if len(rooms)>0:
 			var room_instance=rooms[0].get_dataclass_instance()

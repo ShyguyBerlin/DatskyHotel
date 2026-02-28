@@ -27,8 +27,9 @@ var current_offset:Vector2=Vector2.ZERO
 ## Node instantiation stuff end
 
 func _ready() -> void:
-	draw_hotel()
-	
+	if visible:
+		draw_hotel()
+
 
 func change_current_room(new_room):
 	if current_room==new_room:

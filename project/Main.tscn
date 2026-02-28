@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://hiwflyyi2wjt" path="res://scripts/ui/RoomButtonCreator.gd" id="6_trn2v"]
 [ext_resource type="Script" uid="uid://b74ejcotfcsul" path="res://scripts/ui/HotelButtonData.gd" id="7_03owx"]
 [ext_resource type="PackedScene" uid="uid://cn8tnkricq2cr" path="res://nodes/ui/HabitantSelection.tscn" id="9_20pc6"]
+[ext_resource type="PackedScene" uid="uid://dpnby0x5kmu4i" path="res://nodes/HotelBuildDisplay.tscn" id="9_hhcpw"]
 [ext_resource type="Script" uid="uid://bkheb4gi1iqo" path="res://scripts/dataclasses/roomtypes/Elevator.gd" id="9_wkp8b"]
 [ext_resource type="PackedScene" uid="uid://dy1coe5jwdf0y" path="res://nodes/ui/CycleProgress.tscn" id="11_20pc6"]
 [ext_resource type="PackedScene" uid="uid://dp8ysxvi24x3p" path="res://nodes/ui/GiftingMenu.tscn" id="12_c6i3y"]
@@ -21,6 +22,8 @@
 [ext_resource type="Script" uid="uid://btligk40mbgh6" path="res://scripts/ui/MoneyLabel.gd" id="17_sc1dx"]
 [ext_resource type="Script" uid="uid://mcnu8u32ab8c" path="res://scripts/ui/RoomViewMenu.gd" id="18_5tuhn"]
 [ext_resource type="Texture2D" uid="uid://uv5106bmpc7n" path="res://Assets/Images/SVG/Settings.svg" id="20_3b0ty"]
+[ext_resource type="Texture2D" uid="uid://v3w4ic3k4il0" path="res://Assets/Images/SVG/ButtonIcon.svg" id="20_bg4s2"]
+[ext_resource type="Texture2D" uid="uid://byc2ifumn1hmf" path="res://Assets/Images/SVG/BuildIcon.svg" id="22_hhcpw"]
 
 [sub_resource type="Resource" id="Resource_kjvhd"]
 script = ExtResource("5_c2ibq")
@@ -291,7 +294,11 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="Hotel" parent="Control" unique_id=1516271833 instance=ExtResource("2_r0du0")]
+visible = false
 scale = Vector2(2, 2)
+
+[node name="BuildHotel" parent="Control" unique_id=640807702 instance=ExtResource("9_hhcpw")]
+scale = Vector2(1.58, 1.58)
 
 [node name="HotelUtilButtons" type="HBoxContainer" parent="." unique_id=491354016]
 z_index = 1
@@ -412,10 +419,51 @@ offset_top = 24.0
 offset_right = -193.91998
 offset_bottom = 105.335
 grow_horizontal = 0
-icon = ExtResource("20_3b0ty")
+icon = ExtResource("20_bg4s2")
 flat = true
 icon_alignment = 1
 expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="Settingsbutton" unique_id=1997972638]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_3b0ty")
+expand_mode = 1
+
+[node name="Settingsbutton2" type="Button" parent="." unique_id=871318710]
+self_modulate = Color(1, 1, 0.827451, 1)
+custom_minimum_size = Vector2(81.335, 81.335)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -376.0
+offset_top = 24.0
+offset_right = -294.66498
+offset_bottom = 105.335
+grow_horizontal = 0
+icon = ExtResource("20_bg4s2")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="Settingsbutton2" unique_id=283885614]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_hhcpw")
+expand_mode = 1
 
 [node name="MoneyLabel" type="RichTextLabel" parent="." unique_id=359548930]
 layout_mode = 0
@@ -441,6 +489,7 @@ script = ExtResource("17_sc1dx")
 [connection signal="child_entered_tree" from="MenuHolder/RoomView" to="MenuHolder/RoomView" method="_on_child_entered_tree"]
 [connection signal="pressed" from="ShopButton" to="MenuHolder/Shop" method="open"]
 [connection signal="pressed" from="Settingsbutton" to="MenuHolder/Settings" method="open"]
+[connection signal="pressed" from="Settingsbutton2" to="MenuHolder/Settings" method="open"]
 
 [editable path="MoveLeft"]
 [editable path="MoveRight"]

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://sc4ttc7r42q"]
+
+[ext_resource type="Script" uid="uid://cyrq085gffu31" path="res://scripts/dataclasses/roomtypes/BlueprintRoom.gd" id="1_u6ui3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cvyy"]
+bg_color = Color(0.23137255, 0.4392157, 0.4392157, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.16862746, 0.8, 0.8, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Blueprint" type="Node2D" unique_id=1468149752]
+script = ExtResource("1_u6ui3")
+
+[node name="Panel" type="Panel" parent="." unique_id=1891801284]
+offset_left = -41.0
+offset_top = -31.0
+offset_right = 41.0
+offset_bottom = 31.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5cvyy")
+
+[node name="Button" type="Button" parent="." unique_id=623223661]
+unique_name_in_owner = true
+offset_left = -41.0
+offset_top = -31.0
+offset_right = 41.0
+offset_bottom = 31.0
+flat = true
