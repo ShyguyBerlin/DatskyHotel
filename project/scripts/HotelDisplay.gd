@@ -64,7 +64,8 @@ func draw_hotel():
 	room_mapping.clear()
 	current_offset=Vector2.ZERO
 	for i in get_children():
-		i.position=Vector2.ZERO
+		if not i is CanvasLayer:
+			i.position=Vector2.ZERO
 	# With an implementation for offset, the initial room should always the hotels initial room
 	var primary_room=current_room
 	if primary_room==null or true:

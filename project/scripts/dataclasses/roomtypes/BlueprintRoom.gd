@@ -3,7 +3,6 @@ extends Node2D
 class_name BlueprintRoomConnection
 
 signal pressed
-signal request_build
 @onready var button: Button = %Button
 @export var clickable = true : set = set_clickable
 @export var direction : RoomConnection.display_direction : set=set_direction

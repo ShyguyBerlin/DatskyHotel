@@ -2,9 +2,50 @@
 
 [ext_resource type="PackedScene" uid="uid://vbxq2syg5rg2" path="res://nodes/HotelDisplay.tscn" id="1_vf12f"]
 [ext_resource type="Script" uid="uid://drf18dekdl5g7" path="res://scripts/HotelBuildingDisplay.gd" id="2_o1rnp"]
+[ext_resource type="Texture2D" uid="uid://v3w4ic3k4il0" path="res://Assets/Images/SVG/ButtonIcon.svg" id="3_o1rnp"]
 
 [node name="Hotel" unique_id=640807702 instance=ExtResource("1_vf12f")]
 script = ExtResource("2_o1rnp")
 
 [node name="HotelDecoFolder" parent="." index="0" unique_id=306999520]
 z_index = -10
+
+[node name="BlueprintDialogButtons" type="CanvasLayer" parent="HotelDecoFolder" index="2" unique_id=1547196444]
+layer = 2
+
+[node name="ButtonScaler" type="Control" parent="HotelDecoFolder/BlueprintDialogButtons" index="0" unique_id=2098069392]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Accept" type="Button" parent="HotelDecoFolder/BlueprintDialogButtons/ButtonScaler" index="0" unique_id=159976705]
+modulate = Color(0.78431374, 1, 0.78431374, 1)
+layout_mode = 0
+offset_left = -180.0
+offset_top = 20.0
+offset_right = -90.0
+offset_bottom = 110.0
+icon = ExtResource("3_o1rnp")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Cancel" type="Button" parent="HotelDecoFolder/BlueprintDialogButtons/ButtonScaler" index="1" unique_id=748172005]
+modulate = Color(1, 0.78431374, 0.78431374, 1)
+layout_mode = 0
+offset_left = 90.0
+offset_top = 20.0
+offset_right = 180.0
+offset_bottom = 110.0
+icon = ExtResource("3_o1rnp")
+flat = true
+icon_alignment = 1
+expand_icon = true

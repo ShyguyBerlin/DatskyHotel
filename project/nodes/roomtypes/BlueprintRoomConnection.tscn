@@ -24,7 +24,6 @@ corner_radius_top_left = 2
 [node name="BlueprintConnection" type="Node2D" unique_id=1875782796]
 script = ExtResource("1_fqbfe")
 direction = 1
-no_arrow = null
 
 [node name="VerticalPanel" type="Panel" parent="." unique_id=1250920813]
 unique_name_in_owner = true

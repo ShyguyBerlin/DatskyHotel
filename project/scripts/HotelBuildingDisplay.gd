@@ -7,6 +7,9 @@ const BLUEPRINT_ROOM_CONNECTION = preload("uid://cxnolttfk712f")
 static var room_distance:Vector2 = Vector2.INF
 
 signal blueprint_construction(blueprint : BlueprintRoomConnection)
+var selected_blueprint : BlueprintRoomConnection
+
+@onready var button_scaler: Control = %ButtonScaler
 
 func _ready():
 	if room_distance == Vector2.INF:
@@ -17,6 +20,10 @@ func _ready():
 			exampleRoom.get_size(RoomConnection.display_direction.DISPLAY_DOWN).y+exampleConnection.get_size(RoomConnection.display_direction.DISPLAY_DOWN).y
 			)
 	super()
+
+func change_current_room(new_room):
+	button_scaler.hide()
+	super(new_room)
 
 func draw_hotel():
 	super()
@@ -47,27 +54,43 @@ func draw_hotel():
 				if found_rooms.is_empty():
 					add_blueprint_directional(d,i.position)
 
-func __prepare_blueprint(direction : RoomConnection.display_direction,position:Vector2) -> Node:
-	var adjusted_position = Vector2(RoomConnection.get_display_direction_vector(direction))*room_distance/2+position
+func __prepare_blueprint(direction : RoomConnection.display_direction,_position:Vector2) -> Node:
+	var adjusted_position = Vector2(RoomConnection.get_display_direction_vector(direction))*room_distance/2+_position
 	var blueprint :BlueprintRoomConnection = BLUEPRINT_ROOM_CONNECTION.instantiate()
 	print("ADDING BLUEPRINT ",direction," ",position,adjusted_position)
 	blueprint.position=adjusted_position
 	blueprint.direction=direction
 	blueprint.z_index=-5
-	blueprint.pressed.connect(center_around_node.bind(blueprint))
-	blueprint.request_build.connect(do_blueprint.bind(blueprint))
+	blueprint.pressed.connect(clicked_blueprint.bind(blueprint))
 	return blueprint
 
-func add_blueprint_directional(direction : RoomConnection.display_direction,position:Vector2):
-	var blueprint = __prepare_blueprint(direction,position)
+func add_blueprint_directional(direction : RoomConnection.display_direction,_position:Vector2):
+	var blueprint = __prepare_blueprint(direction,_position)
 	display_nodes_folder.add_child(blueprint) 
 
-func add_blueprint_connecting(direction : RoomConnection.display_direction,position:Vector2):
-	var blueprint = __prepare_blueprint(direction,position)
+func add_blueprint_connecting(direction : RoomConnection.display_direction,_position:Vector2):
+	var blueprint = __prepare_blueprint(direction,_position)
 	blueprint.no_arrow=true
 	display_nodes_folder.add_child(blueprint)
 
-func do_blueprint(blueprint:BlueprintRoomConnection):
+func clicked_blueprint(bp : BlueprintRoomConnection):
+	var hud_visible= button_scaler.visible
+	current_room=null
+	center_around_node(bp)
+	selected_blueprint=bp
+	var tween = get_tree().create_tween()
+	tweens.append(tween)
+	button_scaler.scale=Vector2(0.1,0.1)
+	if not hud_visible:
+		tween.tween_property(button_scaler,"scale",Vector2.ONE,.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	else:
+		button_scaler.scale=Vector2.ONE
+	button_scaler.show()
+
+func do_blueprint():
+	pass
+
+func cancel_blueprint():
 	pass
 
 func center_around_node(node:Node2D):
