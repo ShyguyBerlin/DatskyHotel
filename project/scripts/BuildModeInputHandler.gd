@@ -38,3 +38,29 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		print("Deselected any room")
 		return
+
+
+func _on_build_hotel_blueprint_construction(blueprint: BlueprintRoomConnection) -> void:
+	var cost=0
+	if blueprint.connecting_to==null:
+		cost=110
+	else:
+		cost=10
+	if player_instance.money>cost:
+		player_instance.money-=cost
+	else:
+		print("Not enough money")
+		return
+	
+	builder_node.current_room=blueprint.origin_room
+	
+	var new_room
+	if blueprint.connecting_to==null:
+		new_room=Room.new()
+		builder_node.build_room_in_dir(blueprint.direction,new_room)
+	else:
+		blueprint.origin_room.connect_to_room(blueprint.connecting_to,blueprint.direction)
+		builder_node.built_stuff.emit()
+		new_room=blueprint.origin_room
+	hotel_display_node.current_room=new_room
+	hotel_display_node.center_around_node(blueprint,false)

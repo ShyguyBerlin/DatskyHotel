@@ -8,8 +8,8 @@ signal pressed
 @export var direction : RoomConnection.display_direction : set=set_direction
 @export var no_arrow : bool = false
 
-var origin_room
-var connecting_to #Set to null if building new room
+var origin_room : Room
+var connecting_to : Room#Set to null if building new room
 
 @onready var arrow_left: Panel = %ArrowLeft
 @onready var arrow_up: Panel = %ArrowUp

@@ -483,9 +483,12 @@ autowrap_mode = 0
 script = ExtResource("17_sc1dx")
 
 [connection signal="built_stuff" from="Builder" to="Control/Hotel" method="draw_hotel"]
+[connection signal="built_stuff" from="Builder" to="Control/BuildHotel" method="draw_hotel"]
 [connection signal="current_room_changed" from="Builder" to="Control/Hotel" method="change_current_room"]
+[connection signal="current_room_changed" from="Builder" to="Control/BuildHotel" method="change_current_room"]
 [connection signal="current_room_changed" from="Control/Hotel" to="HotelUtilButtons" method="current_room_updated"]
 [connection signal="generated_new_spatial_room_finder" from="Control/Hotel" to="HotelInputHandler" method="set_spatial_room_finder"]
+[connection signal="blueprint_construction" from="Control/BuildHotel" to="BuildModeInputHandler" method="_on_build_hotel_blueprint_construction"]
 [connection signal="generated_new_spatial_room_finder" from="Control/BuildHotel" to="BuildModeInputHandler" method="set_spatial_room_finder"]
 [connection signal="pressed" from="CloseHotkey" to="MenuHolder" method="close_menu"]
 [connection signal="menu_opened" from="MenuHolder" to="Control/Hotel" method="draw_hotel"]
