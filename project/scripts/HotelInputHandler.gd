@@ -198,6 +198,8 @@ func _input(event: InputEvent) -> void:
 		move_down()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not hotel_display_node.visible:
+		return
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		print("LEFT MOUSE CLICK")
 		var mouse_pos=get_viewport().get_mouse_position()

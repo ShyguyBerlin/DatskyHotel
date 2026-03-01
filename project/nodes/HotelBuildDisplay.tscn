@@ -5,3 +5,6 @@
 
 [node name="Hotel" unique_id=640807702 instance=ExtResource("1_vf12f")]
 script = ExtResource("2_o1rnp")
+
+[node name="HotelDecoFolder" parent="." index="0" unique_id=306999520]
+z_index = -10

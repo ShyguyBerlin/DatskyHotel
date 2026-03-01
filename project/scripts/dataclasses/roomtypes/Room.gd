@@ -34,6 +34,43 @@ func get_rooms_in_direction(direction : RoomConnection.display_direction) -> Arr
 func generate_request() -> Array[Request]:
 	return []
 
+# Breadth-first search to check if this room is connected to another room
+# limit=0 (default) means no limit
+func is_connected_to(target_room: Room, limit: int = 0) -> bool:
+	if self == target_room:
+		return true
+	
+	# Queue stores [room, distance] pairs
+	var queue : Array = [[self, 0]]
+	var visited : Array[Room] = [self]
+	
+	while queue.size() > 0:
+		var current_pair = queue.pop_front()
+		var current_room : Room = current_pair[0]
+		var distance : int = current_pair[1]
+		
+		# Check if we've reached the limit
+		if limit > 0 and distance >= limit:
+			continue
+		
+		# Get all connected rooms from all connections
+		var connected_rooms : Array[Room] = []
+		for connection in current_room.connections:
+			for room in connection.connected_rooms.keys():
+				if room != current_room:
+					connected_rooms.append(room)
+		
+		# Process each connected room
+		for neighbor in connected_rooms:
+			if neighbor == target_room:
+				return true
+			
+			if neighbor not in visited:
+				visited.append(neighbor)
+				queue.append([neighbor, distance + 1])
+	
+	return false
+
 ###################################################
 #########   Display related functions #############
 ###################################################

@@ -4,16 +4,19 @@ extends HotelDisplay
 const BLUEPRINT_ROOM = preload("uid://sc4ttc7r42q")
 const BLUEPRINT_ROOM_CONNECTION = preload("uid://cxnolttfk712f")
 
-static var room_horizontal_distance = -1
-static var room_vertical_distance = -1
+static var room_distance:Vector2 = Vector2.INF
+
+signal blueprint_construction(blueprint : BlueprintRoomConnection)
 
 func _ready():
-	super()
-	if room_horizontal_distance == -1 or room_vertical_distance:
+	if room_distance == Vector2.INF:
 		var exampleRoom = Room.new()
 		var exampleConnection = RoomConnection.new()
-		room_horizontal_distance=exampleRoom.get_size(RoomConnection.display_direction.DISPLAY_RIGHT)+exampleConnection.get_size(RoomConnection.display_direction.DISPLAY_RIGHT)
-		room_horizontal_distance=exampleRoom.get_size(RoomConnection.display_direction.DISPLAY_DOWN)+exampleConnection.get_size(RoomConnection.display_direction.DISPLAY_DOWN)
+		room_distance=Vector2(
+			exampleRoom.get_size(RoomConnection.display_direction.DISPLAY_RIGHT).x+exampleConnection.get_size(RoomConnection.display_direction.DISPLAY_RIGHT).x,
+			exampleRoom.get_size(RoomConnection.display_direction.DISPLAY_DOWN).y+exampleConnection.get_size(RoomConnection.display_direction.DISPLAY_DOWN).y
+			)
+	super()
 
 func draw_hotel():
 	super()
@@ -23,3 +26,50 @@ func draw_hotel():
 			continue
 		print(i.get_dataclass_instance().get_script().get_global_name())
 		print(i.position)
+		
+		var found_rooms
+		var dirs
+		
+		# Check left and right
+		dirs = [RoomConnection.display_direction.DISPLAY_RIGHT,RoomConnection.display_direction.DISPLAY_LEFT]
+		for d in dirs:
+			found_rooms = _room_finder.find_room(i.position+room_distance*Vector2(RoomConnection.get_display_direction_vector(d)))
+			if found_rooms.is_empty():
+				add_blueprint_directional(d,i.position)
+			elif d==RoomConnection.display_direction.DISPLAY_RIGHT:
+				if not i.get_dataclass_instance().is_connected_to(found_rooms[0].get_dataclass_instance(),1):
+					add_blueprint_connecting(d,i.position)
+
+		dirs = [RoomConnection.display_direction.DISPLAY_DOWN,RoomConnection.display_direction.DISPLAY_UP]
+		if i.get_dataclass_instance() is Elevator:
+			for d in dirs:
+				found_rooms = _room_finder.find_room(i.position+room_distance*Vector2(RoomConnection.get_display_direction_vector(d)))
+				if found_rooms.is_empty():
+					add_blueprint_directional(d,i.position)
+
+func __prepare_blueprint(direction : RoomConnection.display_direction,position:Vector2) -> Node:
+	var adjusted_position = Vector2(RoomConnection.get_display_direction_vector(direction))*room_distance/2+position
+	var blueprint :BlueprintRoomConnection = BLUEPRINT_ROOM_CONNECTION.instantiate()
+	print("ADDING BLUEPRINT ",direction," ",position,adjusted_position)
+	blueprint.position=adjusted_position
+	blueprint.direction=direction
+	blueprint.z_index=-5
+	blueprint.pressed.connect(center_around_node.bind(blueprint))
+	blueprint.request_build.connect(do_blueprint.bind(blueprint))
+	return blueprint
+
+func add_blueprint_directional(direction : RoomConnection.display_direction,position:Vector2):
+	var blueprint = __prepare_blueprint(direction,position)
+	display_nodes_folder.add_child(blueprint) 
+
+func add_blueprint_connecting(direction : RoomConnection.display_direction,position:Vector2):
+	var blueprint = __prepare_blueprint(direction,position)
+	blueprint.no_arrow=true
+	display_nodes_folder.add_child(blueprint)
+
+func do_blueprint(blueprint:BlueprintRoomConnection):
+	pass
+
+func center_around_node(node:Node2D):
+	print("boop")
+	center_around(node.position)

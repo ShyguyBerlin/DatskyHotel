@@ -17,6 +17,7 @@ var current_room : set = change_current_room
 
 # I really do not want this to exist
 var room_mapping : Dictionary # dataclass -> displaynode
+var _room_finder : HotelSpatialRoomFinder
 
 # Center of the rendered area, offsetting this to 0 will make everything look equal distance apart
 var rendered_center : Vector2 = Vector2.ZERO
@@ -58,6 +59,7 @@ func draw_hotel():
 	HotelManager.hotel_instance.apply_new_requests([current_room])
 	var children = display_nodes_folder.get_children()
 	for i in children:
+		i.queue_free()
 		display_nodes_folder.remove_child(i)
 	room_mapping.clear()
 	current_offset=Vector2.ZERO
@@ -141,6 +143,7 @@ func draw_hotel():
 	building_sprite_rect.position=bl_corner
 	building_sprite_rect.size=tr_corner-bl_corner
 	rendered_center = (tr_corner-bl_corner)/2+bl_corner
+	_room_finder=room_finder
 	generated_new_spatial_room_finder.emit(room_finder)
 
 func displaynode_real_position(node):

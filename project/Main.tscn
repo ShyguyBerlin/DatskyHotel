@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b4tr0alsee1u" path="res://icon.svg" id="4_fos0i"]
 [ext_resource type="Script" uid="uid://dsukfn0p54e76" path="res://scripts/dataclasses/Player.gd" id="5_c2ibq"]
 [ext_resource type="Script" uid="uid://ei74hetppbva" path="res://scripts/Builder.gd" id="5_fos0i"]
+[ext_resource type="Script" uid="uid://btll86y0rb6kr" path="res://scripts/BuildModeInputHandler.gd" id="6_mxvw5"]
 [ext_resource type="Script" uid="uid://hiwflyyi2wjt" path="res://scripts/ui/RoomButtonCreator.gd" id="6_trn2v"]
 [ext_resource type="Script" uid="uid://b74ejcotfcsul" path="res://scripts/ui/HotelButtonData.gd" id="7_03owx"]
 [ext_resource type="PackedScene" uid="uid://cn8tnkricq2cr" path="res://nodes/ui/HabitantSelection.tscn" id="9_20pc6"]
@@ -275,6 +276,12 @@ money_label = NodePath("../MoneyLabel")
 shop = NodePath("../MenuHolder/Shop")
 room_view_menu = NodePath("../MenuHolder/RoomView")
 
+[node name="BuildModeInputHandler" type="Node" parent="." unique_id=1137305565 node_paths=PackedStringArray("hotel_display_node", "builder_node")]
+unique_name_in_owner = true
+script = ExtResource("6_mxvw5")
+hotel_display_node = NodePath("../Control/BuildHotel")
+builder_node = NodePath("../Builder")
+
 [node name="Builder" type="Node" parent="." unique_id=1447207759]
 unique_name_in_owner = true
 script = ExtResource("5_fos0i")
@@ -479,6 +486,7 @@ script = ExtResource("17_sc1dx")
 [connection signal="current_room_changed" from="Builder" to="Control/Hotel" method="change_current_room"]
 [connection signal="current_room_changed" from="Control/Hotel" to="HotelUtilButtons" method="current_room_updated"]
 [connection signal="generated_new_spatial_room_finder" from="Control/Hotel" to="HotelInputHandler" method="set_spatial_room_finder"]
+[connection signal="generated_new_spatial_room_finder" from="Control/BuildHotel" to="BuildModeInputHandler" method="set_spatial_room_finder"]
 [connection signal="pressed" from="CloseHotkey" to="MenuHolder" method="close_menu"]
 [connection signal="menu_opened" from="MenuHolder" to="Control/Hotel" method="draw_hotel"]
 [connection signal="item_selected" from="MenuHolder/GiftingMenu" to="HotelInputHandler" method="finished_gift_menu"]

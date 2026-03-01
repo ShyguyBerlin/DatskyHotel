@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://sc4ttc7r42q"]
 
-[ext_resource type="Script" uid="uid://cyrq085gffu31" path="res://scripts/dataclasses/roomtypes/BlueprintRoom.gd" id="1_u6ui3"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cvyy"]
 bg_color = Color(0.23137255, 0.4392157, 0.4392157, 1)
 border_width_left = 2
@@ -15,7 +13,6 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="Blueprint" type="Node2D" unique_id=1468149752]
-script = ExtResource("1_u6ui3")
 
 [node name="Panel" type="Panel" parent="." unique_id=1891801284]
 offset_left = -41.0
