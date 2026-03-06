@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://c6t18h0n3h7k4"]
+
+[ext_resource type="Script" uid="uid://cmotokryce23h" path="res://scripts/ui/RoomTypeSelectorHorizontal.gd" id="1_cn42e"]
+[ext_resource type="PackedScene" uid="uid://icdh0k6s0aup" path="res://nodes/roomtypes/Residence/ResidenceDisplay.tscn" id="1_xkha8"]
+
+[node name="Panel" type="Panel" unique_id=1604368104]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_cn42e")
+
+[node name="HorizontalContainer" type="HBoxContainer" parent="." unique_id=2100322464]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RoomTypeMargin" type="MarginContainer" parent="HorizontalContainer" unique_id=978276438]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="HorizontalContainer/RoomTypeMargin" unique_id=1593860806]
+clip_contents = true
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+theme_type_variation = &"ItemPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HorizontalContainer/RoomTypeMargin/Panel" unique_id=2004384190]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HorizontalContainer/RoomTypeMargin/Panel/VBoxContainer" unique_id=69750351]
+layout_mode = 2
+text = "Residence"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="HorizontalContainer/RoomTypeMargin/Panel/VBoxContainer" unique_id=797018417]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="HorizontalContainer/RoomTypeMargin/Panel/VBoxContainer/Control" unique_id=682299478]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Node2D" parent="HorizontalContainer/RoomTypeMargin/Panel/VBoxContainer/Control/Control" unique_id=1462756369 instance=ExtResource("1_xkha8")]
+scale = Vector2(2.265, 2.265)
+
+[node name="Panel" type="Panel" parent="HorizontalContainer/RoomTypeMargin/Panel" unique_id=1637455975]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"ItemPanelSelected"
