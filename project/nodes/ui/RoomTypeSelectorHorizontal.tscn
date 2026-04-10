@@ -70,3 +70,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"ItemPanelSelected"
+
+[node name="Button" type="Button" parent="HorizontalContainer/RoomTypeMargin/Panel" unique_id=764764044]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 188.0

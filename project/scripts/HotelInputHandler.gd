@@ -82,13 +82,13 @@ func build_residence():
 	if not builder_node:
 		return
 	before_build()
-	return builder_node.make_room_to_residence()
+	return builder_node.make_room_to_else(Residence)
 
 func build_elevator():
 	if not builder_node:
 		return
 	before_build()
-	return builder_node.make_room_to_elevator()
+	return builder_node.make_room_to_else(Elevator)
 
 
 func build_room_left():

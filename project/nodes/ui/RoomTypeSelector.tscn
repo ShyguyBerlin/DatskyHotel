@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://bhawgvc4vxsgi"]
+
+[ext_resource type="Texture2D" uid="uid://cv4nagotorl6" path="res://Assets/Images/SVG/Residence.svg" id="1_d61f4"]
+[ext_resource type="Script" uid="uid://cek6laf43jj2q" path="res://scripts/ui/ItemCountList.gd" id="1_xk8qg"]
+
+[sub_resource type="Theme" id="Theme_xk8qg"]
+default_font_size = 48
+
+[node name="RoomTypeSelector" type="Panel" unique_id=359976587]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"SubmenuPanel"
+script = ExtResource("1_xk8qg")
+
+[node name="ListMargins" type="MarginContainer" parent="." unique_id=926378886]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ListMargins" unique_id=2052592097]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="ItemContainer" type="VBoxContainer" parent="ListMargins/ScrollContainer" unique_id=312599188]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ListMargins/ScrollContainer/ItemContainer" unique_id=1387861427]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="BackgroundPanelNormal" type="Panel" parent="ListMargins/ScrollContainer/ItemContainer/MarginContainer" unique_id=1100590615]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"ItemPanel"
+
+[node name="ItemLine" type="Button" parent="ListMargins/ScrollContainer/ItemContainer/MarginContainer" unique_id=1439385546]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"InvisibleButton"
+
+[node name="TextContent" type="MarginContainer" parent="ListMargins/ScrollContainer/ItemContainer/MarginContainer" unique_id=2079701065]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ListMargins/ScrollContainer/ItemContainer/MarginContainer/TextContent" unique_id=1098132387]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ListMargins/ScrollContainer/ItemContainer/MarginContainer/TextContent/VBoxContainer" unique_id=345917689]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="ListMargins/ScrollContainer/ItemContainer/MarginContainer/TextContent/VBoxContainer/HBoxContainer" unique_id=16719005]
+custom_minimum_size = Vector2(144, 144)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_d61f4")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="ItemIcon" type="Control" parent="ListMargins/ScrollContainer/ItemContainer/MarginContainer/TextContent/VBoxContainer/HBoxContainer" unique_id=693395266]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LabelLeft" type="RichTextLabel" parent="ListMargins/ScrollContainer/ItemContainer/MarginContainer/TextContent/VBoxContainer/HBoxContainer" unique_id=605664666]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = SubResource("Theme_xk8qg")
+text = "Item"
+fit_content = true
+vertical_alignment = 1
+
+[node name="LabelRight" type="RichTextLabel" parent="ListMargins/ScrollContainer/ItemContainer/MarginContainer/TextContent/VBoxContainer" unique_id=1769799824]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+text = "description"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="BackgroundPanelSelected" type="Panel" parent="ListMargins/ScrollContainer/ItemContainer/MarginContainer" unique_id=599062823]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"ItemPanelSelected"

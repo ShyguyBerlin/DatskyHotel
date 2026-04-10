@@ -95,12 +95,9 @@ func swap_current_room_with(room:Room):
 	current_room=room
 	current_room_changed.emit(room)
 
-func make_room_to_residence():
-	var new_residence = Residence.new()
+func make_room_to_else(room_type : Script):
+	if Utility.does_script_inherit(room_type,Room):
+		printerr("ERROR: make_room_to_else can only turn room likes into other room likes. Don't try to turn a room into something that doesn't inherit from room.")
+	var new_residence = room_type.new()
 	swap_current_room_with(new_residence)
-	built_stuff.emit()
-
-func make_room_to_elevator():
-	var new_elevator = Elevator.new()
-	swap_current_room_with(new_elevator)
 	built_stuff.emit()

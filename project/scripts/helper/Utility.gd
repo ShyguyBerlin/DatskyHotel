@@ -17,3 +17,14 @@ static func weighted_select_random(arr,f:Callable):
 			pull-=weights[i]
 	
 	return arr[-1]
+
+static func does_script_inherit(script:Script, parent:Script):
+	if not script or not parent:
+		return false
+	while script!=parent:
+		print("testing: ",script.get_global_name())
+		script=script.get_base_script()
+		if not script:
+			return false
+	print("found: ",script.get_global_name())
+	return true

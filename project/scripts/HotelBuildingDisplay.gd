@@ -7,9 +7,13 @@ const BLUEPRINT_ROOM_CONNECTION = preload("uid://cxnolttfk712f")
 static var room_distance:Vector2 = Vector2.INF
 
 signal blueprint_construction(blueprint : BlueprintRoomConnection)
+signal roomUpgrades
 var selected_blueprint : BlueprintRoomConnection
 
 @onready var button_scaler: Control = %ButtonScaler
+
+signal try_fetch_room_upgrade(room:Room)
+var room_clicked_last : Room
 
 func _ready():
 	if room_distance == Vector2.INF:
@@ -101,6 +105,9 @@ func do_blueprint():
 
 func cancel_blueprint():
 	button_scaler.hide()
+
+func upgrade_room():
+	pass
 
 func center_around_node(node:Node2D,animated=true):
 	print("boop")

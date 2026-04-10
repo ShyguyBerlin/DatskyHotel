@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://uv5106bmpc7n" path="res://Assets/Images/SVG/Settings.svg" id="20_3b0ty"]
 [ext_resource type="Texture2D" uid="uid://v3w4ic3k4il0" path="res://Assets/Images/SVG/ButtonIcon.svg" id="20_bg4s2"]
 [ext_resource type="Texture2D" uid="uid://byc2ifumn1hmf" path="res://Assets/Images/SVG/BuildIcon.svg" id="22_hhcpw"]
+[ext_resource type="PackedScene" uid="uid://bsbk1vcxhf7kb" path="res://nodes/ui/BuildModeRoomUpgradeMenu.tscn" id="22_xrxkg"]
 
 [sub_resource type="Resource" id="Resource_kjvhd"]
 script = ExtResource("5_c2ibq")
@@ -401,6 +402,10 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 script = ExtResource("18_5tuhn")
+
+[node name="BuildModeRoomUpgradeMenu" parent="MenuHolder" unique_id=1125729111 instance=ExtResource("22_xrxkg")]
+visible = false
+layout_mode = 2
 
 [node name="ShopButton" type="Button" parent="." unique_id=1322098054]
 custom_minimum_size = Vector2(144.08, 81.335)
