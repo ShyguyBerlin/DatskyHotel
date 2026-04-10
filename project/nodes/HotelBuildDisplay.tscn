@@ -15,6 +15,7 @@ layer = 2
 
 [node name="ButtonScaler" type="Control" parent="HotelDecoFolder/BlueprintDialogButtons" index="0" unique_id=2098069392]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -27,6 +28,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Accept" type="Button" parent="HotelDecoFolder/BlueprintDialogButtons/ButtonScaler" index="0" unique_id=159976705]
+unique_name_in_owner = true
 modulate = Color(0.78431374, 1, 0.78431374, 1)
 layout_mode = 0
 offset_left = -300.0
@@ -39,6 +41,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="Cancel" type="Button" parent="HotelDecoFolder/BlueprintDialogButtons/ButtonScaler" index="1" unique_id=748172005]
+unique_name_in_owner = true
 modulate = Color(1, 0.78431374, 0.78431374, 1)
 layout_mode = 0
 offset_left = 180.0
@@ -50,5 +53,18 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
+[node name="Upgrade" type="Button" parent="HotelDecoFolder/BlueprintDialogButtons/ButtonScaler" index="2" unique_id=1386358004]
+unique_name_in_owner = true
+modulate = Color(0.50980395, 0.7647059, 1, 1)
+layout_mode = 0
+offset_left = -60.0
+offset_top = 75.0
+offset_right = 60.0
+offset_bottom = 194.99998
+icon = ExtResource("3_o1rnp")
+flat = true
+expand_icon = true
+
 [connection signal="pressed" from="HotelDecoFolder/BlueprintDialogButtons/ButtonScaler/Accept" to="." method="do_blueprint"]
 [connection signal="pressed" from="HotelDecoFolder/BlueprintDialogButtons/ButtonScaler/Cancel" to="." method="cancel_blueprint"]
+[connection signal="pressed" from="HotelDecoFolder/BlueprintDialogButtons/ButtonScaler/Upgrade" to="." method="upgrade_room"]

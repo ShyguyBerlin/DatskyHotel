@@ -4,8 +4,10 @@ extends Node
 @export var hotel_display_node : HotelDisplay
 @export var builder_node : HotelBuilder
 var spatial_room_finder : HotelSpatialRoomFinder
+signal try_room_upgrade(room : Room)
 
 func _ready() -> void:
+	hotel_display_node.try_upgrade_room.connect(_on_upgrade_button_pressed)
 	if SaveSystem.save:
 		player_instance=SaveSystem.save.player
 	else:
@@ -39,17 +41,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		print("Deselected any room")
 		return
 
-
-func _on_build_hotel_blueprint_construction(blueprint: BlueprintRoomConnection) -> void:
-	var cost=0
-	if blueprint.connecting_to==null:
-		cost=110
-	else:
-		cost=10
+func has_cost(cost) -> bool:
 	if player_instance.money>cost:
 		player_instance.money-=cost
 	else:
 		print("Not enough money")
+		return false
+	return true
+
+func _on_build_hotel_blueprint_construction(blueprint: BlueprintRoomConnection) -> void:
+	var cost=10
+	if blueprint.connecting_to==null:
+		cost+=RoomUpgradeMenu.room_costs.get(Room)
+	
+	if not has_cost(cost):
 		return
 	
 	builder_node.current_room=blueprint.origin_room
@@ -64,3 +69,20 @@ func _on_build_hotel_blueprint_construction(blueprint: BlueprintRoomConnection) 
 		new_room=blueprint.origin_room
 	hotel_display_node.current_room=new_room
 	hotel_display_node.center_around_node(blueprint,false)
+
+var last_selected_room : Room
+func _on_upgrade_button_pressed(room:Room):
+	last_selected_room = room
+	try_room_upgrade.emit(room)
+
+func _on_build_hotel_room_upgrade(upgrade_type:Script):
+	var room = last_selected_room
+	var cost=0
+	cost+=RoomUpgradeMenu.room_costs.get(upgrade_type)
+	if room.get_script():
+		cost-=RoomUpgradeMenu.room_costs.get(room.get_script())
+	if not has_cost(cost):
+		return
+	
+	builder_node.current_room=room
+	builder_node.make_room_to_else(upgrade_type)

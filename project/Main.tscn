@@ -398,14 +398,14 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="BuildModeRoomUpgradeMenu" parent="MenuHolder" unique_id=1125729111 instance=ExtResource("22_xrxkg")]
+visible = false
+layout_mode = 2
+
 [node name="RoomView" type="Control" parent="MenuHolder" unique_id=1145870134]
 visible = false
 layout_mode = 2
 script = ExtResource("18_5tuhn")
-
-[node name="BuildModeRoomUpgradeMenu" parent="MenuHolder" unique_id=1125729111 instance=ExtResource("22_xrxkg")]
-visible = false
-layout_mode = 2
 
 [node name="ShopButton" type="Button" parent="." unique_id=1322098054]
 custom_minimum_size = Vector2(144.08, 81.335)
@@ -487,6 +487,7 @@ fit_content = true
 autowrap_mode = 0
 script = ExtResource("17_sc1dx")
 
+[connection signal="try_room_upgrade" from="BuildModeInputHandler" to="MenuHolder/BuildModeRoomUpgradeMenu" method="open"]
 [connection signal="built_stuff" from="Builder" to="Control/Hotel" method="draw_hotel"]
 [connection signal="built_stuff" from="Builder" to="Control/BuildHotel" method="draw_hotel"]
 [connection signal="current_room_changed" from="Builder" to="Control/Hotel" method="change_current_room"]
@@ -502,6 +503,7 @@ script = ExtResource("17_sc1dx")
 [connection signal="selected_habitant" from="MenuHolder/SelectHabitant" to="HotelInputHandler" method="select_habitant_to_reside_finish"]
 [connection signal="habitant_changes_confirmed" from="MenuHolder/CreateResident" to="MenuHolder/SelectHabitant" method="overwrite_current_habitant"]
 [connection signal="hidden" from="MenuHolder/CreateResident" to="MenuHolder/SelectHabitant" method="open_keep_last_selection"]
+[connection signal="room_type_selected" from="MenuHolder/BuildModeRoomUpgradeMenu" to="BuildModeInputHandler" method="_on_build_hotel_room_upgrade"]
 [connection signal="child_entered_tree" from="MenuHolder/RoomView" to="MenuHolder/RoomView" method="_on_child_entered_tree"]
 [connection signal="pressed" from="ShopButton" to="MenuHolder/Shop" method="open"]
 [connection signal="pressed" from="Settingsbutton" to="MenuHolder/Settings" method="open"]

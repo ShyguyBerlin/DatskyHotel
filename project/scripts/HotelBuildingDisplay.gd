@@ -7,13 +7,13 @@ const BLUEPRINT_ROOM_CONNECTION = preload("uid://cxnolttfk712f")
 static var room_distance:Vector2 = Vector2.INF
 
 signal blueprint_construction(blueprint : BlueprintRoomConnection)
-signal roomUpgrades
+signal try_upgrade_room(room : Room)
 var selected_blueprint : BlueprintRoomConnection
 
 @onready var button_scaler: Control = %ButtonScaler
-
-signal try_fetch_room_upgrade(room:Room)
-var room_clicked_last : Room
+@onready var accept: Button = %Accept
+@onready var cancel: Button = %Cancel
+@onready var upgrade: Button = %Upgrade
 
 func _ready():
 	if room_distance == Vector2.INF:
@@ -26,7 +26,11 @@ func _ready():
 	super()
 
 func change_current_room(new_room):
-	button_scaler.hide()
+	if new_room:
+		if new_room.get_script() and new_room.get_script() in RoomUpgradeMenu.upgrade_tree:
+			button_scaler_upgrade()
+		else:
+			button_scaler_none()
 	super(new_room)
 
 func draw_hotel():
@@ -86,18 +90,10 @@ func add_blueprint_connecting(direction : RoomConnection.display_direction,_posi
 	display_nodes_folder.add_child(blueprint)
 
 func clicked_blueprint(bp : BlueprintRoomConnection):
-	var hud_visible= button_scaler.visible
 	current_room=null
 	center_around_node(bp)
 	selected_blueprint=bp
-	var tween = get_tree().create_tween()
-	tweens.append(tween)
-	button_scaler.scale=Vector2(0.1,0.1)
-	if not hud_visible:
-		tween.tween_property(button_scaler,"scale",Vector2.ONE,.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	else:
-		button_scaler.scale=Vector2.ONE
-	button_scaler.show()
+	button_scaler_bp()
 
 func do_blueprint():
 	blueprint_construction.emit(selected_blueprint)
@@ -106,8 +102,39 @@ func do_blueprint():
 func cancel_blueprint():
 	button_scaler.hide()
 
+func button_scaler_none():
+	button_scaler.hide()
+
+func button_scaler_bp():
+	accept.show()
+	cancel.show()
+	upgrade.hide()
+	button_scaler.show()
+	button_scaler.scale=Vector2(0.1,0.1)
+	if not button_scaler.visible:
+		var tween = get_tree().create_tween()
+		tweens.append(tween)
+		tween.tween_property(button_scaler,"scale",Vector2.ONE,.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	else:
+		button_scaler.scale=Vector2.ONE
+
+func button_scaler_upgrade():
+	accept.hide()
+	cancel.hide()
+	upgrade.show()
+	button_scaler.show()
+	button_scaler.scale=Vector2(0.1,0.1)
+	if not button_scaler.visible:
+		var tween = get_tree().create_tween()
+		tweens.append(tween)
+		tween.tween_property(button_scaler,"scale",Vector2.ONE,.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	else:
+		button_scaler.scale=Vector2.ONE
+
 func upgrade_room():
-	pass
+	if current_room:
+		try_upgrade_room.emit(current_room)
+	button_scaler_none()
 
 func center_around_node(node:Node2D,animated=true):
 	print("boop")

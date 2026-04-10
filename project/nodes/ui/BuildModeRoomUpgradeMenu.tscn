@@ -35,7 +35,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RoomTypeSelector" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1046100443 instance=ExtResource("2_tqnq4")]
+[node name="ItemList" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1046100443 instance=ExtResource("2_tqnq4")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -50,3 +51,7 @@ custom_minimum_size = Vector2(200, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "  Convert Room  "
+
+[connection signal="item_selected" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/ItemList" to="." method="list_item_selected"]
+[connection signal="item_selection_confirmed" from="Panel/MarginContainer/VBoxContainer/ScrollContainer/ItemList" to="." method="list_item_selected_final"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MarginContainer/Button" to="." method="upgrade_button_pressed"]

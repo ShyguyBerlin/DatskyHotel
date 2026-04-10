@@ -1,6 +1,7 @@
 extends Control
+class_name RoomUpgradeMenu
 
-signal item_selected(item_name:String)
+signal room_type_selected(room_script:String)
 
 var _clicked_item : int = -1
 
@@ -9,7 +10,14 @@ var _clicked_item : int = -1
 # Needed to know which options there are
 var room_script_to_upgrade : Script
 
-var upgrade_tree = {
+static var room_costs = {
+	Room: 100,
+	Residence: 120,
+	Elevator: 280,
+	MonitoringRoom: 600
+}
+
+static var upgrade_tree = {
 	Room: [Residence, Elevator]
 }
 
@@ -34,7 +42,7 @@ func populate_item_list() -> void:
 	_clicked_item=-1
 	if room_script_to_upgrade in upgrade_tree:
 		for i in upgrade_tree.get(room_script_to_upgrade):
-			var room_script = i as Room
+			var room_script = i
 			var room_script_title = room_script.get_global_name() as String
 			if room_script_title == "":
 				push_warning("WARNING: Room without class name in RoomUpgradeTree")
@@ -50,7 +58,7 @@ func list_item_selected(index: int) -> void:
 	print("selected ",index)
 	_clicked_item=index
 
-func gift_button_pressed() -> void:
+func upgrade_button_pressed() -> void:
 	if _clicked_item!=-1:
 		finalize()
 
@@ -58,6 +66,6 @@ func finalize() -> void:
 	print("final selected ",_clicked_item)
 	hide()
 	if _clicked_item==-1:
-		item_selected.emit(null)
+		room_type_selected.emit(null)
 	else:
-		item_selected.emit(upgrade_tree.get(room_script_to_upgrade)[_clicked_item])
+		room_type_selected.emit(upgrade_tree.get(room_script_to_upgrade)[_clicked_item])
