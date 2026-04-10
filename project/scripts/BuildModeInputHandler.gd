@@ -20,7 +20,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if not hotel_display_node.visible:
 		return
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		print("LEFT MOUSE CLICK")
 		var mouse_pos=get_viewport().get_mouse_position()
 		mouse_pos-=hotel_display_node.global_position
 		mouse_pos=Vector2(mouse_pos.x/hotel_display_node.scale.x,mouse_pos.y/hotel_display_node.scale.y)
@@ -34,11 +33,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			if room_instance:
 				hotel_display_node.current_room=room_instance
 			get_viewport().set_input_as_handled()
-			print("Swapped current room")
 			return
 		hotel_display_node.current_room=null
 		get_viewport().set_input_as_handled()
-		print("Deselected any room")
 		return
 
 func has_cost(cost) -> bool:

@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://v3w4ic3k4il0" path="res://Assets/Images/SVG/ButtonIcon.svg" id="20_bg4s2"]
 [ext_resource type="Texture2D" uid="uid://byc2ifumn1hmf" path="res://Assets/Images/SVG/BuildIcon.svg" id="22_hhcpw"]
 [ext_resource type="PackedScene" uid="uid://bsbk1vcxhf7kb" path="res://nodes/ui/BuildModeRoomUpgradeMenu.tscn" id="22_xrxkg"]
+[ext_resource type="Script" uid="uid://oqyf8y6eyp2q" path="res://scripts/ui/BuildModeToggleButton.gd" id="25_sqvbp"]
 
 [sub_resource type="Resource" id="Resource_kjvhd"]
 script = ExtResource("5_c2ibq")
@@ -301,12 +302,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Hotel" parent="Control" unique_id=1516271833 instance=ExtResource("2_r0du0")]
+[node name="Hotel" parent="Control" unique_id=1516271833 node_paths=PackedStringArray("forward_room_to") instance=ExtResource("2_r0du0")]
 visible = false
 scale = Vector2(2, 2)
+forward_room_to = [NodePath("../BuildHotel")]
 
-[node name="BuildHotel" parent="Control" unique_id=640807702 instance=ExtResource("9_hhcpw")]
-scale = Vector2(1.58, 1.58)
+[node name="BuildHotel" parent="Control" unique_id=640807702 node_paths=PackedStringArray("forward_room_to") instance=ExtResource("9_hhcpw")]
+scale = Vector2(2, 2)
+forward_room_to = [NodePath("../Hotel")]
 
 [node name="HotelUtilButtons" type="HBoxContainer" parent="." unique_id=491354016]
 z_index = 1
@@ -448,7 +451,7 @@ grow_vertical = 2
 texture = ExtResource("20_3b0ty")
 expand_mode = 1
 
-[node name="Settingsbutton2" type="Button" parent="." unique_id=871318710]
+[node name="BuildModeButton" type="Button" parent="." unique_id=871318710 node_paths=PackedStringArray("show_if_build_mode_disabled", "show_if_build_mode_enabled")]
 self_modulate = Color(1, 1, 0.827451, 1)
 custom_minimum_size = Vector2(81.335, 81.335)
 layout_mode = 1
@@ -464,8 +467,12 @@ icon = ExtResource("20_bg4s2")
 flat = true
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("25_sqvbp")
+show_if_build_mode_disabled = [NodePath("../Control/Hotel")]
+show_if_build_mode_enabled = [NodePath("../Control/BuildHotel")]
+sync_properties = PackedStringArray("current_room")
 
-[node name="TextureRect" type="TextureRect" parent="Settingsbutton2" unique_id=283885614]
+[node name="TextureRect" type="TextureRect" parent="BuildModeButton" unique_id=283885614]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -478,13 +485,18 @@ texture = ExtResource("22_hhcpw")
 expand_mode = 1
 
 [node name="MoneyLabel" type="RichTextLabel" parent="." unique_id=359548930]
-layout_mode = 0
-offset_left = 192.0
-offset_top = 15.0
-offset_right = 232.0
-offset_bottom = 97.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -67.0
+offset_top = 118.0
+offset_right = -27.0
+offset_bottom = 200.0
+grow_horizontal = 0
 fit_content = true
 autowrap_mode = 0
+horizontal_alignment = 2
 script = ExtResource("17_sc1dx")
 
 [connection signal="try_room_upgrade" from="BuildModeInputHandler" to="MenuHolder/BuildModeRoomUpgradeMenu" method="open"]
@@ -507,7 +519,6 @@ script = ExtResource("17_sc1dx")
 [connection signal="child_entered_tree" from="MenuHolder/RoomView" to="MenuHolder/RoomView" method="_on_child_entered_tree"]
 [connection signal="pressed" from="ShopButton" to="MenuHolder/Shop" method="open"]
 [connection signal="pressed" from="Settingsbutton" to="MenuHolder/Settings" method="open"]
-[connection signal="pressed" from="Settingsbutton2" to="MenuHolder/Settings" method="open"]
 
 [editable path="MoveLeft"]
 [editable path="MoveRight"]

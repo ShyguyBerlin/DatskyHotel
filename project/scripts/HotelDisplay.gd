@@ -15,6 +15,8 @@ var current_room : set = change_current_room
 @onready var terrain_sprite_rect: NinePatchRect = %TerrainSpriteRect
 @onready var building_sprite_rect: NinePatchRect = %BuildingSpriteRect
 
+@export var forward_room_to : Array[Node]
+
 # I really do not want this to exist
 var room_mapping : Dictionary # dataclass -> displaynode
 var _room_finder : HotelSpatialRoomFinder
@@ -32,7 +34,10 @@ func _ready() -> void:
 		draw_hotel()
 
 
+
 func change_current_room(new_room):
+	if not is_node_ready():
+		return
 	if current_room==new_room:
 		return
 	
@@ -41,6 +46,8 @@ func change_current_room(new_room):
 		center_around_current_room()
 	else:
 		center_around_center()
+	for i in forward_room_to:
+		i.set("current_room",current_room)
 	current_room_changed.emit(current_room)
 
 class renderInfo:
@@ -178,3 +185,10 @@ func center_around_current_room(animate=true):
 	if not current_room in room_mapping:
 		return
 	center_around(displaynode_real_position(room_mapping[current_room]),animate)
+
+
+func _on_visibility_changed() -> void:
+	if not is_node_ready():
+		return
+	if visible:
+		draw_hotel()

@@ -44,3 +44,5 @@ patch_margin_bottom = 3
 
 [node name="DisplayNodesFolder" type="Node2D" parent="." unique_id=2054575968]
 unique_name_in_owner = true
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

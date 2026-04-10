@@ -26,6 +26,8 @@ func _ready():
 	super()
 
 func change_current_room(new_room):
+	if not is_node_ready():
+		return
 	if new_room:
 		if new_room.get_script() and new_room.get_script() in RoomUpgradeMenu.upgrade_tree:
 			button_scaler_upgrade()
