@@ -17,7 +17,7 @@ func set_spatial_room_finder(room_finder: HotelSpatialRoomFinder) -> void:
 	spatial_room_finder=room_finder
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not hotel_display_node.visible:
+	if not hotel_display_node.is_visible_in_tree():
 		return
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		var mouse_pos=get_viewport().get_mouse_position()
@@ -39,7 +39,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 func has_cost(cost) -> bool:
-	if player_instance.money>cost:
+	if player_instance.money>=cost:
 		player_instance.money-=cost
 	else:
 		print("Not enough money")

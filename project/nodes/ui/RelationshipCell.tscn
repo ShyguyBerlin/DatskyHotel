@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cj8x5ymqkr2pb"]
 
-[ext_resource type="Script" uid="uid://c2qara3att872" path="res://scripts/ui/RelationshipCell.gd" id="1_abc123"]
+[ext_resource type="Script" uid="uid://c2qara3att872" path="res://scripts/ui/Menus/Monitoring/RelationshipCell.gd" id="1_abc123"]
 
 [node name="RelationshipCell" type="PanelContainer" unique_id=428537027]
 custom_minimum_size = Vector2(200, 120)

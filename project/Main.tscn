@@ -9,24 +9,29 @@
 [ext_resource type="Script" uid="uid://dsukfn0p54e76" path="res://scripts/dataclasses/Player.gd" id="5_c2ibq"]
 [ext_resource type="Script" uid="uid://ei74hetppbva" path="res://scripts/Builder.gd" id="5_fos0i"]
 [ext_resource type="Script" uid="uid://btll86y0rb6kr" path="res://scripts/BuildModeInputHandler.gd" id="6_mxvw5"]
-[ext_resource type="Script" uid="uid://hiwflyyi2wjt" path="res://scripts/ui/RoomButtonCreator.gd" id="6_trn2v"]
-[ext_resource type="Script" uid="uid://b74ejcotfcsul" path="res://scripts/ui/HotelButtonData.gd" id="7_03owx"]
+[ext_resource type="Script" uid="uid://hiwflyyi2wjt" path="res://scripts/ui/Components/HotelButtonCreator/RoomButtonCreator.gd" id="6_trn2v"]
+[ext_resource type="Script" uid="uid://b74ejcotfcsul" path="res://scripts/ui/Components/HotelButtonCreator/HotelButtonData.gd" id="7_03owx"]
 [ext_resource type="PackedScene" uid="uid://cn8tnkricq2cr" path="res://nodes/ui/HabitantSelection.tscn" id="9_20pc6"]
 [ext_resource type="PackedScene" uid="uid://dpnby0x5kmu4i" path="res://nodes/HotelBuildDisplay.tscn" id="9_hhcpw"]
+[ext_resource type="Script" uid="uid://bppbiklqsog55" path="res://scripts/helper/StateMachine.gd" id="9_hri7i"]
 [ext_resource type="Script" uid="uid://bkheb4gi1iqo" path="res://scripts/dataclasses/roomtypes/Elevator.gd" id="9_wkp8b"]
+[ext_resource type="Script" uid="uid://c7wxbxbypnlls" path="res://scripts/ui/ViewStates/HotelViewState.gd" id="10_w3rk5"]
 [ext_resource type="PackedScene" uid="uid://dy1coe5jwdf0y" path="res://nodes/ui/CycleProgress.tscn" id="11_20pc6"]
 [ext_resource type="PackedScene" uid="uid://dp8ysxvi24x3p" path="res://nodes/ui/GiftingMenu.tscn" id="12_c6i3y"]
 [ext_resource type="Script" uid="uid://duni3ujulu4ee" path="res://scripts/ui/UIMenuHolder.gd" id="13_j4qnp"]
 [ext_resource type="PackedScene" uid="uid://dmbhro44k7v3m" path="res://nodes/ui/Shop.tscn" id="16_fpfj3"]
 [ext_resource type="PackedScene" uid="uid://cwcywkytiomgv" path="res://nodes/ui/SettingsMenu.tscn" id="17_devvj"]
 [ext_resource type="PackedScene" uid="uid://bql70mqvjwyq3" path="res://nodes/ui/HabitantCreation.tscn" id="17_kjvhd"]
-[ext_resource type="Script" uid="uid://btligk40mbgh6" path="res://scripts/ui/MoneyLabel.gd" id="17_sc1dx"]
-[ext_resource type="Script" uid="uid://mcnu8u32ab8c" path="res://scripts/ui/RoomViewMenu.gd" id="18_5tuhn"]
+[ext_resource type="Script" uid="uid://btligk40mbgh6" path="res://scripts/ui/Components/MoneyLabel.gd" id="17_sc1dx"]
+[ext_resource type="Script" uid="uid://mcnu8u32ab8c" path="res://scripts/ui/Menus/RoomViewMenu.gd" id="18_5tuhn"]
+[ext_resource type="Texture2D" uid="uid://bdt3t44gub3fr" path="res://Assets/Images/SVG/ExitIcon.svg" id="18_40n85"]
 [ext_resource type="Texture2D" uid="uid://uv5106bmpc7n" path="res://Assets/Images/SVG/Settings.svg" id="20_3b0ty"]
 [ext_resource type="Texture2D" uid="uid://v3w4ic3k4il0" path="res://Assets/Images/SVG/ButtonIcon.svg" id="20_bg4s2"]
 [ext_resource type="Texture2D" uid="uid://byc2ifumn1hmf" path="res://Assets/Images/SVG/BuildIcon.svg" id="22_hhcpw"]
 [ext_resource type="PackedScene" uid="uid://bsbk1vcxhf7kb" path="res://nodes/ui/BuildModeRoomUpgradeMenu.tscn" id="22_xrxkg"]
-[ext_resource type="Script" uid="uid://oqyf8y6eyp2q" path="res://scripts/ui/BuildModeToggleButton.gd" id="25_sqvbp"]
+[ext_resource type="Script" uid="uid://oqyf8y6eyp2q" path="res://scripts/ui/Components/BuildModeToggleButton.gd" id="25_sqvbp"]
+[ext_resource type="Script" uid="uid://diuorcrg3iu3u" path="res://RoomViewState.gd" id="29_5mvff"]
+[ext_resource type="Script" uid="uid://dxrb55wo5nm65" path="res://scripts/ui/ViewStates/HotelDisplayModeState.gd" id="29_oye8v"]
 
 [sub_resource type="Resource" id="Resource_kjvhd"]
 script = ExtResource("5_c2ibq")
@@ -93,6 +98,12 @@ button_text = "Gift"
 button_actions = Array[String](["open_gift_menu"])
 room_whitelist = ["Residence"]
 metadata/_custom_type_script = "uid://b74ejcotfcsul"
+
+[sub_resource type="InputEventAction" id="InputEventAction_j4qnp"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_fpfj3"]
+events = [SubResource("InputEventAction_j4qnp")]
 
 [sub_resource type="Shader" id="Shader_5tuhn"]
 code = "shader_type canvas_item;
@@ -218,12 +229,6 @@ shader_parameter/fill_percentage = 1.0
 shader_parameter/start_angle = -1.5707963267948966
 shader_parameter/clockwise = true
 
-[sub_resource type="InputEventAction" id="InputEventAction_j4qnp"]
-action = &"ui_cancel"
-
-[sub_resource type="Shortcut" id="Shortcut_fpfj3"]
-events = [SubResource("InputEventAction_j4qnp")]
-
 [node name="Main" type="Control" unique_id=836403994]
 layout_mode = 3
 anchors_preset = 15
@@ -235,6 +240,7 @@ mouse_filter = 1
 theme = ExtResource("1_c2ibq")
 
 [node name="MoveLeft" parent="." unique_id=900968389 instance=ExtResource("3_cm0pq")]
+visible = false
 layout_mode = 1
 
 [node name="Control" parent="MoveLeft" index="0"]
@@ -250,6 +256,7 @@ action = "ui_left"
 visibility_mode = 1
 
 [node name="MoveRight" parent="." unique_id=1103553785 instance=ExtResource("3_cm0pq")]
+visible = false
 layout_mode = 1
 anchor_left = 0.88
 anchor_right = 0.88
@@ -266,33 +273,43 @@ texture_normal = ExtResource("4_fos0i")
 action = "ui_right"
 visibility_mode = 1
 
-[node name="HotelInputHandler" type="Node" parent="." unique_id=1798192008 node_paths=PackedStringArray("hotel_display_node", "builder_node", "habitant_selection", "gift_menu", "money_label", "shop", "room_view_menu")]
-unique_name_in_owner = true
-script = ExtResource("4_3dxm6")
-player_instance = SubResource("Resource_kjvhd")
-hotel_display_node = NodePath("../Control/Hotel")
-builder_node = NodePath("../Builder")
-habitant_selection = NodePath("../MenuHolder/SelectHabitant")
-gift_menu = NodePath("../MenuHolder/GiftingMenu")
-money_label = NodePath("../MoneyLabel")
-shop = NodePath("../MenuHolder/Shop")
-room_view_menu = NodePath("../MenuHolder/RoomView")
+[node name="Management" type="Node" parent="." unique_id=1683215036]
 
-[node name="BuildModeInputHandler" type="Node" parent="." unique_id=1137305565 node_paths=PackedStringArray("hotel_display_node", "builder_node")]
-unique_name_in_owner = true
-script = ExtResource("6_mxvw5")
-hotel_display_node = NodePath("../Control/BuildHotel")
-builder_node = NodePath("../Builder")
-
-[node name="Builder" type="Node" parent="." unique_id=1447207759]
+[node name="Builder" type="Node" parent="Management" unique_id=1447207759]
 unique_name_in_owner = true
 script = ExtResource("5_fos0i")
 
-[node name="HotelLoader" parent="." unique_id=1578136510 node_paths=PackedStringArray("hotel_display_node") instance=ExtResource("1_uu6xs")]
-hotel_display_node = NodePath("../Control/Hotel")
+[node name="HotelLoader" parent="Management" unique_id=1578136510 node_paths=PackedStringArray("hotel_display_node") instance=ExtResource("1_uu6xs")]
+hotel_display_node = NodePath("../../GameViewSTM/MainState/HotelDisplay/HotelModeSTM/DefaultMode/Center/Hotel")
 
-[node name="Control" type="Control" parent="." unique_id=2054478906]
-layout_mode = 1
+[node name="GameViewSTM" type="Node" parent="." unique_id=1540326730]
+script = ExtResource("9_hri7i")
+
+[node name="MainState" type="Node" parent="GameViewSTM" unique_id=1862969197]
+script = ExtResource("10_w3rk5")
+
+[node name="Management" type="Node" parent="GameViewSTM/MainState" unique_id=891875739]
+
+[node name="HotelInputHandler" type="Node" parent="GameViewSTM/MainState/Management" unique_id=1798192008 node_paths=PackedStringArray("hotel_display_node", "builder_node", "habitant_selection", "gift_menu", "money_label", "shop", "room_view_menu")]
+unique_name_in_owner = true
+script = ExtResource("4_3dxm6")
+player_instance = SubResource("Resource_kjvhd")
+hotel_display_node = NodePath("../../HotelDisplay/HotelModeSTM/DefaultMode/Center/Hotel")
+builder_node = NodePath("../../../../Management/Builder")
+habitant_selection = NodePath("../../UI/MenuHolder/SelectHabitant")
+gift_menu = NodePath("../../UI/MenuHolder/GiftingMenu")
+money_label = NodePath("../../UI/MoneyLabel")
+shop = NodePath("../../UI/MenuHolder/Shop")
+room_view_menu = NodePath("../../UI/MenuHolder/RoomView")
+
+[node name="BuildModeInputHandler" type="Node" parent="GameViewSTM/MainState/Management" unique_id=1137305565 node_paths=PackedStringArray("hotel_display_node", "builder_node")]
+unique_name_in_owner = true
+script = ExtResource("6_mxvw5")
+hotel_display_node = NodePath("../../HotelDisplay/HotelModeSTM/BuildMode/Center/BuildHotel")
+builder_node = NodePath("../../../../Management/Builder")
+
+[node name="HotelDisplay" type="Control" parent="GameViewSTM/MainState" unique_id=2054478906]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -302,16 +319,63 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Hotel" parent="Control" unique_id=1516271833 node_paths=PackedStringArray("forward_room_to") instance=ExtResource("2_r0du0")]
+[node name="HotelModeSTM" type="Node" parent="GameViewSTM/MainState/HotelDisplay" unique_id=1464536861]
+script = ExtResource("9_hri7i")
+metadata/_custom_type_script = "uid://bppbiklqsog55"
+
+[node name="DefaultMode" type="Node" parent="GameViewSTM/MainState/HotelDisplay/HotelModeSTM" unique_id=1394839024 node_paths=PackedStringArray("hotel_display", "current_room_storage")]
+script = ExtResource("29_oye8v")
+hotel_display = NodePath("Center/Hotel")
+current_room_storage = NodePath("../../../../../Management/HotelLoader")
+metadata/_custom_type_script = "uid://cr5lkgso5keyy"
+
+[node name="Center" type="Control" parent="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/DefaultMode" unique_id=2041194380]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Hotel" parent="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/DefaultMode/Center" unique_id=1516271833 instance=ExtResource("2_r0du0")]
+scale = Vector2(2, 2)
+
+[node name="BuildMode" type="Node" parent="GameViewSTM/MainState/HotelDisplay/HotelModeSTM" unique_id=622249554 node_paths=PackedStringArray("hotel_display", "current_room_storage")]
+script = ExtResource("29_oye8v")
+hotel_display = NodePath("Center/BuildHotel")
+current_room_storage = NodePath("../../../../../Management/HotelLoader")
+metadata/_custom_type_script = "uid://cr5lkgso5keyy"
+
+[node name="Center" type="Control" parent="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/BuildMode" unique_id=1239488034]
 visible = false
-scale = Vector2(2, 2)
-forward_room_to = [NodePath("../BuildHotel")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="BuildHotel" parent="Control" unique_id=640807702 node_paths=PackedStringArray("forward_room_to") instance=ExtResource("9_hhcpw")]
+[node name="BuildHotel" parent="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/BuildMode/Center" unique_id=640807702 instance=ExtResource("9_hhcpw")]
 scale = Vector2(2, 2)
-forward_room_to = [NodePath("../Hotel")]
 
-[node name="HotelUtilButtons" type="HBoxContainer" parent="." unique_id=491354016]
+[node name="UI" type="Control" parent="GameViewSTM/MainState" unique_id=2133379726]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="HotelUtilButtons" type="HBoxContainer" parent="GameViewSTM/MainState/UI" unique_id=491354016]
 z_index = 1
 custom_minimum_size = Vector2(800, 140)
 layout_mode = 1
@@ -325,6 +389,162 @@ offset_bottom = -28.0
 grow_vertical = 0
 script = ExtResource("6_trn2v")
 buttons = Array[ExtResource("7_03owx")]([SubResource("Resource_trn2v"), SubResource("Resource_03owx"), SubResource("Resource_20pc6"), SubResource("Resource_5vvyt"), SubResource("Resource_wkp8b"), SubResource("Resource_c6i3y"), SubResource("Resource_c2ibq"), SubResource("Resource_j4qnp"), SubResource("Resource_sc1dx")])
+
+[node name="CloseHotkey" type="Button" parent="GameViewSTM/MainState/UI" unique_id=498517106]
+layout_mode = 0
+shortcut = SubResource("Shortcut_fpfj3")
+
+[node name="IconButtons" type="HBoxContainer" parent="GameViewSTM/MainState/UI" unique_id=629026760]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -352.0
+offset_top = 21.0
+offset_right = -26.0
+offset_bottom = 102.0
+grow_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="EnterButton" type="Button" parent="GameViewSTM/MainState/UI/IconButtons" unique_id=1055862880]
+self_modulate = Color(0.8627451, 1, 1, 1)
+custom_minimum_size = Vector2(81.335, 81.335)
+layout_mode = 2
+icon = ExtResource("20_bg4s2")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="GameViewSTM/MainState/UI/IconButtons/EnterButton" unique_id=1525751526]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 8.0
+offset_right = -13.334999
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_40n85")
+expand_mode = 1
+
+[node name="BuildModeButton" type="Button" parent="GameViewSTM/MainState/UI/IconButtons" unique_id=871318710 node_paths=PackedStringArray("state_machine", "default_mode_state", "build_mode_state")]
+self_modulate = Color(1, 1, 0.827451, 1)
+custom_minimum_size = Vector2(81.335, 81.335)
+layout_mode = 2
+icon = ExtResource("20_bg4s2")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("25_sqvbp")
+state_machine = NodePath("../../../HotelDisplay/HotelModeSTM")
+default_mode_state = NodePath("../../../HotelDisplay/HotelModeSTM/DefaultMode")
+build_mode_state = NodePath("../../../HotelDisplay/HotelModeSTM/BuildMode")
+
+[node name="TextureRect" type="TextureRect" parent="GameViewSTM/MainState/UI/IconButtons/BuildModeButton" unique_id=283885614]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_hhcpw")
+expand_mode = 1
+
+[node name="Settingsbutton" type="Button" parent="GameViewSTM/MainState/UI/IconButtons" unique_id=83540468]
+custom_minimum_size = Vector2(81.335, 81.335)
+layout_mode = 2
+icon = ExtResource("20_bg4s2")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="GameViewSTM/MainState/UI/IconButtons/Settingsbutton" unique_id=1997972638]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_3b0ty")
+expand_mode = 1
+
+[node name="ShopButton" type="Button" parent="GameViewSTM/MainState/UI/IconButtons" unique_id=1322098054]
+custom_minimum_size = Vector2(144.08, 81.335)
+layout_mode = 2
+text = "Shop"
+
+[node name="MenuHolder" type="MarginContainer" parent="GameViewSTM/MainState/UI" unique_id=1999925184]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 80
+script = ExtResource("13_j4qnp")
+metadata/_edit_lock_ = true
+
+[node name="GiftingMenu" parent="GameViewSTM/MainState/UI/MenuHolder" unique_id=519930054 instance=ExtResource("12_c6i3y")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="SelectHabitant" parent="GameViewSTM/MainState/UI/MenuHolder" unique_id=1655271121 instance=ExtResource("9_20pc6")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Shop" parent="GameViewSTM/MainState/UI/MenuHolder" unique_id=2013413085 instance=ExtResource("16_fpfj3")]
+visible = false
+layout_mode = 2
+items_in_stock = 2
+
+[node name="Settings" parent="GameViewSTM/MainState/UI/MenuHolder" unique_id=1861014793 instance=ExtResource("17_devvj")]
+visible = false
+layout_mode = 2
+
+[node name="CreateResident" parent="GameViewSTM/MainState/UI/MenuHolder" unique_id=1668951875 instance=ExtResource("17_kjvhd")]
+visible = false
+layout_mode = 2
+
+[node name="BuildModeRoomUpgradeMenu" parent="GameViewSTM/MainState/UI/MenuHolder" unique_id=1125729111 instance=ExtResource("22_xrxkg")]
+visible = false
+layout_mode = 2
+
+[node name="RoomView" type="Control" parent="GameViewSTM/MainState/UI/MenuHolder" unique_id=1145870134]
+visible = false
+layout_mode = 2
+script = ExtResource("18_5tuhn")
+
+[node name="MoneyLabel" type="RichTextLabel" parent="GameViewSTM/MainState/UI" unique_id=359548930]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -67.0
+offset_top = 118.0
+offset_right = -27.0
+offset_bottom = 200.0
+grow_horizontal = 0
+mouse_filter = 1
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+script = ExtResource("17_sc1dx")
+
+[node name="RoomViewState" type="Node" parent="GameViewSTM" unique_id=1962988308]
+script = ExtResource("29_5mvff")
 
 [node name="CycleProgress" parent="." unique_id=2012219598 instance=ExtResource("11_20pc6")]
 unique_name_in_owner = true
@@ -358,167 +578,27 @@ offset_bottom = -206.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="CloseHotkey" type="Button" parent="." unique_id=498517106]
-layout_mode = 0
-shortcut = SubResource("Shortcut_fpfj3")
-
-[node name="MenuHolder" type="MarginContainer" parent="." unique_id=1999925184]
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_top = 80
-theme_override_constants/margin_right = 200
-theme_override_constants/margin_bottom = 80
-script = ExtResource("13_j4qnp")
-metadata/_edit_lock_ = true
-
-[node name="GiftingMenu" parent="MenuHolder" unique_id=519930054 instance=ExtResource("12_c6i3y")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="SelectHabitant" parent="MenuHolder" unique_id=1655271121 instance=ExtResource("9_20pc6")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="Shop" parent="MenuHolder" unique_id=2013413085 instance=ExtResource("16_fpfj3")]
-visible = false
-layout_mode = 2
-items_in_stock = 2
-
-[node name="Settings" parent="MenuHolder" unique_id=1861014793 instance=ExtResource("17_devvj")]
-visible = false
-layout_mode = 2
-
-[node name="CreateResident" parent="MenuHolder" unique_id=1668951875 instance=ExtResource("17_kjvhd")]
-visible = false
-layout_mode = 2
-
-[node name="BuildModeRoomUpgradeMenu" parent="MenuHolder" unique_id=1125729111 instance=ExtResource("22_xrxkg")]
-visible = false
-layout_mode = 2
-
-[node name="RoomView" type="Control" parent="MenuHolder" unique_id=1145870134]
-visible = false
-layout_mode = 2
-script = ExtResource("18_5tuhn")
-
-[node name="ShopButton" type="Button" parent="." unique_id=1322098054]
-custom_minimum_size = Vector2(144.08, 81.335)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -175.0
-offset_top = 22.0
-offset_right = -30.920044
-offset_bottom = 103.335
-grow_horizontal = 0
-text = "Shop"
-
-[node name="Settingsbutton" type="Button" parent="." unique_id=83540468]
-custom_minimum_size = Vector2(81.335, 81.335)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -275.255
-offset_top = 24.0
-offset_right = -193.91998
-offset_bottom = 105.335
-grow_horizontal = 0
-icon = ExtResource("20_bg4s2")
-flat = true
-icon_alignment = 1
-expand_icon = true
-
-[node name="TextureRect" type="TextureRect" parent="Settingsbutton" unique_id=1997972638]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -4.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("20_3b0ty")
-expand_mode = 1
-
-[node name="BuildModeButton" type="Button" parent="." unique_id=871318710 node_paths=PackedStringArray("show_if_build_mode_disabled", "show_if_build_mode_enabled")]
-self_modulate = Color(1, 1, 0.827451, 1)
-custom_minimum_size = Vector2(81.335, 81.335)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -376.0
-offset_top = 24.0
-offset_right = -294.66498
-offset_bottom = 105.335
-grow_horizontal = 0
-icon = ExtResource("20_bg4s2")
-flat = true
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("25_sqvbp")
-show_if_build_mode_disabled = [NodePath("../Control/Hotel")]
-show_if_build_mode_enabled = [NodePath("../Control/BuildHotel")]
-sync_properties = PackedStringArray("current_room")
-
-[node name="TextureRect" type="TextureRect" parent="BuildModeButton" unique_id=283885614]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -4.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("22_hhcpw")
-expand_mode = 1
-
-[node name="MoneyLabel" type="RichTextLabel" parent="." unique_id=359548930]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -67.0
-offset_top = 118.0
-offset_right = -27.0
-offset_bottom = 200.0
-grow_horizontal = 0
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 2
-script = ExtResource("17_sc1dx")
-
-[connection signal="try_room_upgrade" from="BuildModeInputHandler" to="MenuHolder/BuildModeRoomUpgradeMenu" method="open"]
-[connection signal="built_stuff" from="Builder" to="Control/Hotel" method="draw_hotel"]
-[connection signal="built_stuff" from="Builder" to="Control/BuildHotel" method="draw_hotel"]
-[connection signal="current_room_changed" from="Builder" to="Control/Hotel" method="change_current_room"]
-[connection signal="current_room_changed" from="Builder" to="Control/BuildHotel" method="change_current_room"]
-[connection signal="current_room_changed" from="Control/Hotel" to="HotelUtilButtons" method="current_room_updated"]
-[connection signal="generated_new_spatial_room_finder" from="Control/Hotel" to="HotelInputHandler" method="set_spatial_room_finder"]
-[connection signal="blueprint_construction" from="Control/BuildHotel" to="BuildModeInputHandler" method="_on_build_hotel_blueprint_construction"]
-[connection signal="generated_new_spatial_room_finder" from="Control/BuildHotel" to="BuildModeInputHandler" method="set_spatial_room_finder"]
-[connection signal="pressed" from="CloseHotkey" to="MenuHolder" method="close_menu"]
-[connection signal="menu_opened" from="MenuHolder" to="Control/Hotel" method="draw_hotel"]
-[connection signal="item_selected" from="MenuHolder/GiftingMenu" to="HotelInputHandler" method="finished_gift_menu"]
-[connection signal="open_habitant_creator" from="MenuHolder/SelectHabitant" to="MenuHolder/CreateResident" method="open_with_habitant"]
-[connection signal="selected_habitant" from="MenuHolder/SelectHabitant" to="HotelInputHandler" method="select_habitant_to_reside_finish"]
-[connection signal="habitant_changes_confirmed" from="MenuHolder/CreateResident" to="MenuHolder/SelectHabitant" method="overwrite_current_habitant"]
-[connection signal="hidden" from="MenuHolder/CreateResident" to="MenuHolder/SelectHabitant" method="open_keep_last_selection"]
-[connection signal="room_type_selected" from="MenuHolder/BuildModeRoomUpgradeMenu" to="BuildModeInputHandler" method="_on_build_hotel_room_upgrade"]
-[connection signal="child_entered_tree" from="MenuHolder/RoomView" to="MenuHolder/RoomView" method="_on_child_entered_tree"]
-[connection signal="pressed" from="ShopButton" to="MenuHolder/Shop" method="open"]
-[connection signal="pressed" from="Settingsbutton" to="MenuHolder/Settings" method="open"]
+[connection signal="built_stuff" from="Management/Builder" to="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/DefaultMode/Center/Hotel" method="draw_hotel"]
+[connection signal="built_stuff" from="Management/Builder" to="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/BuildMode/Center/BuildHotel" method="draw_hotel"]
+[connection signal="current_room_changed" from="Management/Builder" to="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/DefaultMode/Center/Hotel" method="change_current_room"]
+[connection signal="current_room_changed" from="Management/Builder" to="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/BuildMode/Center/BuildHotel" method="change_current_room"]
+[connection signal="try_room_upgrade" from="GameViewSTM/MainState/Management/BuildModeInputHandler" to="GameViewSTM/MainState/UI/MenuHolder/BuildModeRoomUpgradeMenu" method="open"]
+[connection signal="current_room_changed" from="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/DefaultMode/Center/Hotel" to="GameViewSTM/MainState/UI/HotelUtilButtons" method="current_room_updated"]
+[connection signal="generated_new_spatial_room_finder" from="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/DefaultMode/Center/Hotel" to="GameViewSTM/MainState/Management/HotelInputHandler" method="set_spatial_room_finder"]
+[connection signal="blueprint_construction" from="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/BuildMode/Center/BuildHotel" to="GameViewSTM/MainState/Management/BuildModeInputHandler" method="_on_build_hotel_blueprint_construction"]
+[connection signal="generated_new_spatial_room_finder" from="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/BuildMode/Center/BuildHotel" to="GameViewSTM/MainState/Management/BuildModeInputHandler" method="set_spatial_room_finder"]
+[connection signal="pressed" from="GameViewSTM/MainState/UI/CloseHotkey" to="GameViewSTM/MainState/UI/MenuHolder" method="close_menu"]
+[connection signal="pressed" from="GameViewSTM/MainState/UI/IconButtons/EnterButton" to="GameViewSTM/MainState/Management/HotelInputHandler" method="enter_room"]
+[connection signal="pressed" from="GameViewSTM/MainState/UI/IconButtons/Settingsbutton" to="GameViewSTM/MainState/UI/MenuHolder/Settings" method="open"]
+[connection signal="pressed" from="GameViewSTM/MainState/UI/IconButtons/ShopButton" to="GameViewSTM/MainState/UI/MenuHolder/Shop" method="open"]
+[connection signal="menu_opened" from="GameViewSTM/MainState/UI/MenuHolder" to="GameViewSTM/MainState/HotelDisplay/HotelModeSTM/DefaultMode/Center/Hotel" method="draw_hotel"]
+[connection signal="item_selected" from="GameViewSTM/MainState/UI/MenuHolder/GiftingMenu" to="GameViewSTM/MainState/Management/HotelInputHandler" method="finished_gift_menu"]
+[connection signal="open_habitant_creator" from="GameViewSTM/MainState/UI/MenuHolder/SelectHabitant" to="GameViewSTM/MainState/UI/MenuHolder/CreateResident" method="open_with_habitant"]
+[connection signal="selected_habitant" from="GameViewSTM/MainState/UI/MenuHolder/SelectHabitant" to="GameViewSTM/MainState/Management/HotelInputHandler" method="select_habitant_to_reside_finish"]
+[connection signal="habitant_changes_confirmed" from="GameViewSTM/MainState/UI/MenuHolder/CreateResident" to="GameViewSTM/MainState/UI/MenuHolder/SelectHabitant" method="overwrite_current_habitant"]
+[connection signal="hidden" from="GameViewSTM/MainState/UI/MenuHolder/CreateResident" to="GameViewSTM/MainState/UI/MenuHolder/SelectHabitant" method="open_keep_last_selection"]
+[connection signal="room_type_selected" from="GameViewSTM/MainState/UI/MenuHolder/BuildModeRoomUpgradeMenu" to="GameViewSTM/MainState/Management/BuildModeInputHandler" method="_on_build_hotel_room_upgrade"]
+[connection signal="child_entered_tree" from="GameViewSTM/MainState/UI/MenuHolder/RoomView" to="GameViewSTM/MainState/UI/MenuHolder/RoomView" method="_on_child_entered_tree"]
 
 [editable path="MoveLeft"]
 [editable path="MoveRight"]

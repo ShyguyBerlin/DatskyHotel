@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bhawgvc4vxsgi"]
 
 [ext_resource type="Texture2D" uid="uid://cv4nagotorl6" path="res://Assets/Images/SVG/Residence.svg" id="1_d61f4"]
-[ext_resource type="Script" uid="uid://vldeflkbpi2y" path="res://scripts/ui/ItemWithDescriptionList.gd" id="1_xk8qg"]
+[ext_resource type="Script" uid="uid://vldeflkbpi2y" path="res://scripts/ui/Components/ItemWithDescriptionList.gd" id="1_xk8qg"]
 
 [sub_resource type="Theme" id="Theme_xk8qg"]
 default_font_size = 48
@@ -56,6 +56,13 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme_type_variation = &"ItemPanel"
 
+[node name="BackgroundPanelSelected" type="Panel" parent="ListMargins/ScrollContainer/ItemContainer/ItemLine" unique_id=599062823]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_type_variation = &"ItemPanelSelected"
+
 [node name="TextContent" type="MarginContainer" parent="ListMargins/ScrollContainer/ItemContainer/ItemLine" unique_id=2079701065]
 layout_mode = 2
 mouse_filter = 2
@@ -102,9 +109,3 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
-
-[node name="BackgroundPanelSelected" type="Panel" parent="ListMargins/ScrollContainer/ItemContainer/ItemLine" unique_id=599062823]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-theme_type_variation = &"ItemPanelSelected"

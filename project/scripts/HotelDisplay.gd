@@ -15,8 +15,6 @@ var current_room : set = change_current_room
 @onready var terrain_sprite_rect: NinePatchRect = %TerrainSpriteRect
 @onready var building_sprite_rect: NinePatchRect = %BuildingSpriteRect
 
-@export var forward_room_to : Array[Node]
-
 # I really do not want this to exist
 var room_mapping : Dictionary # dataclass -> displaynode
 var _room_finder : HotelSpatialRoomFinder
@@ -46,8 +44,6 @@ func change_current_room(new_room):
 		center_around_current_room()
 	else:
 		center_around_center()
-	for i in forward_room_to:
-		i.set("current_room",current_room)
 	current_room_changed.emit(current_room)
 
 class renderInfo:

@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cn8tnkricq2cr"]
+[gd_scene format=3 uid="uid://cn8tnkricq2cr"]
 
-[ext_resource type="Script" uid="uid://cy0yx3lfbsoso" path="res://scripts/ui/HabitantSelection.gd" id="1_yfolk"]
+[ext_resource type="Script" uid="uid://cy0yx3lfbsoso" path="res://scripts/ui/Menus/HabitantSelection.gd" id="1_yfolk"]
 [ext_resource type="StyleBox" uid="uid://bgsav0hcj27qw" path="res://Assets/UI/MenuMainPanel.tres" id="2_020bc"]
 [ext_resource type="PackedScene" uid="uid://dp80dwfgl170u" path="res://nodes/ui/ItemCountList.tscn" id="3_bcnh3"]
 [ext_resource type="PackedScene" uid="uid://cs4kqpokmave6" path="res://nodes/HabitantDisplay.tscn" id="4_r4ojn"]

@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp80dwfgl170u"]
+[gd_scene format=3 uid="uid://dp80dwfgl170u"]
 
-[ext_resource type="Script" uid="uid://cek6laf43jj2q" path="res://scripts/ui/ItemCountList.gd" id="1_ny071"]
+[ext_resource type="Script" uid="uid://cek6laf43jj2q" path="res://scripts/ui/Components/ItemCountList.gd" id="1_ny071"]
 [ext_resource type="Texture2D" uid="uid://b4tr0alsee1u" path="res://icon.svg" id="2_3ngk3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny071"]

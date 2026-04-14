@@ -11,6 +11,9 @@ class_name HotelInputManager
 @export var room_view_menu : RoomViewMenu
 var spatial_room_finder : HotelSpatialRoomFinder
 
+@export var my_stm_state : StateMachineState
+@export var room_view_state : StateMachineState
+
 func _ready() -> void:
 	if SaveSystem.save.first_start:
 		SaveSystem.save.player=player_instance
@@ -122,6 +125,8 @@ func select_habitant_to_reside():
 	habitant_selection.open()
 
 func enter_room():
+	if not hotel_display_node.is_visible_in_tree():
+		return
 	if not hotel_display_node.current_room:
 		return
 	
@@ -133,6 +138,9 @@ func enter_room():
 	enter_data.room_view_menu=room_view_menu
 	
 	node.enter(enter_data)
+	
+	if enter_data.open_room_view_menu:
+		my_stm_state.transition.emit(my_stm_state,room_view_state.name)
 
 func select_habitant_to_reside_finish(habitant_selected:Habitant):
 	
@@ -198,7 +206,7 @@ func _input(event: InputEvent) -> void:
 		move_down()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not hotel_display_node.visible:
+	if not hotel_display_node.is_visible_in_tree():
 		return
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 		print("LEFT MOUSE CLICK")

@@ -14,7 +14,6 @@ func display_menu(menu : Control):
 	else:
 		menu.open()
 	show()
-	
 
 func _on_child_entered_tree(node: Node) -> void:
 	node.visibility_changed.connect(child_visibility_changed.bind(node))

@@ -53,10 +53,10 @@ func selected_item(idx):
 	else:
 		# Switch to normal panel
 		if selected_idx!=-1:
-			item_list[selected_idx].get_child(1).hide()
+			item_list[selected_idx].get_child(2).hide()
 		selected_idx=idx
 		# Switch to selected panel
-		item_list[selected_idx].get_child(1).show()
+		item_list[selected_idx].get_child(2).show()
 		item_selected.emit(idx)
 
 func add_item(text,textr="",icon:Texture2D=null) -> void:

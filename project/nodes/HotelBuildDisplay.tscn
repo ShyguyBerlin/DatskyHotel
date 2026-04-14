@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://vbxq2syg5rg2" path="res://nodes/HotelDisplay.tscn" id="1_vf12f"]
 [ext_resource type="Script" uid="uid://drf18dekdl5g7" path="res://scripts/HotelBuildingDisplay.gd" id="2_o1rnp"]
-[ext_resource type="Script" uid="uid://bxsv4vuyal7nq" path="res://scripts/ui/CanvasLayerAutoHide.gd" id="3_ckxs2"]
+[ext_resource type="Script" uid="uid://bxsv4vuyal7nq" path="res://scripts/ui/Components/CanvasLayerAutoHide.gd" id="3_ckxs2"]
 [ext_resource type="Texture2D" uid="uid://v3w4ic3k4il0" path="res://Assets/Images/SVG/ButtonIcon.svg" id="3_o1rnp"]
 
 [node name="Hotel" unique_id=640807702 instance=ExtResource("1_vf12f")]

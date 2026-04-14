@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bsbk1vcxhf7kb"]
 
-[ext_resource type="Script" uid="uid://bwr72cmgwlso7" path="res://scripts/ui/RoomUpgradeMenu.gd" id="1_s3mrq"]
+[ext_resource type="Script" uid="uid://bwr72cmgwlso7" path="res://scripts/ui/Menus/RoomUpgradeMenu.gd" id="1_s3mrq"]
 [ext_resource type="PackedScene" uid="uid://bhawgvc4vxsgi" path="res://nodes/ui/RoomTypeSelector.tscn" id="2_tqnq4"]
 
 [node name="BuildModeRoomUpgradeMenu" type="Control" unique_id=1125729111]

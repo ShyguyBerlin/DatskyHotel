@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bql70mqvjwyq3"]
+[gd_scene format=3 uid="uid://bql70mqvjwyq3"]
 
 [ext_resource type="PackedScene" uid="uid://cs4kqpokmave6" path="res://nodes/HabitantDisplay.tscn" id="1_3rbqo"]
-[ext_resource type="Script" uid="uid://b0ga4urns7qwd" path="res://scripts/ui/GrabFocus.gd" id="1_i1d6k"]
-[ext_resource type="Script" uid="uid://cd2kyj7nj54bx" path="res://scripts/ui/HabitantCreator.gd" id="1_y7pg5"]
+[ext_resource type="Script" uid="uid://b0ga4urns7qwd" path="res://scripts/ui/Components/GrabFocus.gd" id="1_i1d6k"]
+[ext_resource type="Script" uid="uid://cd2kyj7nj54bx" path="res://scripts/ui/Menus/HabitantCreator.gd" id="1_y7pg5"]
 [ext_resource type="Script" uid="uid://bsfncf7jj3c7e" path="res://scripts/dataclasses/habitant/HabitantProperty.gd" id="2_7nx6e"]
 [ext_resource type="Texture2D" uid="uid://dvr53wsi855pe" path="res://Assets/Images/SVG/ArrowRight.svg" id="2_i2he7"]
 [ext_resource type="Script" uid="uid://cdjrb84dqswik" path="res://scripts/dataclasses/habitant/needs/HabitantNeed.gd" id="3_cch1j"]

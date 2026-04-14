@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://xqbljmnhixdq"]
+[gd_scene format=3 uid="uid://xqbljmnhixdq"]
 
-[ext_resource type="Script" uid="uid://ld6by4mquasc" path="res://scripts/ui/MonitoringMenu.gd" id="1_kdbbf"]
+[ext_resource type="Script" uid="uid://ld6by4mquasc" path="res://scripts/ui/Menus/Monitoring/MonitoringMenu.gd" id="1_kdbbf"]
 
 [node name="MonitoringMenu" type="Control"]
 layout_mode = 3

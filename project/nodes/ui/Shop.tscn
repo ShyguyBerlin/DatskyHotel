@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmbhro44k7v3m"]
+[gd_scene format=3 uid="uid://dmbhro44k7v3m"]
 
-[ext_resource type="Script" uid="uid://dnm7u76sk8y0e" path="res://scripts/ui/Shop.gd" id="1_84oiw"]
+[ext_resource type="Script" uid="uid://dnm7u76sk8y0e" path="res://scripts/ui/Menus/Shop.gd" id="1_84oiw"]
 [ext_resource type="Theme" uid="uid://c2803i265ic3m" path="res://Assets/UI/Theme.tres" id="1_xce7c"]
 [ext_resource type="Texture2D" uid="uid://bsnu6uhl1pc05" path="res://Assets/Images/SVG/AlrekaSign.svg" id="3_0y2pf"]
 [ext_resource type="Script" uid="uid://delt4yexho1p2" path="res://scripts/dataclasses/ShopItem.gd" id="3_uh8wc"]
 [ext_resource type="Texture2D" uid="uid://jqskfnwptrf" path="res://Assets/Images/SVG/Bretzel.svg" id="3_woj3e"]
-[ext_resource type="Script" uid="uid://btligk40mbgh6" path="res://scripts/ui/MoneyLabel.gd" id="5_uh8wc"]
+[ext_resource type="Script" uid="uid://btligk40mbgh6" path="res://scripts/ui/Components/MoneyLabel.gd" id="5_uh8wc"]
 
 [sub_resource type="Resource" id="Resource_d742j"]
 script = ExtResource("3_uh8wc")

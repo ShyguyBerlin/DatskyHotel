@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://rk4rqs7egk8k"]
+
+[ext_resource type="PackedScene" uid="uid://wpf4u1pieakm" path="res://Assets/3D/Models/CircleLamp.glb" id="1_fuycu"]
+[ext_resource type="Script" uid="uid://cqlfuqwmmbuul" path="res://scripts/RoomInteriorView.gd" id="1_misqp"]
+[ext_resource type="Material" uid="uid://biqdl14bl56gp" path="res://Assets/3D/Materials/LampEmissionMaterial.tres" id="2_tabjf"]
+[ext_resource type="PackedScene" uid="uid://cs4kqpokmave6" path="res://nodes/HabitantDisplay.tscn" id="3_8pawo"]
+[ext_resource type="Texture2D" uid="uid://v3w4ic3k4il0" path="res://Assets/Images/SVG/ButtonIcon.svg" id="4_8pawo"]
+[ext_resource type="Texture2D" uid="uid://bdt3t44gub3fr" path="res://Assets/Images/SVG/ExitIcon.svg" id="5_misqp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_misqp"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_702uv"]
+sky_material = SubResource("ProceduralSkyMaterial_misqp")
+
+[sub_resource type="Environment" id="Environment_rqqqx"]
+background_mode = 1
+sky = SubResource("Sky_702uv")
+reflected_light_source = 1
+tonemap_mode = 2
+glow_enabled = true
+adjustment_enabled = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_mcf3s"]
+size = Vector2(4, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7x44"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_l5dpe"]
+material = SubResource("StandardMaterial3D_r7x44")
+size = Vector2(4, 2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_67mqw"]
+size = Vector2(4, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_63te1"]
+material = ExtResource("2_tabjf")
+top_radius = 0.505
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_10pkf"]
+viewport_path = NodePath("World/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smg6v"]
+resource_local_to_scene = true
+transparency = 4
+cull_mode = 2
+albedo_texture = SubResource("ViewportTexture_10pkf")
+
+[sub_resource type="QuadMesh" id="QuadMesh_k5kca"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_smg6v")
+size = Vector2(1.1, 2)
+
+[node name="RoomInterior" type="Node3D" unique_id=575822641]
+script = ExtResource("1_misqp")
+
+[node name="World" type="Node" parent="." unique_id=58353185]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=1821582929]
+environment = SubResource("Environment_rqqqx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World" unique_id=725553040]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_mcf3s")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="World" unique_id=391718102]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2, 0)
+mesh = SubResource("QuadMesh_mcf3s")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="World" unique_id=1318149423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
+mesh = SubResource("QuadMesh_l5dpe")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="World" unique_id=1458808729]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2, 1, 0)
+mesh = SubResource("QuadMesh_67mqw")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="World" unique_id=1632677897]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, 2)
+mesh = SubResource("QuadMesh_67mqw")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="World" unique_id=1704741818]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 2, 1, 0)
+mesh = SubResource("QuadMesh_67mqw")
+skeleton = NodePath("../..")
+
+[node name="CircleLamp" parent="World" unique_id=1437850498 instance=ExtResource("1_fuycu")]
+transform = Transform3D(0.2, 0, 0, 0, -0.2, -1.7484556e-08, 0, 1.7484556e-08, -0.2, 0, 2, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/CircleLamp" unique_id=790158657]
+transform = Transform3D(1.4478384, 0, 0, 0, 0.0975253, 5.684342e-14, 0, -1.3322676e-14, 1.5379776, 0, 0.24749374, -0.032832146)
+mesh = SubResource("CylinderMesh_63te1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="World/CircleLamp" unique_id=432985982]
+transform = Transform3D(5, 0, 0, 0, 5, 8.526513e-14, 0, -8.526513e-14, 5, 0, 0.6010647, 0)
+light_color = Color(0.9372549, 0.93333334, 0.8666667, 1)
+shadow_enabled = true
+omni_attenuation = 2.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World" unique_id=337741811]
+transform = Transform3D(0.8272964, -0.2531913, 0.5014728, 2.054224e-09, 0.8926724, 0.45070618, -0.56176573, -0.3728676, 0.73850465, 0, 5.450941, -0.66148186)
+light_color = Color(1, 0.9490196, 0.89411765, 1)
+light_energy = 0.22
+light_bake_mode = 1
+sky_mode = 1
+
+[node name="HabitantMesh" type="MeshInstance3D" parent="World" unique_id=2054325483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.873, -1.3)
+mesh = SubResource("QuadMesh_k5kca")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="World" unique_id=574184784]
+transform = Transform3D(1, 0, 0, 0, 0.99771744, 0.067527756, 0, -0.067527756, 0.99771744, 0, 1.1617757, 0.8381487)
+
+[node name="SubViewport" type="SubViewport" parent="World" unique_id=1443729674]
+transparent_bg = true
+size = Vector2i(720, 1320)
+
+[node name="Habitant" parent="World/SubViewport" unique_id=1802072356 instance=ExtResource("3_8pawo")]
+
+[node name="Camera2D" type="Camera2D" parent="World/SubViewport/Habitant" unique_id=1211655658]
+position = Vector2(0, -566)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1681847603]
+
+[node name="Control" type="Control" parent="UI" unique_id=761516628]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Settingsbutton" type="Button" parent="UI/Control" unique_id=1368264450]
+self_modulate = Color(0.9137255, 0.78039217, 0.7647059, 1)
+custom_minimum_size = Vector2(81.335, 81.335)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.33496
+offset_top = 24.0
+offset_right = -19.0
+offset_bottom = 105.335
+grow_horizontal = 0
+icon = ExtResource("4_8pawo")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/Control/Settingsbutton" unique_id=745861736]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.334961
+offset_top = 11.0
+offset_right = 8.334961
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.71, 0.71)
+texture = ExtResource("5_misqp")
+expand_mode = 1
