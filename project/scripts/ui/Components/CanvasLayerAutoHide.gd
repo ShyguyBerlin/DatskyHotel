@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name CanvasLayerAutoHide
 
 ## Needs to be set at startup
 @export var copy_visibility_of : CanvasItem

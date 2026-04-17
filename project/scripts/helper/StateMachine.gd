@@ -35,8 +35,8 @@ func enter_state_id(id : int):
 
 func _enter_state(state : StateMachineState):
 	if current_state_node:
-		current_state_node._leave()
-	state._enter()
+		current_state_node.__leave()
+	state.__enter()
 	current_state_node=state
 
 func _on_child_transition(origin_state : StateMachineState, target_state : String):

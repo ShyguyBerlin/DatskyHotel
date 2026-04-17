@@ -135,11 +135,11 @@ func enter_room():
 		return
 		
 	var enter_data : Input_EnterRoomData = Input_EnterRoomData.new()
-	enter_data.room_view_menu=room_view_menu
 	
 	node.enter(enter_data)
 	
 	if enter_data.open_room_view_menu:
+		print("starting roomviewstate transition")
 		my_stm_state.transition.emit(my_stm_state,room_view_state.name)
 
 func select_habitant_to_reside_finish(habitant_selected:Habitant):
@@ -206,28 +206,33 @@ func _input(event: InputEvent) -> void:
 		move_down()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not hotel_display_node.is_visible_in_tree():
-		return
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-		print("LEFT MOUSE CLICK")
-		var mouse_pos=get_viewport().get_mouse_position()
-		mouse_pos-=hotel_display_node.global_position
-		mouse_pos=Vector2(mouse_pos.x/hotel_display_node.scale.x,mouse_pos.y/hotel_display_node.scale.y)
-		var adjusted_mouse_pos=mouse_pos-hotel_display_node.current_offset
-		if not spatial_room_finder:
-			print("no room finder configured")
-			return
-		var rooms = spatial_room_finder.find_room(adjusted_mouse_pos)
-		if len(rooms)>0:
-			var room_instance=rooms[0].get_dataclass_instance()
-			if room_instance:
-				if room_instance == hotel_display_node.current_room:
-					enter_room.call_deferred()
-				hotel_display_node.current_room=room_instance
-			get_viewport().set_input_as_handled()
-			print("Swapped current room")
-			return
-		hotel_display_node.current_room=null
-		get_viewport().set_input_as_handled()
-		print("Deselected any room")
+		handle_mouse_click(event)
+
+func handle_mouse_click(event : InputEventMouseButton):
+	if not hotel_display_node.is_visible_in_tree():
+		print("Hotel not visible")
 		return
+	print("LEFT MOUSE CLICK")
+	var mouse_pos=get_viewport().get_mouse_position()
+	mouse_pos-=hotel_display_node.global_position
+	mouse_pos=Vector2(mouse_pos.x/hotel_display_node.scale.x,mouse_pos.y/hotel_display_node.scale.y)
+	var adjusted_mouse_pos=mouse_pos-hotel_display_node.current_offset
+	if not spatial_room_finder:
+		print("no room finder configured")
+		return
+	var rooms = spatial_room_finder.find_room(adjusted_mouse_pos)
+	if len(rooms)>0:
+		var room_instance=rooms[0].get_dataclass_instance()
+		if room_instance:
+			if room_instance == hotel_display_node.current_room:
+				enter_room.call_deferred()
+			hotel_display_node.current_room=room_instance
+		get_viewport().set_input_as_handled()
+		print("Swapped current room")
+		return
+	hotel_display_node.current_room=null
+	get_viewport().set_input_as_handled()
+	print("Deselected any room")
+	return
+	

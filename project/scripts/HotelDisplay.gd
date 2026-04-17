@@ -59,6 +59,8 @@ func get_current_display_node():
 	return room_mapping[current_room]
 
 func draw_hotel():
+	print("HOTEL IS DRAWN")
+	print_stack()
 	HotelManager.hotel_instance.apply_new_requests([current_room])
 	var children = display_nodes_folder.get_children()
 	for i in children:
@@ -186,5 +188,5 @@ func center_around_current_room(animate=true):
 func _on_visibility_changed() -> void:
 	if not is_node_ready():
 		return
-	if visible:
+	if is_visible_in_tree():
 		draw_hotel()

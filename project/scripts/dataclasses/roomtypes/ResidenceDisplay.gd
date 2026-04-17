@@ -54,7 +54,8 @@ func enter(input_data : Input_EnterRoomData):
 	var tk_action=TalkAction.new()
 	tk_action.player=input_data.player
 	tk_action.display_node=self
-	residence.consume_talk_action(tk_action)
+	#residence.consume_talk_action(tk_action)
+	input_data.open_room_view_menu = true
 
 func start_habitant_dialog(dialogue_resource: DialogueResource, extra_info : Array=[]):
 	#start(dialogue_resource: DialogueResource, title: String, extra_game_states: Array = []) -> void:
@@ -69,8 +70,8 @@ func start_habitant_dialog(dialogue_resource: DialogueResource, extra_info : Arr
 	extra_game_states.append(std_info)
 	if dialog_balloon:
 		var balloon= dialog_balloon.instantiate()
-		balloon.call_deferred("start",dialogue_resource,"start",extra_game_states)
 		add_child(balloon)
+		balloon.call_deferred("start",dialogue_resource,"start",extra_game_states)
 		await balloon.tree_exited
 	draw_quest_icon()
 
