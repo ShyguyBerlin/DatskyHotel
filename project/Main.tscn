@@ -124,6 +124,12 @@ script = ExtResource("34_ny7u2")
 resident = SubResource("Resource_v8qla")
 metadata/_custom_type_script = "uid://cpoh3qxnvew3p"
 
+[sub_resource type="InputEventAction" id="InputEventAction_1w2xm"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_gngx1"]
+events = [SubResource("InputEventAction_1w2xm")]
+
 [sub_resource type="Shader" id="Shader_5tuhn"]
 code = "shader_type canvas_item;
 
@@ -588,6 +594,7 @@ alignment = 2
 self_modulate = Color(0.8627451, 1, 1, 1)
 custom_minimum_size = Vector2(81.335, 81.335)
 layout_mode = 2
+shortcut = SubResource("Shortcut_gngx1")
 icon = ExtResource("20_bg4s2")
 flat = true
 icon_alignment = 1

@@ -31,5 +31,9 @@ func rebuild() -> void:
 			if room.resident:
 				habitant.set_dataclass_instance(room.resident)
 				habitant_mesh.show()
+		MonitoringRoom:
+			print("doing monitoring-room",room)
+			room = room as MonitoringRoom
+			testMat.albedo_color=Color.WEB_GRAY
 		_:
 			pass
